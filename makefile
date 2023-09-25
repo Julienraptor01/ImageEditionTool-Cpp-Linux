@@ -1,4 +1,4 @@
-test01:	src/test/test01.cpp obj/ImageNG.o
+bin/test01:	src/test/test01.cpp obj/ImageNG.o
 	g++ \
 	-I src/main \
 	src/test/test01.cpp \
