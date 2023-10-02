@@ -53,5 +53,6 @@ clean:
 	$(DELETE) $(OBJ)/*
 	make setup
 
-full-clean:	clean
-	$(DELETE) $(BIN)/*
+full-clean:
+	$(DELETE) $(BUILD)/*
+	make setup
