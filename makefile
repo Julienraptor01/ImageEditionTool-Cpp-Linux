@@ -21,43 +21,48 @@ TEST_BIN=$(BIN)/test
 COMPILE=g++ -I $(MAIN_SRC)
 # deletion
 DELETE=rm -rf
+# silent log using printf
+LOG=@printf
+
 
 all:	setup $(TEST_BIN)/test01
+	$(LOG) '\n\033[44mmake all finished\033[49m\n\n'
 
 $(TEST_BIN)/test01:	$(TEST_SRC)/test01.cpp $(MAIN_OBJ)/ImageNG.o
-	echo creation of the test01 executable
+	$(LOG) '\n\033[42mcreation of the test01 executable\033[49m\n'
 	$(COMPILE) \
 	$(TEST_SRC)/test01.cpp \
 	$(MAIN_OBJ)/ImageNG.o \
 	-o $(TEST_BIN)/test01
 
 $(MAIN_OBJ)/ImageNG.o:	$(MAIN_SRC)/ImageNG.cpp $(MAIN_SRC)/ImageNG.h
-	echo creation of the ImageNG object file
+	$(LOG) '\n\033[42mcreation of the ImageNG object file\033[49m\n'
 	$(COMPILE) \
 	$(MAIN_SRC)/ImageNG.cpp \
 	-c \
 	-o $(MAIN_OBJ)/ImageNG.o
 
 setup:
-	echo setup of the directories
-	# the - before mkdir is to make sure make ignore the error if the dir can't be created
-	-mkdir \
-	$(BUILD) \
-	$(OBJ) \
+	$(LOG) '\n\033[42msetup of the directories\033[49m\n'
+# the - before mkdir is to make sure make ignore the error if the dir can't be created
+	mkdir \
+	-p \
 	$(MAIN_OBJ) \
 	$(LIB_OBJ) \
 	$(TEST_OBJ) \
-	$(BIN) \
 	$(MAIN_BIN) \
 	$(LIB_BIN) \
 	$(TEST_BIN)
+	$(LOG) '\n\033[44mmake setup finished\033[49m\n\n'
 
 clean:
-	echo deletion of the object directory
+	$(LOG) '\n\033[41mdeletion of the object directory\033[49m\n'
 	$(DELETE) $(OBJ)/*
 	make setup
+	$(LOG) '\n\033[44mmake clean finished\033[49m\n\n'
 
 full-clean:
-	echo deletion of ALL the build directories
+	$(LOG) '\n\033[41mdeletion of ALL the build directories\033[49m\n'
 	$(DELETE) $(BUILD)/*
 	make setup
+	$(LOG) '\n\033[44mmake full-clean finished\033[49m\n\n'
