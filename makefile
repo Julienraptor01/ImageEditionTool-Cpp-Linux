@@ -37,7 +37,8 @@ $(MAIN_OBJ)/ImageNG.o:	$(MAIN_SRC)/ImageNG.cpp $(MAIN_SRC)/ImageNG.h
 	-o $(MAIN_OBJ)/ImageNG.o
 
 setup:
-	mkdir \
+	# the - before mkdir is to make sure make ignore the error if the dir can't be created
+	-mkdir \
 	$(BUILD) \
 	$(OBJ) \
 	$(MAIN_OBJ) \
