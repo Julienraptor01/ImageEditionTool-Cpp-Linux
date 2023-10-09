@@ -18,14 +18,14 @@ LIB_BIN=$(BIN)/lib
 TEST_BIN=$(BIN)/test
 ### commands
 # compilation
-COMPILE=g++ -I $(MAIN_SRC)
+COMPILE=g++ -I $(MAIN_SRC) -DDEBUGVERBOSE -Wall
 # deletion
 DELETE=rm -rf
 # silent log using printf
 LOG=@printf
 
 
-all:	setup $(TEST_BIN)/test01
+all:	full-clean setup $(TEST_BIN)/test01
 	$(LOG) '\n\033[44mmake all finished\033[49m\n\n'
 
 $(TEST_BIN)/test01:	$(TEST_SRC)/test01.cpp $(MAIN_OBJ)/ImageNG.o
