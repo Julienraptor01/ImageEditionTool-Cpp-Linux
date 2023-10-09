@@ -18,7 +18,7 @@ LIB_BIN=$(BIN)/lib
 TEST_BIN=$(BIN)/test
 ### commands
 # compilation
-COMPILE=g++ -I $(MAIN_SRC) -DDEBUGVERBOSE -Wall
+COMPILE=g++ -I $(MAIN_SRC) -Wall -DDEBUG -DDEBUGVERBOSE
 # deletion
 DELETE=rm -rf
 # silent log using printf

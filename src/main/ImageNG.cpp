@@ -5,10 +5,6 @@ using namespace std;
 
 #include "ImageNG.h"
 
-#ifdef DEBUGVERBOSE
-#define DEBUG
-#endif
-
 ImageNG::ImageNG()
 {
 #ifdef DEBUG
