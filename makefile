@@ -25,7 +25,7 @@ DELETE=rm -rf
 LOG=@printf
 
 
-all:	full-clean $(TEST_BIN)/test01
+all:	full-clean $(TEST_BIN)/test01 $(TEST_BIN)/test02
 	$(LOG) '\n\033[44mmake all finished\033[49m\n\n'
 
 $(MAIN_OBJ)/ImageNG.o:	$(MAIN_SRC)/ImageNG.cpp $(MAIN_SRC)/ImageNG.h
@@ -34,6 +34,13 @@ $(MAIN_OBJ)/ImageNG.o:	$(MAIN_SRC)/ImageNG.cpp $(MAIN_SRC)/ImageNG.h
 	$(MAIN_SRC)/ImageNG.cpp \
 	-c \
 	-o $(MAIN_OBJ)/ImageNG.o
+
+$(MAIN_OBJ)/Dimension.o:	$(MAIN_SRC)/Dimension.cpp $(MAIN_SRC)/Dimension.h
+	$(LOG) '\n\033[42mcreation of the Dimension object file\033[49m\n'
+	$(COMPILE) \
+	$(MAIN_SRC)/Dimension.cpp \
+	-c \
+	-o $(MAIN_OBJ)/Dimension.o
 
 $(TEST_BIN)/test01:	$(TEST_OBJ)/test01.o $(MAIN_OBJ)/ImageNG.o
 	$(LOG) '\n\033[42mcreation of the test01 executable\033[49m\n'
@@ -48,6 +55,20 @@ $(TEST_OBJ)/test01.o:	$(TEST_SRC)/test01.cpp
 	$(TEST_SRC)/test01.cpp \
 	-c \
 	-o $(TEST_OBJ)/test01.o
+
+$(TEST_BIN)/test02:	$(TEST_OBJ)/test02.o $(MAIN_OBJ)/ImageNG.o $(MAIN_OBJ)/Dimension.o
+	$(LOG) '\n\033[42mcreation of the test02 executable\033[49m\n'
+	$(COMPILE) \
+	$(TEST_OBJ)/test02.o \
+	$(MAIN_OBJ)/ImageNG.o \
+	-o $(TEST_BIN)/test02
+
+$(TEST_OBJ)/test02.o:	$(TEST_SRC)/test02.cpp
+	$(LOG) '\n\033[42mcreation of the test02 object file\033[49m\n'
+	$(COMPILE) \
+	$(TEST_SRC)/test02.cpp \
+	-c \
+	-o $(TEST_OBJ)/test02.o
 
 setup:
 	$(LOG) '\n\033[42msetup of the directories\033[49m\n'
