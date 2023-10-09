@@ -1,4 +1,4 @@
-# c++ 2023-2024 Project
+# C++ 2023-2024 Project
 
 Small image edition tool for Linux in C++ with the QT Library
 
