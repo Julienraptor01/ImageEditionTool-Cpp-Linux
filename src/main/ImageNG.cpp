@@ -26,7 +26,7 @@ ImageNG::~ImageNG()
 ImageNG::ImageNG(int id, const char *nom)
 {
 #ifdef DEBUG
-	cout<<"\033[42mDEBUG : Constructeur d'initialisation de ImageNG\033[49m"<<endl;
+	cout<<"\033[42mDEBUG : Constructeur d'initialisation complet de ImageNG\033[49m"<<endl;
 #endif
 	setId(id);
 	setNom(nom);
