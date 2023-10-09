@@ -5,27 +5,82 @@ using namespace std;
 
 #include "ImageNG.h"
 
+#ifdef DEBUGVERBOSE
+#define DEBUG
+#endif
+
 ImageNG::ImageNG()
 {
 #ifdef DEBUG
-	cout<<"Constructeur par défaut de ImageNG"<<endl;
+	cout<<"\033[42mDEBUG : Constructeur par défaut de ImageNG\033[49m"<<endl;
 #endif
-	id=1;
-	//nom=NULL;
-	nom=(char *)malloc(20);
-	strcpy(nom,"ImageNG sans nom");
+	setId(1);
+	setNom("ImageNG sans nom");
 }
 
 ImageNG::~ImageNG()
 {
 #ifdef DEBUG
-	cout<<"Destructeur de ImageNG"<<endl;
+	cout<<"\033[41mDEBUG : Destructeur de ImageNG\033[49m"<<endl;
 #endif
 	if(nom !=NULL)
 		free(nom);
 }
 
+ImageNG::ImageNG(int id, const char *nom)
+{
+#ifdef DEBUG
+	cout<<"\033[42mDEBUG : Constructeur d'initialisation de ImageNG\033[49m"<<endl;
+#endif
+	setId(id);
+	setNom(nom);
+}
+
+ImageNG::ImageNG(const ImageNG &image)
+{
+#ifdef DEBUG
+	cout<<"\033[42mDEBUG : Constructeur de copie de ImageNG\033[49m"<<endl;
+#endif
+	setId(image.id);
+	setNom(image.nom);
+}
+
 void ImageNG::Affiche()
 {
-	cout<<"id="<<id<<" nom="<<nom<<endl;
+	cout<<" id="<<id<<" nom="<<nom<<endl;
+}
+
+void ImageNG::setId(int id)
+{
+#ifdef DEBUGVERBOSE
+	cout<<"\033[44mDEBUGVERBOSE : setId de ImageNG\033[49m"<<endl;
+#endif
+	this->id=id;
+}
+
+int ImageNG::getId()
+{
+#ifdef DEBUGVERBOSE
+	cout<<"\033[44mDEBUGVERBOSE : getId de ImageNG\033[49m"<<endl;
+#endif
+	return id;
+}
+
+void ImageNG::setNom(const char *nom)
+{
+#ifdef DEBUGVERBOSE
+	cout<<"\033[44mDEBUGVERBOSE : setNom de ImageNG\033[49m"<<endl;
+#endif
+	if(this->nom !=NULL)
+		free(this->nom);
+	this->nom=(char *)malloc(strlen(nom)+1);
+	strcpy(this->nom,nom);
+}
+
+char *ImageNG::getNom()
+{
+#ifdef DEBUGVERBOSE
+	cout<<"\033[44mDEBUGVERBOSE : getNom de ImageNG\033[49m"<<endl;
+#endif
+	return nom;
 }

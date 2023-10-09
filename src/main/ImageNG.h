@@ -10,8 +10,14 @@ private:
 public:
 	ImageNG();
 	~ImageNG();
+	ImageNG(int id, const char *nom);
+	ImageNG(const ImageNG &image);
 
 	void Affiche();
+	void setId(int id);
+	int getId();
+	void setNom(const char *nom);
+	char *getNom();
 };
 
 #endif

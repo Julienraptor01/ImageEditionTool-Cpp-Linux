@@ -19,7 +19,7 @@ int main()
 		ImageNG image;
 		image.Affiche();
 	} // La presence des accolades assure que le destructeur de ImageNG sera appele --> a tracer !
-/*
+
 	cout << endl << "(2) ***** Test des setters et getters ******************************************************" << endl;
 	{
 		ImageNG image;
@@ -66,6 +66,6 @@ int main()
 		i->Affiche();
 		delete i;
 	}
-*/
+
 	return 0;
 }
