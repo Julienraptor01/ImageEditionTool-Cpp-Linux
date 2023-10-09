@@ -30,11 +30,13 @@ int main()
 		cout << "Nom = " << image.getNom() << endl;
 		cout << "Id = " << image.getId() << endl;
 	}
+
 	cout << endl << "(3) ***** Test du constructeur d'initialisation ********************************************" << endl;
 	{
 		ImageNG image(6,"boat");
 		image.Affiche();
 	}
+
 	cout << endl << "(4) ***** Test du constructeur de copie ****************************************************" << endl;
 	{
 		ImageNG image1(2,"joconde");
@@ -52,6 +54,7 @@ int main()
 		cout << "image1 (APRES) :" << endl;
 		image1.Affiche();
 	}
+
 	cout << endl << "(5) ***** Test d'allocation dynamique ******************************************************" << endl;
 	{
 		// Vous n'avez rien à faire... juste comprendre et savoir expliquer!!!
