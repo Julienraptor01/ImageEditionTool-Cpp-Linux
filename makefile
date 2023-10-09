@@ -25,15 +25,8 @@ DELETE=rm -rf
 LOG=@printf
 
 
-all:	full-clean setup $(TEST_BIN)/test01
+all:	full-clean $(TEST_BIN)/test01
 	$(LOG) '\n\033[44mmake all finished\033[49m\n\n'
-
-$(TEST_BIN)/test01:	$(TEST_SRC)/test01.cpp $(MAIN_OBJ)/ImageNG.o
-	$(LOG) '\n\033[42mcreation of the test01 executable\033[49m\n'
-	$(COMPILE) \
-	$(TEST_SRC)/test01.cpp \
-	$(MAIN_OBJ)/ImageNG.o \
-	-o $(TEST_BIN)/test01
 
 $(MAIN_OBJ)/ImageNG.o:	$(MAIN_SRC)/ImageNG.cpp $(MAIN_SRC)/ImageNG.h
 	$(LOG) '\n\033[42mcreation of the ImageNG object file\033[49m\n'
@@ -42,9 +35,22 @@ $(MAIN_OBJ)/ImageNG.o:	$(MAIN_SRC)/ImageNG.cpp $(MAIN_SRC)/ImageNG.h
 	-c \
 	-o $(MAIN_OBJ)/ImageNG.o
 
+$(TEST_BIN)/test01:	$(TEST_OBJ)/test01.o $(MAIN_OBJ)/ImageNG.o
+	$(LOG) '\n\033[42mcreation of the test01 executable\033[49m\n'
+	$(COMPILE) \
+	$(TEST_OBJ)/test01.o \
+	$(MAIN_OBJ)/ImageNG.o \
+	-o $(TEST_BIN)/test01
+
+$(TEST_OBJ)/test01.o:	$(TEST_SRC)/test01.cpp
+	$(LOG) '\n\033[42mcreation of the test01 object file\033[49m\n'
+	$(COMPILE) \
+	$(TEST_SRC)/test01.cpp \
+	-c \
+	-o $(TEST_OBJ)/test01.o
+
 setup:
 	$(LOG) '\n\033[42msetup of the directories\033[49m\n'
-# the - before mkdir is to make sure make ignore the error if the dir can't be created
 	mkdir \
 	-p \
 	$(MAIN_OBJ) \
