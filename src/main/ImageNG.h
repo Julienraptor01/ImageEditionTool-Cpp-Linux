@@ -14,6 +14,7 @@ public:
 	ImageNG(const ImageNG &image);
 
 	void Affiche();
+
 	void setId(int id);
 	int getId();
 	void setNom(const char *nom);
