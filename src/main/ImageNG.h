@@ -9,6 +9,11 @@ private:
 	int id;
 	char * nom = NULL;
 	Dimension dimension;
+	int ** matrice = nullptr;
+
+	void freeNom();
+	void createMatrice();
+	void freeMatrice();
 
 public:
 	ImageNG();
@@ -23,8 +28,15 @@ public:
 	char *getNom()const;
 	void setDimension(const Dimension &dimension);
 	Dimension getDimension()const;
+	void setBackground(int couleur);
+	void setPixel(int x, int y, int couleur);
+	int getPixel(int x, int y)const;
 
 	void Affiche()const;
+	void Dessine()const;
+
+	void importFromFile(const char *nomFichier);
+	void exportToFile(const char *nomFichier, const char *formatFichier)const;
 };
 
 #endif

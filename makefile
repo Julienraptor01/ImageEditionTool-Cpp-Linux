@@ -26,12 +26,13 @@ LIB_BIN=$(BIN)$(LIB)
 MYQT_LIB_BIN=$(LIB_BIN)$(MYQT)
 ### commands
 # compile arguments
-SRC_COMPILE_ARGS=-I $(MAIN_SRC) -Wall -DDEBUG -DDEBUGVERBOSE
+SRC_COMPILE_ARGS=-I $(MAIN_SRC) -Wall
+SRC_COMPILE_ADD_ARGS=-DDEBUG -DDEBUGVERBOSE
 LIB_COMPILE_ARGS=-pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I/usr/lib64/qt5/mkspecs/linux-g++ -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -I $(LIB_SRC)
-LIB_COMPILE_LINKER_ARGS=-lSDL -lpthread -Wl,-O1 /usr/lib64/libQt5Widgets.so /usr/lib64/libQt5Gui.so /usr/lib64/libQt5Core.so /usr/lib64/
+LIB_COMPILE_LINKER_ARGS=-lpthread -Wl,-O1 /usr/lib64/libQt5Widgets.so /usr/lib64/libQt5Gui.so /usr/lib64/libQt5Core.so #-lSDL /usr/lib64/
 # compilation
 COMPILE=g++
-SRC_COMPILE=$(COMPILE) $(SRC_COMPILE_ARGS)
+SRC_COMPILE=$(COMPILE) $(SRC_COMPILE_ARGS) $(SRC_COMPILE_ADD_ARGS)
 LIB_COMPILE=$(COMPILE) $(LIB_COMPILE_ARGS)
 # deletion
 DELETE=rm -rf
@@ -64,7 +65,7 @@ $(TEST_BIN)/test01:	$(TEST_OBJ)/test01.o $(MAIN_OBJ)/ImageNG.o $(MAIN_OBJ)/Dimen
 	$(MAIN_OBJ)/Dimension.o \
 	-o $(TEST_BIN)/test01
 
-$(TEST_OBJ)/test01.o:	$(TEST_SRC)/test01.cpp
+$(TEST_OBJ)/test01.o:	$(TEST_SRC)/test01.cpp $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/Dimension.h
 	$(LOG) '\n\033[42mcreation of the test01 object file\033[49m\n'
 	$(SRC_COMPILE) \
 	$(TEST_SRC)/test01.cpp \
@@ -79,7 +80,7 @@ $(TEST_BIN)/test02:	$(TEST_OBJ)/test02.o $(MAIN_OBJ)/ImageNG.o $(MAIN_OBJ)/Dimen
 	$(MAIN_OBJ)/Dimension.o \
 	-o $(TEST_BIN)/test02
 
-$(TEST_OBJ)/test02.o:	$(TEST_SRC)/test02.cpp
+$(TEST_OBJ)/test02.o:	$(TEST_SRC)/test02.cpp $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/Dimension.h
 	$(LOG) '\n\033[42mcreation of the test02 object file\033[49m\n'
 	$(SRC_COMPILE) \
 	$(TEST_SRC)/test02.cpp \
@@ -95,16 +96,16 @@ $(TEST_BIN)/test03:	$(TEST_OBJ)/test03.o $(MAIN_OBJ)/ImageNG.o $(MAIN_OBJ)/Dimen
 	$(MYQT_LIB_OBJ)/MyQT.o \
 	-o $(TEST_BIN)/test03
 
-$(TEST_OBJ)/test03.o:	$(TEST_SRC)/test03.cpp
+$(TEST_OBJ)/test03.o:	$(TEST_SRC)/test03.cpp $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/Dimension.h $(MYQT_LIB_SRC)/MyQT.h
 	$(LOG) '\n\033[42mcreation of the test03 object file\033[49m\n'
 	$(SRC_COMPILE) $(LIB_COMPILE_ARGS)$(MyQT) \
 	$(TEST_SRC)/test03.cpp \
 	-c \
 	-o $(TEST_OBJ)/test03.o
 
-$(MYQT_LIB_OBJ)/MyQT.o:	$(MYQT_LIB_SRC)/MyQT.cpp
+$(MYQT_LIB_OBJ)/MyQT.o:	$(MYQT_LIB_SRC)/MyQT.cpp $(MYQT_LIB_SRC)/MyQT.h $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/Dimension.h
 	$(LOG) '\n\033[42mcreation of the MyQT object file\033[49m\n'
-	$(LIB_COMPILE)$(MyQT) \
+	$(LIB_COMPILE)$(MyQT) $(SRC_COMPILE_ARGS) \
 	$(MYQT_LIB_SRC)/MyQT.cpp \
 	-c \
 	-o $(MYQT_LIB_OBJ)/MyQT.o
@@ -114,11 +115,13 @@ setup:
 	mkdir \
 	-p \
 	$(MAIN_OBJ) \
-	$(LIB_OBJ) \
 	$(TEST_OBJ) \
+	$(LIB_OBJ) \
+	$(MYQT_LIB_OBJ) \
 	$(MAIN_BIN) \
+	$(TEST_BIN) \
 	$(LIB_BIN) \
-	$(TEST_BIN)
+	$(MYQT_LIB_BIN)
 	$(LOG) '\n\033[44mmake setup finished\033[49m\n\n'
 
 clean:
