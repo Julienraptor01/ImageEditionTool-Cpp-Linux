@@ -17,14 +17,14 @@ public:
 	ImageNG(int id, const char *nom);
 	ImageNG(const ImageNG &image);
 
-	void Affiche()const;
-
 	void setId(int id);
 	int getId()const;
 	void setNom(const char *nom);
 	char *getNom()const;
 	void setDimension(const Dimension &dimension);
 	Dimension getDimension()const;
+
+	void Affiche()const;
 };
 
 #endif

@@ -20,8 +20,6 @@ public:
 	Dimension(int largeur, int hauteur);
 	Dimension(const Dimension &dimension);
 
-	void Affiche()const;
-
 	void setLargeur(int largeur);
 	int getLargeur()const;
 	void setHauteur(int hauteur);
@@ -30,6 +28,8 @@ public:
 	static const Dimension VGA;
 	static const Dimension HD;
 	static const Dimension FULL_HD;
+
+	void Affiche()const;
 };
 
 #endif

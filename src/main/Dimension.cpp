@@ -39,11 +39,6 @@ Dimension::Dimension(const Dimension &dimension)
 	setHauteur(dimension.hauteur);
 }
 
-void Dimension::Affiche()const
-{
-	cout<<" largeur="<<largeur<<" hauteur="<<hauteur<<endl;
-}
-
 void Dimension::setLargeur(int largeur)
 {
 #ifdef DEBUGVERBOSE
@@ -81,3 +76,8 @@ int Dimension::getHauteur()const
 const Dimension Dimension::VGA(640,480);
 const Dimension Dimension::HD(1280,720);
 const Dimension Dimension::FULL_HD(1920,1080);
+
+void Dimension::Affiche()const
+{
+	cout<<" largeur="<<largeur<<" hauteur="<<hauteur<<endl;
+}

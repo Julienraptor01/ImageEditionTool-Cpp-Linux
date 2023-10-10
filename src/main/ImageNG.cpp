@@ -53,11 +53,6 @@ ImageNG::ImageNG(const ImageNG &image)
 	setDimension(image.dimension);
 }
 
-void ImageNG::Affiche()const
-{
-	cout<<" id="<<id<<" nom="<<nom<<" dimension=("<<dimension.getLargeur()<<","<<dimension.getHauteur()<<")"<<endl;
-}
-
 void ImageNG::setId(int id)
 {
 #ifdef DEBUGVERBOSE
@@ -109,4 +104,9 @@ Dimension ImageNG::getDimension()const
 	cout<<"\033[44mDEBUGVERBOSE : getDimension de ImageNG\033[49m"<<endl;
 #endif
 	return dimension;
+}
+
+void ImageNG::Affiche()const
+{
+	cout<<" id="<<id<<" nom="<<nom<<" dimension=("<<dimension.getLargeur()<<","<<dimension.getHauteur()<<")"<<endl;
 }
