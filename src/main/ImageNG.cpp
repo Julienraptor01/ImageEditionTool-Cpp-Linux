@@ -41,7 +41,7 @@ ImageNG::ImageNG(const ImageNG &image)
 	setNom(image.nom);
 }
 
-void ImageNG::Affiche()
+void ImageNG::Affiche()const
 {
 	cout<<" id="<<id<<" nom="<<nom<<endl;
 }
@@ -54,7 +54,7 @@ void ImageNG::setId(int id)
 	this->id=id;
 }
 
-int ImageNG::getId()
+int ImageNG::getId()const
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[44mDEBUGVERBOSE : getId de ImageNG\033[49m"<<endl;
@@ -73,7 +73,7 @@ void ImageNG::setNom(const char *nom)
 	strcpy(this->nom,nom);
 }
 
-char *ImageNG::getNom()
+char *ImageNG::getNom()const
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[44mDEBUGVERBOSE : getNom de ImageNG\033[49m"<<endl;

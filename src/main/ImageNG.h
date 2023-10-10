@@ -13,12 +13,12 @@ public:
 	ImageNG(int id, const char *nom);
 	ImageNG(const ImageNG &image);
 
-	void Affiche();
+	void Affiche()const;
 
 	void setId(int id);
-	int getId();
+	int getId()const;
 	void setNom(const char *nom);
-	char *getNom();
+	char *getNom()const;
 };
 
 #endif
