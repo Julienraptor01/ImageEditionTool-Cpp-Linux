@@ -10,8 +10,8 @@ Dimension::Dimension()
 #ifdef DEBUG
 	cout<<"\033[42mDEBUG : Constructeur par défaut de Dimension\033[49m"<<endl;
 #endif
-	setLargeur(1);
-	setHauteur(1);
+	setLargeur(DIMENSION_H_DEFAULT_LARGEUR);
+	setHauteur(DIMENSION_H_DEFAULT_HAUTEUR);
 }
 
 Dimension::~Dimension()
@@ -39,7 +39,7 @@ Dimension::Dimension(const Dimension &dimension)
 	setHauteur(dimension.hauteur);
 }
 
-void Dimension::Affiche()
+void Dimension::Affiche()const
 {
 	cout<<" largeur="<<largeur<<" hauteur="<<hauteur<<endl;
 }
@@ -49,10 +49,11 @@ void Dimension::setLargeur(int largeur)
 #ifdef DEBUGVERBOSE
 	cout<<"\033[44mDEBUGVERBOSE : setLargeur de Dimension\033[49m"<<endl;
 #endif
+	if (largeur<=0) largeur=DIMENSION_H_DEFAULT_LARGEUR;
 	this->largeur=largeur;
 }
 
-int Dimension::getLargeur()
+int Dimension::getLargeur()const
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[44mDEBUGVERBOSE : getLargeur de Dimension\033[49m"<<endl;
@@ -65,13 +66,18 @@ void Dimension::setHauteur(int hauteur)
 #ifdef DEBUGVERBOSE
 	cout<<"\033[44mDEBUGVERBOSE : setHauteur de Dimension\033[49m"<<endl;
 #endif
+	if (hauteur<=0) hauteur=DIMENSION_H_DEFAULT_HAUTEUR;
 	this->hauteur=hauteur;
 }
 
-int Dimension::getHauteur()
+int Dimension::getHauteur()const
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[44mDEBUGVERBOSE : getHauteur de Dimension\033[49m"<<endl;
 #endif
 	return hauteur;
 }
+
+const Dimension Dimension::VGA(640,480);
+const Dimension Dimension::HD(1280,720);
+const Dimension Dimension::FULL_HD(1920,1080);

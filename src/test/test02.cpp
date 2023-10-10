@@ -108,10 +108,10 @@ void Essai2()
 		Dimension d(800,600);
 		ImageNG i1(2,"boat",d);
 		i1.Affiche();
-	
+
 		ImageNG i2(7,"car",Dimension(1024,780));
 		i2.Affiche();
-	
+
 		ImageNG i3(6,"house",Dimension::FULL_HD);
 		i3.Affiche();
 	}
