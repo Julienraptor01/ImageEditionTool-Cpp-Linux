@@ -1,3 +1,14 @@
+# OS specific setup
+OS=$(shell . /etc/os-release ; echo $$ID_LIKE)
+ifeq "$(OS)" "debian"
+QT5_HEADERS=/usr/include/x86_64-linux-gnu/qt5
+SHARED_OBJECTS=/usr/lib/x86_64-linux-gnu
+else ifeq "$(OS)" "fedora"
+QT5_HEADERS=/usr/include/qt5
+SHARED_OBJECTS=/usr/lib64
+else
+$(error OS not supported)
+endif
 ### paths
 # sources sub directories
 MAIN=/main
@@ -24,10 +35,6 @@ MAIN_BIN=$(BIN)$(MAIN)
 TEST_BIN=$(BIN)$(TEST)
 LIB_BIN=$(BIN)$(LIB)
 MYQT_LIB_BIN=$(LIB_BIN)$(MYQT)
-# qt5 headers
-QT5_HEADERS=/usr/include/qt5
-# shared objects
-SHARED_OBJECTS=/usr/lib64
 ### commands
 # compile arguments
 SRC_COMPILE_ARGS=-I $(MAIN_SRC) -Wall
