@@ -26,12 +26,14 @@ LIB_BIN=$(BIN)$(LIB)
 MYQT_LIB_BIN=$(LIB_BIN)$(MYQT)
 # qt5 headers
 QT5_HEADERS=/usr/include/qt5
+# shared objects
+SHARED_OBJECTS=/usr/lib64
 ### commands
 # compile arguments
 SRC_COMPILE_ARGS=-I $(MAIN_SRC) -Wall
 SRC_COMPILE_ADD_ARGS=-DDEBUG -DDEBUGVERBOSE
-LIB_COMPILE_ARGS=-pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I/usr/lib64/qt5/mkspecs/linux-g++ -isystem $(QT5_HEADERS) -isystem $(QT5_HEADERS)/QtWidgets -isystem $(QT5_HEADERS)/QtGui -isystem $(QT5_HEADERS)/QtCore -I $(LIB_SRC)
-LIB_COMPILE_LINKER_ARGS=-lpthread -Wl,-O1 /usr/lib64/libQt5Widgets.so /usr/lib64/libQt5Gui.so /usr/lib64/libQt5Core.so #-lSDL /usr/lib64/
+LIB_COMPILE_ARGS=-pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I$(SHARED_OBJECTS)/qt5/mkspecs/linux-g++ -isystem $(QT5_HEADERS) -isystem $(QT5_HEADERS)/QtWidgets -isystem $(QT5_HEADERS)/QtGui -isystem $(QT5_HEADERS)/QtCore -I $(LIB_SRC)
+LIB_COMPILE_LINKER_ARGS=-ISDL -lpthread -Wl,-O1 $(SHARED_OBJECTS)/libQt5Widgets.so $(SHARED_OBJECTS)/libQt5Gui.so $(SHARED_OBJECTS)/libQt5Core.so $(SHARED_OBJECTS)/libGL.so
 # compilation
 COMPILE=g++
 SRC_COMPILE=$(COMPILE) $(SRC_COMPILE_ARGS) $(SRC_COMPILE_ADD_ARGS)
