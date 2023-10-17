@@ -1,12 +1,25 @@
 # OS specific setup
-OS=$(shell . /etc/os-release ; echo $$ID_LIKE)
+ID=$(shell . /etc/os-release ; echo $$ID)
+ifeq "$(ID)" "debian"
+OS=debian
+else ifeq "$(ID)" "fedora"
+OS=fedora
+else
+ID_LIKE=$(shell . /etc/os-release ; echo $$ID_LIKE)
+ifeq "$(ID_LIKE)" "debian"
+OS=debian
+else ifeq "$(ID_LIKE)" "fedora"
+OS=fedora
+else
+endif
+endif
 ifeq "$(OS)" "debian"
 QT5_HEADERS=/usr/include/x86_64-linux-gnu/qt5
 SHARED_OBJECTS=/usr/lib/x86_64-linux-gnu
 else ifeq "$(OS)" "fedora"
 QT5_HEADERS=/usr/include/qt5
 SHARED_OBJECTS=/usr/lib64
-else
+else ifndef OS
 $(error OS not supported)
 endif
 ### paths
