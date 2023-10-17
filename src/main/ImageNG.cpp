@@ -67,7 +67,7 @@ ImageNG::~ImageNG()
 #endif
 	if(nom != NULL)
 		freeNom();
-	if(nom != nullptr)
+	if(matrice != nullptr)
 		freeMatrice();
 }
 
@@ -145,7 +145,10 @@ void ImageNG::setDimension(const Dimension &dimension)
 #endif
 	if(matrice != nullptr)
 		freeMatrice();
-	this->dimension=dimension;
+	//this->dimension=dimension;
+	//do each component of dimension separately because technically we didn't overload the = operator so it just work by sheer luck
+	this->dimension.setLargeur(dimension.getLargeur());
+	this->dimension.setHauteur(dimension.getHauteur());
 	createMatrice();
 }
 

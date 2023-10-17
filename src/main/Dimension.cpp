@@ -44,7 +44,8 @@ void Dimension::setLargeur(int largeur)
 #ifdef DEBUGVERBOSE
 	cout<<"\033[44mDEBUGVERBOSE : setLargeur de Dimension\033[49m"<<endl;
 #endif
-	if (largeur<=0) largeur=DIMENSION_H_DEFAULT_LARGEUR;
+	if (largeur<=0)
+		largeur=DIMENSION_H_DEFAULT_LARGEUR;
 	this->largeur=largeur;
 }
 
@@ -61,7 +62,8 @@ void Dimension::setHauteur(int hauteur)
 #ifdef DEBUGVERBOSE
 	cout<<"\033[44mDEBUGVERBOSE : setHauteur de Dimension\033[49m"<<endl;
 #endif
-	if (hauteur<=0) hauteur=DIMENSION_H_DEFAULT_HAUTEUR;
+	if (hauteur<=0)
+		hauteur=DIMENSION_H_DEFAULT_HAUTEUR;
 	this->hauteur=hauteur;
 }
 
