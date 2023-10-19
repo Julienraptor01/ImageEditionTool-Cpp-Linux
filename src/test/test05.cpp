@@ -176,7 +176,7 @@ void Essai3()
 	cout << "Exportation de l'image modifiee vers le fichier joconde2.png......" << endl;
 	for (int x=0 ; x<255 ; x++) image.setPixel(x,(x*x/255),Couleur::ROUGE); // Dessin d'une parabole rouge :)
 	image.Dessine();
-	image.exportToFile("joconde2.png","PNG");
+	image.exportToFile("./out/joconde2.png","PNG");
 }
 
 //*************************************************************************************************
@@ -234,7 +234,7 @@ void Essai5()
 	ImageB::couleurFalse = Couleur(0,255,255);
 	cout << "Exportation de l'image binaire vers le fichier disque.png......" << endl;
 	image.Dessine();
-	image.exportToFile("disque.png","PNG");
+	image.exportToFile("./out/disque.png","PNG");
 }
 
 //***********************************************************************************************

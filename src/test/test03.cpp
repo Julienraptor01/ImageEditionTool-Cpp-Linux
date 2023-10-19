@@ -118,7 +118,7 @@ void Essai2()
 	cout << "Exportation de l'image modifiee vers le fichier joconde2.png......" << endl;
 	for (int x=0 ; x<255 ; x++) image.setPixel(x,(x*x/255),255); // Dessin d'une parabole blanche :)
 	image.Dessine();
-	image.exportToFile("joconde2.png","PNG");
+	image.exportToFile("./out/joconde2.png","PNG");
 }
 
 //*************************************************************************************************
