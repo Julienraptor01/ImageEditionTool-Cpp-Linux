@@ -16,6 +16,7 @@ private:
 	void freeMatrice(int **matrice, const Dimension &dimension);
 	void freeMatrice();
 	void copyMatrice(int **matrice, const Dimension &dimension, int** matriceToCopy, const Dimension &dimensionOfMatriceToCopy);
+	void copyMatrice(const ImageNG &image);
 
 public:
 	ImageNG();

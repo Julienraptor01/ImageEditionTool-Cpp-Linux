@@ -24,11 +24,13 @@ void ImageNG::createMatrice()
 #ifdef DEBUGVERBOSE
 	cout<<"\033[35;43mDEBUGVERBOSE : createMatrice de ImageNG\033[0m"<<endl;
 #endif
-	matrice = new int*[dimension.getLargeur()];
-	for(int i=0;i<dimension.getLargeur();i++)
+	int largeur = dimension.getLargeur();
+	int hauteur = dimension.getHauteur();
+	matrice = new int*[largeur];
+	for(int i=0;i<largeur;i++)
 	{
-		matrice[i] = new int[dimension.getHauteur()];
-		for(int j=0;j<dimension.getHauteur();j++)
+		matrice[i] = new int[hauteur];
+		for(int j=0;j<hauteur;j++)
 			matrice[i][j] = 0;
 	}
 #ifdef DEBUGVERBOSE
@@ -41,7 +43,8 @@ void ImageNG::freeMatrice(int **matrice, const Dimension &dimension)
 #ifdef DEBUGVERBOSE
 	cout<<"\033[35;43mDEBUGVERBOSE : freeMatrice de ImageNG (matrice, dimension)\033[0m"<<endl;
 #endif
-	for(int i=0;i<dimension.getLargeur();i++)
+	int largeur = dimension.getLargeur();
+	for(int i=0;i<largeur;i++)
 		delete[] matrice[i];
 	delete[] matrice;
 #ifdef DEBUGVERBOSE
@@ -64,13 +67,24 @@ void ImageNG::freeMatrice()
 void ImageNG::copyMatrice(int **matrice, const Dimension &dimension, int **matriceToCopy, const Dimension &dimensionOfMatriceToCopy)
 {
 #ifdef DEBUGVERBOSE
-	cout<<"\033[35;43mDEBUGVERBOSE : copyMatrice de ImageNG\033[0m"<<endl;
+	cout<<"\033[35;43mDEBUGVERBOSE : copyMatrice de ImageNG (matrice, dimension, matriceToCopy, dimensionOfMatriceToCopy)\033[0m"<<endl;
 #endif
 	int minLargeur = (dimension.getLargeur() < dimensionOfMatriceToCopy.getLargeur()) ? dimension.getLargeur() : dimensionOfMatriceToCopy.getLargeur();
 	int minHauteur = (dimension.getHauteur() < dimensionOfMatriceToCopy.getHauteur()) ? dimension.getHauteur() : dimensionOfMatriceToCopy.getHauteur();
 	for(int i=0;i<minLargeur;i++)
 		for(int j=0;j<minHauteur;j++)
 			matrice[i][j] = matriceToCopy[i][j];
+#ifdef DEBUGVERBOSE
+	cout<<"\033[36;43mDEBUGVERBOSE : Fin copyMatrice de ImageNG\033[0m"<<endl;
+#endif
+}
+
+void ImageNG::copyMatrice(const ImageNG &image)
+{
+#ifdef DEBUGVERBOSE
+	cout<<"\033[35;43mDEBUGVERBOSE : copyMatrice de ImageNG (image)\033[0m"<<endl;
+#endif
+	copyMatrice(matrice,dimension,image.matrice,image.dimension);
 #ifdef DEBUGVERBOSE
 	cout<<"\033[36;43mDEBUGVERBOSE : Fin copyMatrice de ImageNG\033[0m"<<endl;
 #endif
@@ -137,7 +151,7 @@ ImageNG::ImageNG(const ImageNG &image)
 	setId(image.id);
 	setNom(image.nom);
 	setDimension(image.dimension);
-	copyMatrice(matrice,dimension,image.matrice,image.dimension);
+	copyMatrice(image);
 #ifdef DEBUG
 	cout<<"\033[31;42mDEBUG : Fin Constructeur de copie de ImageNG\033[0m"<<endl;
 #endif
@@ -183,44 +197,27 @@ void ImageNG::setDimension(const Dimension &dimension)
 #ifdef DEBUGVERBOSE
 	cout<<"\033[31;44mDEBUGVERBOSE : setDimension de ImageNG\033[0m"<<endl;
 #endif
-	if(matrice == nullptr)
+	//we need to save the old matrix
+	int **oldMatrice = matrice;
+	//we need to set the matrix to null as now it technically doesn't exist anymore, oldMatrice has taken its place
+	matrice = nullptr;
+	//we need to save the old dimension
+	Dimension oldDimension(this->dimension);
+	//we need to set the new dimension
+	//this->dimension=dimension;
+	//do each component of dimension separately because technically we didn't overload the = operator so it just work by sheer luck
+	this->dimension.setLargeur(dimension.getLargeur());
+	this->dimension.setHauteur(dimension.getHauteur());
+	//we need to create the new matrix
+	createMatrice();
+	//if the matrix was not null, we need to copy the old matrix into the new one
+	if (oldMatrice != nullptr)
 	{
-		//this->dimension=dimension;
-		//do each component of dimension separately because technically we didn't 	overload the = operator so it just work by sheer luck
-		this->dimension.setLargeur(dimension.getLargeur());
-		this->dimension.setHauteur(dimension.getHauteur());
-		createMatrice();
-	}
-	//else we need to copy the old matrix into the new one
-	else
-	{
-		//we need to make a hard save of the old matrix
-		int **oldMatrice = new int*[this->dimension.getLargeur()];
-		for(int i=0;i<this->dimension.getLargeur();i++)
-		{
-			oldMatrice[i] = new int[this->dimension.getHauteur()];
-			for(int j=0;j<this->dimension.getHauteur();j++)
-				oldMatrice[i][j] = matrice[i][j];
-		}
-		//we need to save the old dimension
-		Dimension oldDimension;
-		oldDimension.setLargeur(this->dimension.getLargeur());
-		oldDimension.setHauteur(this->dimension.getHauteur());
-		//we need to free the old matrix
-		freeMatrice();
-		//we need to set the new dimension
-		this->dimension.setLargeur(dimension.getLargeur());
-		this->dimension.setHauteur(dimension.getHauteur());
-		//we need to create the new matrix
-		createMatrice();
 		//we need to copy the old matrix into the new one
 		copyMatrice(matrice,this->dimension,oldMatrice,oldDimension);
 		//we need to free the old matrix
 		freeMatrice(oldMatrice, oldDimension);
 	}
-#ifdef DEBUGVERBOSE
-	cout<<"\033[36;44mDEBUGVERBOSE : Fin setDimension de ImageNG\033[0m"<<endl;
-#endif
 }
 
 Dimension ImageNG::getDimension()const
@@ -236,8 +233,10 @@ void ImageNG::setBackground(int couleur)
 #ifdef DEBUGVERBOSE
 	cout<<"\033[31;44mDEBUGVERBOSE : setBackground de ImageNG\033[0m"<<endl;
 #endif
-	for(int i=0;i<dimension.getLargeur();i++)
-		for(int j=0;j<dimension.getHauteur();j++)
+	int largeur = dimension.getLargeur();
+	int hauteur = dimension.getHauteur();
+	for(int i=0;i<largeur;i++)
+		for(int j=0;j<hauteur;j++)
 			setPixel(i,j,couleur);
 }
 
