@@ -41,8 +41,8 @@ Dimension::Dimension(const Dimension &dimension)
 
 void Dimension::setLargeur(int largeur)
 {
-#ifdef DEBUGVERBOSE
-	cout<<"\033[44mDEBUGVERBOSE : setLargeur de Dimension\033[49m"<<endl;
+#ifdef DEBUGVERYVERBOSE
+	cout<<"\033[44mDEBUGVERYVERBOSE : setLargeur de Dimension\033[49m"<<endl;
 #endif
 	if (largeur<=0)
 		largeur=DIMENSION_H_DEFAULT_LARGEUR;
@@ -51,16 +51,16 @@ void Dimension::setLargeur(int largeur)
 
 int Dimension::getLargeur()const
 {
-#ifdef DEBUGVERBOSE
-	cout<<"\033[44mDEBUGVERBOSE : getLargeur de Dimension\033[49m"<<endl;
+#ifdef DEBUGVERYVERBOSE
+	cout<<"\033[44mDEBUGVERYVERBOSE : getLargeur de Dimension\033[49m"<<endl;
 #endif
 	return largeur;
 }
 
 void Dimension::setHauteur(int hauteur)
 {
-#ifdef DEBUGVERBOSE
-	cout<<"\033[44mDEBUGVERBOSE : setHauteur de Dimension\033[49m"<<endl;
+#ifdef DEBUGVERYVERBOSE
+	cout<<"\033[44mDEBUGVERYVERBOSE : setHauteur de Dimension\033[49m"<<endl;
 #endif
 	if (hauteur<=0)
 		hauteur=DIMENSION_H_DEFAULT_HAUTEUR;
@@ -69,8 +69,8 @@ void Dimension::setHauteur(int hauteur)
 
 int Dimension::getHauteur()const
 {
-#ifdef DEBUGVERBOSE
-	cout<<"\033[44mDEBUGVERBOSE : getHauteur de Dimension\033[49m"<<endl;
+#ifdef DEBUGVERYVERBOSE
+	cout<<"\033[44mDEBUGVERYVERBOSE : getHauteur de Dimension\033[49m"<<endl;
 #endif
 	return hauteur;
 }

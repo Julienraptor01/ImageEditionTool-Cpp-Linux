@@ -5,6 +5,7 @@ using namespace std;
 
 #include "ImageNG.h"
 #include "Dimension.h"
+#include "MyQT.h"
 
 void ImageNG::freeNom()
 {
@@ -172,8 +173,8 @@ void ImageNG::setBackground(int couleur)
 
 void ImageNG::setPixel(int x, int y, int couleur)
 {
-#ifdef DEBUGVERBOSE
-	cout<<"\033[44mDEBUGVERBOSE : setPixel de ImageNG\033[49m"<<endl;
+#ifdef DEBUGVERYVERBOSE
+	cout<<"\033[44mDEBUGVERYVERBOSE : setPixel de ImageNG\033[49m"<<endl;
 #endif
 	if(x>=0 && x<dimension.getLargeur() && y>=0 && y<dimension.getHauteur())
 		matrice[x][y] = couleur;
@@ -181,8 +182,8 @@ void ImageNG::setPixel(int x, int y, int couleur)
 
 int ImageNG::getPixel(int x, int y) const
 {
-#ifdef DEBUGVERBOSE
-	cout<<"\033[44mDEBUGVERBOSE : getPixel de ImageNG\033[49m"<<endl;
+#ifdef DEBUGVERYVERBOSE
+	cout<<"\033[44mDEBUGVERYVERBOSE : getPixel de ImageNG\033[49m"<<endl;
 #endif
 	if(x>=0 && x<dimension.getLargeur() && y>=0 && y<dimension.getHauteur())
 		return matrice[x][y];
@@ -196,12 +197,24 @@ void ImageNG::Affiche()const
 
 void ImageNG::Dessine() const
 {
+#ifdef DEBUGVERBOSE
+	cout<<"\033[44mDEBUGVERBOSE : Dessine de ImageNG\033[49m"<<endl;
+#endif
+	MyQT::ViewImage(*this);
 }
 
 void ImageNG::importFromFile(const char *nomFichier)
 {
+#ifdef DEBUGVERBOSE
+	cout<<"\033[44mDEBUGVERBOSE : importFromFile de ImageNG\033[49m"<<endl;
+#endif
+	MyQT::ImportFromFile(*this, nomFichier);
 }
 
 void ImageNG::exportToFile(const char *nomFichier, const char *formatFichier) const
 {
+#ifdef DEBUGVERBOSE
+	cout<<"\033[44mDEBUGVERBOSE : exportToFile de ImageNG\033[49m"<<endl;
+#endif
+	MyQT::ExportToFile(*this, nomFichier, formatFichier);
 }
