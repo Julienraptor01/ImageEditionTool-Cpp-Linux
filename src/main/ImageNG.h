@@ -13,7 +13,9 @@ private:
 
 	void freeNom();
 	void createMatrice();
+	void freeMatrice(int **matrice, const Dimension &dimension);
 	void freeMatrice();
+	void copyMatrice(int **matrice, const Dimension &dimension, int** matriceToCopy, const Dimension &dimensionOfMatriceToCopy);
 
 public:
 	ImageNG();
