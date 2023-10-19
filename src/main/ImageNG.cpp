@@ -75,7 +75,7 @@ void ImageNG::copyMatrice(int **matrice, const Dimension &dimension, int **matri
 		for(int j=0;j<minHauteur;j++)
 			matrice[i][j] = matriceToCopy[i][j];
 #ifdef DEBUGVERBOSE
-	cout<<"\033[36;43mDEBUGVERBOSE : Fin copyMatrice de ImageNG\033[0m"<<endl;
+	cout<<"\033[36;43mDEBUGVERBOSE : Fin copyMatrice de ImageNG (matrice, dimension, matriceToCopy, dimensionOfMatriceToCopy)\033[0m"<<endl;
 #endif
 }
 
@@ -86,7 +86,7 @@ void ImageNG::copyMatrice(const ImageNG &image)
 #endif
 	copyMatrice(matrice,dimension,image.matrice,image.dimension);
 #ifdef DEBUGVERBOSE
-	cout<<"\033[36;43mDEBUGVERBOSE : Fin copyMatrice de ImageNG\033[0m"<<endl;
+	cout<<"\033[36;43mDEBUGVERBOSE : Fin copyMatrice de ImageNG (image)\033[0m"<<endl;
 #endif
 }
 
@@ -197,25 +197,17 @@ void ImageNG::setDimension(const Dimension &dimension)
 #ifdef DEBUGVERBOSE
 	cout<<"\033[31;44mDEBUGVERBOSE : setDimension de ImageNG\033[0m"<<endl;
 #endif
-	//we need to save the old matrix
 	int **oldMatrice = matrice;
-	//we need to set the matrix to null as now it technically doesn't exist anymore, oldMatrice has taken its place
 	matrice = nullptr;
-	//we need to save the old dimension
 	Dimension oldDimension(this->dimension);
-	//we need to set the new dimension
 	//this->dimension=dimension;
 	//do each component of dimension separately because technically we didn't overload the = operator so it just work by sheer luck
 	this->dimension.setLargeur(dimension.getLargeur());
 	this->dimension.setHauteur(dimension.getHauteur());
-	//we need to create the new matrix
 	createMatrice();
-	//if the matrix was not null, we need to copy the old matrix into the new one
 	if (oldMatrice != nullptr)
 	{
-		//we need to copy the old matrix into the new one
 		copyMatrice(matrice,this->dimension,oldMatrice,oldDimension);
-		//we need to free the old matrix
 		freeMatrice(oldMatrice, oldDimension);
 	}
 }
