@@ -108,7 +108,7 @@ void Essai2() // Attention : utilisez les flux bytes (read et write) !!!!
 {
 	cout << "----- 2. Test des methodes Save et Load de la classe ImageNG ------" << endl;
 
-	ImageNG i1("../images/joconde.bmp");
+	ImageNG i1("./src/assets/images/joconde.bmp");
 	cout << "i1 = " << i1 << endl;
 	i1.Dessine();
 	cout << endl;
@@ -183,7 +183,7 @@ void Essai5() // Attention : utilisez les flux bytes (read et write) !!!!
 {
 	cout << "----- 5. Test des methodes Save et Load de la classe ImageRGB ------" << endl;
 
-	ImageRGB i1("../images/joconde.bmp");
+	ImageRGB i1("./src/assets/images/joconde.bmp");
 	cout << "i1 = " << i1 << endl;
 	i1.Dessine();
 	cout << endl;

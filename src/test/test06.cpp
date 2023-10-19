@@ -249,13 +249,13 @@ void Essai4()
 		switch(ch)
 		{
 		case 'a' :
-			im1.importFromFile("../images/joconde.bmp");
+			im1.importFromFile("./src/assets/images/joconde.bmp");
 			break;
 		case 'b' :
-			im1.importFromFile("../images/lena.bmp");
+			im1.importFromFile("./src/assets/images/lena.bmp");
 			break;
 		default :
-			im1.importFromFile("../images/bulles.bmp");
+			im1.importFromFile("./src/assets/images/bulles.bmp");
 			break;
 		}
 		cout << "Image 2 : ";
@@ -264,13 +264,13 @@ void Essai4()
 		switch(ch)
 		{
 		case 'a' :
-			im2.importFromFile("../images/joconde.bmp");
+			im2.importFromFile("./src/assets/images/joconde.bmp");
 			break;
 		case 'b' :
-			im2.importFromFile("../images/lena.bmp");
+			im2.importFromFile("./src/assets/images/lena.bmp");
 			break;
 		default :
-			im2.importFromFile("../images/bulles.bmp");
+			im2.importFromFile("./src/assets/images/bulles.bmp");
 			break;
 		}
 		cout << "Voici image 1 :" << endl << im1 << endl;

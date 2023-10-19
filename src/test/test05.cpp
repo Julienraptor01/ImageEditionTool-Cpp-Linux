@@ -164,7 +164,7 @@ void Essai3()
 
 	ImageRGB image;
 	cout << "Importation d'une image à partir du fichier joconde.bmp......" << endl;
-	image.importFromFile("../images/joconde.bmp");
+	image.importFromFile("./src/assets/images/joconde.bmp");
 	image.setNom("La Joconde");
 	image.setId(1);
 	image.Affiche();

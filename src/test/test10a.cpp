@@ -21,12 +21,12 @@ int main(int argc,char* argv[])
 
 	// Ajout d'images
 	cout << endl << "//***** Ajout d'images à la biblothèque ******************************" << endl;
-	cout << "Ajout image NG \"../images/joconde.bmp\"..." << endl;
-	ps.ajouteImage(new ImageNG("../images/joconde.bmp"));
+	cout << "Ajout image NG \"./src/assets/images/joconde.bmp\"..." << endl;
+	ps.ajouteImage(new ImageNG("./src/assets/images/joconde.bmp"));
 
-	cout << "Ajout image NG \"../images/lena.bmp\"..." << endl;
+	cout << "Ajout image NG \"./src/assets/images/lena.bmp\"..." << endl;
 	ImageNG *p = new ImageNG();
-	p->importFromFile("../images/lena.bmp");
+	p->importFromFile("./src/assets/images/lena.bmp");
 	p->setNom("lena");
 	ps.ajouteImage(p);
 
@@ -42,8 +42,8 @@ int main(int argc,char* argv[])
 		p->setPixel(i,i,250);
 	ps.ajouteImage(p);
 
-	cout << "Ajout image RGB \"../images/mandrill.bmp\"..." << endl;
-	ps.ajouteImage(new ImageRGB("../images/mandrill.bmp"));
+	cout << "Ajout image RGB \"./src/assets/images/mandrill.bmp\"..." << endl;
+	ps.ajouteImage(new ImageRGB("./src/assets/images/mandrill.bmp"));
 
 	cout << endl << "//***** Images de la biblothèque *************************************" << endl;
 	ps.afficheImages();

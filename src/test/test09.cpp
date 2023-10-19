@@ -94,7 +94,7 @@ void Essai1()
 {
 	cout << "***** 1. Test du Seuillage d'une ImageNG *****************************************************" << endl;
 
-	ImageNG image("../images/joconde.bmp");
+	ImageNG image("./src/assets/images/joconde.bmp");
 	image.setNom("joconde");
 	cout << "Voici l'image de départ : " << image << endl;
 	image.Dessine();
@@ -116,7 +116,7 @@ void Essai2()
 {
 	cout << "***** 2. Test du filtre moyenneur sur une ImageNG ********************************************" << endl;
 
-	ImageNG image("../images/lena.bmp");
+	ImageNG image("./src/assets/images/lena.bmp");
 	image.setNom("lena");
 	cout << "Voici l'image de départ : " << image << endl;
 	image.Dessine();
@@ -127,7 +127,7 @@ void Essai2()
 	cout << "Voici l'image filtree : " << imageFiltree << endl;
 	imageFiltree.Dessine();
 
-	ImageNG image2("../images/mandrill.bmp");
+	ImageNG image2("./src/assets/images/mandrill.bmp");
 	image2.setNom("mandrill");
 	cout << "Voici l'image de départ : " << image << endl;
 	image2.Dessine();
@@ -144,7 +144,7 @@ void Essai3()
 {
 	cout << "***** 3. Test du filtre median sur une ImageNG ********************************************" << endl;
 
-	ImageNG image("../images/house.bmp");
+	ImageNG image("./src/assets/images/house.bmp");
 	image.setNom("house");
 	cout << "Voici l'image de départ : " << image << endl;
 	image.Dessine();
@@ -166,7 +166,7 @@ void Essai4()
 {
 	cout << "***** 4. Test de l'erosion sur une ImageNG ********************************************" << endl;
 
-	ImageNG image("../images/lena.bmp");
+	ImageNG image("./src/assets/images/lena.bmp");
 	image.setNom("lena");
 	cout << "Voici l'image de départ : " << image << endl;
 	image.Dessine();
@@ -188,7 +188,7 @@ void Essai5()
 {
 	cout << "***** 5. Test de la dilatation sur une ImageNG ********************************************" << endl;
 
-	ImageNG image("../images/lena.bmp");
+	ImageNG image("./src/assets/images/lena.bmp");
 	image.setNom("lena");
 	cout << "Voici l'image de départ : " << image << endl;
 	image.Dessine();
@@ -210,7 +210,7 @@ void Essai6()
 {
 	cout << "***** 6. Essai de detection de contours sur une ImageNG ************************************" << endl;
 
-	ImageNG image("../images/joconde.bmp");
+	ImageNG image("./src/assets/images/joconde.bmp");
 	image.setNom("joconde");
 	cout << "Voici l'image de départ : " << image << endl;
 	image.Dessine();
@@ -228,7 +228,7 @@ void Essai7()
 {
 	cout << "***** 7. Test du negatif sur une ImageNG ************************************" << endl;
 
-	ImageNG image("../images/bulles.bmp");
+	ImageNG image("./src/assets/images/bulles.bmp");
 	image.setNom("bulles");
 	cout << "Voici l'image de départ : " << image << endl;
 	image.Dessine();

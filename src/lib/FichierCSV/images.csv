@@ -1,7 +1,7 @@
-NG;../images/lena.bmp;lena
-RGB;../images/lena.bmp;lena
-RGB;../images/joconde.bmp;joconde
-NG;../images/house.bmp;house
-RGB;../images/bulles.bmp;bulles
-RGB;../images/mandrill.bmp;mandrill
-NG;../images/boat.bmp;boat
+NG;./src/assets/images/lena.bmp;lena
+RGB;./src/assets/images/lena.bmp;lena
+RGB;./src/assets/images/joconde.bmp;joconde
+NG;./src/assets/images/house.bmp;house
+RGB;./src/assets/images/bulles.bmp;bulles
+RGB;./src/assets/images/mandrill.bmp;mandrill
+NG;./src/assets/images/boat.bmp;boat

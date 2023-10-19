@@ -106,7 +106,7 @@ void Essai2()
 
 	ImageNG image;
 	cout << "Importation d'une image à partir du fichier joconde.bmp......" << endl;
-	image.importFromFile("../images/joconde.bmp");
+	image.importFromFile("./src/assets/images/joconde.bmp");
 	image.setNom("La Joconde");
 	image.setId(1);
 	image.Affiche();
@@ -130,7 +130,7 @@ void Essai3()
 
 	ImageNG image;
 	cout << "Importation d'une image à partir du fichier mandrill.bmp......" << endl;
-	image.importFromFile("../images/mandrill.bmp");
+	image.importFromFile("./src/assets/images/mandrill.bmp");
 	image.Affiche();
 	image.Dessine();
 

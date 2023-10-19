@@ -118,7 +118,7 @@ void Essai1()
 	cout << "(1) ***** Tests des parametres d'une image *************************" << endl;
 	cout << "********************************************************************" << endl;
 
-	ImageNG im("../images/lena.bmp");
+	ImageNG im("./src/assets/images/lena.bmp");
 	im.Affiche();
 	cout << "Luminance = " << im.getLuminance() << endl;
 	cout << "Minimum = " << im.getMinimum() << endl;
@@ -138,7 +138,7 @@ void Essai2()
 	{
 		ImageNG i;
 		{
-			ImageNG i1("../images/bulles.bmp"); // Ajout d'un nouveau constructeur !!! --> a faire
+			ImageNG i1("./src/assets/images/bulles.bmp"); // Ajout d'un nouveau constructeur !!! --> a faire
 			cout << "Voici i1 : ";
 			i1.Affiche();
 			i1.Dessine();
@@ -186,7 +186,7 @@ void Essai4()
 	cout << "**************************************************************************" << endl;
 	cout << "(4) ********* Tests de l'operateur << de ImageNG *************************" << endl;
 	cout << "**************************************************************************" << endl;
-	ImageNG i1("../images/lena.bmp");
+	ImageNG i1("./src/assets/images/lena.bmp");
 	cout << "ImageNG chargee = " << i1 << endl;
 	i1.Dessine();
 }
@@ -201,7 +201,7 @@ void Essai5()
 	cout << "****************************************************************************************" << endl;
 
 	cout << endl << "***** Tests de ImageNG + int ***************************************************" << endl;
-	ImageNG i1("../images/boat.bmp"), i2;
+	ImageNG i1("./src/assets/images/boat.bmp"), i2;
 	cout << "Avant :" << endl;
 	cout << "i1 = " << i1 << endl;
 	i1.Dessine();
@@ -213,7 +213,7 @@ void Essai5()
 	i1.Dessine();
 
 	cout << endl << "***** Tests de int + ImageNG **************************************************" << endl;
-	ImageNG i3("../images/lena.bmp"), i4;
+	ImageNG i3("./src/assets/images/lena.bmp"), i4;
 	cout << "Avant :" << endl;
 	cout << "i3 = " << i3 << endl;
 	i3.Dessine();
@@ -235,7 +235,7 @@ void Essai6()
 	cout << "****************************************************************************************" << endl;
 
 	cout << endl << "***** Tests de ImageNG - int ***************************************************" << endl;
-	ImageNG i1("../images/boat.bmp"), i2;
+	ImageNG i1("./src/assets/images/boat.bmp"), i2;
 	cout << "Avant :" << endl;
 	cout << "i1 = " << i1 << endl;
 	i1.Dessine();
@@ -268,7 +268,7 @@ void Essai7()
 	cout << "i : " << i << endl << endl;
 
 	cout << "***** Test visuel ++ *************************************************" << endl;
-	i = ImageNG("../images/boat.bmp");
+	i = ImageNG("./src/assets/images/boat.bmp");
 	for (int x=0 ; x<8 ; x++,i++) i.Dessine();
 }
 
@@ -294,7 +294,7 @@ void Essai8()
 	cout << "i : " << i << endl << endl;
 
 	cout << "***** Test visuel ++ *************************************************" << endl;
-	i = ImageNG("../images/boat.bmp");
+	i = ImageNG("./src/assets/images/boat.bmp");
 	for (int x=0 ; x<8 ; x++,i--) i.Dessine();
 }
 
@@ -326,7 +326,7 @@ void Essai10()
 	cout << "(10) ********* Tests de l'operateur (- ImageNG) de la classe ImageNG *******************" << endl;
 	cout << "****************************************************************************************" << endl;
 
-	ImageNG i1("../images/imageBinaire1.bmp"),i2("../images/imageBinaire2.bmp"),i3;
+	ImageNG i1("./src/assets/images/imageBinaire1.bmp"),i2("./src/assets/images/imageBinaire2.bmp"),i3;
 	cout << "Avant :" << endl;
 	cout << "i1 = " << i1 << endl;
 	i1.Dessine();
@@ -351,7 +351,7 @@ void Essai11()
 	cout << "(11) ********* Test des operateurs < > et == de la classe ImageNG **********************" << endl;
 	cout << "****************************************************************************************" << endl;
 
-	ImageNG i1("../images/lena.bmp"), i2 = i1 + 30;
+	ImageNG i1("./src/assets/images/lena.bmp"), i2 = i1 + 30;
 	cout << "Voici i1 : " << i1 << endl;
 	i1.Dessine();
 	cout << "Voici i2 : " << i2 << endl;
