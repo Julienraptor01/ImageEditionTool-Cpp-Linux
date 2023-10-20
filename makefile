@@ -68,7 +68,7 @@ DELETE=rm -rf
 LOG=@printf
 
 
-all:	full-clean $(TEST_BIN)/test01 $(TEST_BIN)/test02 $(TEST_BIN)/test03
+all:	full-clean $(TEST_BIN)/test01 $(TEST_BIN)/test02 $(TEST_BIN)/test03 $(TEST_BIN)/test04
 	$(LOG) '\n\033[44mmake all finished\033[49m\n\n'
 
 $(MAIN_OBJ)/ImageNG.o:	$(MAIN_SRC)/ImageNG.cpp $(MAIN_SRC)/ImageNG.h $(MYQT_LIB_SRC)/MyQT.h
@@ -130,6 +130,21 @@ $(TEST_OBJ)/test03.o:	$(TEST_SRC)/test03.cpp $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/D
 	$(TEST_SRC)/test03.cpp \
 	-c \
 	-o $(TEST_OBJ)/test03.o
+
+$(TEST_BIN)/test04:	$(TEST_OBJ)/test04.o $(MAIN_OBJ)/ImageNG.o $(MAIN_OBJ)/Dimension.o $(MYQT_LIB_OBJ)/MyQT.o
+	$(LOG) '\n\033[42mcreation of the test04 executable\033[49m\n'
+	$(TEST_COMPILE) \
+	$(TEST_OBJ)/test04.o \
+	$(TEST_COMPILE_ARGS) \
+	-o $(TEST_BIN)/test04 \
+	$(LIB_COMPILE_LINKER_ARGS)
+
+$(TEST_OBJ)/test04.o:	$(TEST_SRC)/test04.cpp $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/Dimension.h $(MYQT_LIB_SRC)/MyQT.h
+	$(LOG) '\n\033[42mcreation of the test04 object file\033[49m\n'
+	$(TEST_COMPILE) \
+	$(TEST_SRC)/test04.cpp \
+	-c \
+	-o $(TEST_OBJ)/test04.o
 
 $(MYQT_LIB_OBJ)/MyQT.o:	$(MYQT_LIB_SRC)/MyQT.cpp $(MYQT_LIB_SRC)/MyQT.h $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/Dimension.h
 	$(LOG) '\n\033[42mcreation of the MyQT object file\033[49m\n'

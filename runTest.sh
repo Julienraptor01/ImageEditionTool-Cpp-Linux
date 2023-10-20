@@ -24,6 +24,17 @@ then
 	./build/bin/test/test03 1 > ./logs/test03-1.log
 	./build/bin/test/test03 2 > ./logs/test03-2.log
 	./build/bin/test/test03 3 > ./logs/test03-3.log
+	./build/bin/test/test04 1 > ./logs/test04-01.log
+	./build/bin/test/test04 2 > ./logs/test04-02.log
+	./build/bin/test/test04 3 > ./logs/test04-03.log
+	./build/bin/test/test04 4 > ./logs/test04-04.log
+	./build/bin/test/test04 5 > ./logs/test04-05.log
+	./build/bin/test/test04 6 > ./logs/test04-06.log
+	./build/bin/test/test04 7 > ./logs/test04-07.log
+	./build/bin/test/test04 8 > ./logs/test04-08.log
+	./build/bin/test/test04 9 > ./logs/test04-09.log
+	./build/bin/test/test04 10 > ./logs/test04-10.log
+	./build/bin/test/test04 11 > ./logs/test04-11.log
 else
 	echo "GG, i have no idea how you got here, i probably forgot a way to escape my conditions"
 	exit -69
