@@ -2,7 +2,11 @@
 #include <string.h>
 #include <regex>
 
-using namespace std;
+using std::cout;
+using std::endl;
+using std::regex;
+using std::regex_search;
+using std::regex_replace;
 
 #include "ImageNG.h"
 #include "Dimension.h"

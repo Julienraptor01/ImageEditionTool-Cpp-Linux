@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string.h>
 
-using namespace std;
+using std::cout;
+using std::endl;
 
 #include "Dimension.h"
 
