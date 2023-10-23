@@ -23,6 +23,7 @@ public:
 	~ImageNG();
 	ImageNG(int id, const char *nom, const Dimension &dimension);
 	ImageNG(int id, const char *nom);
+	ImageNG(const char *nom);
 	ImageNG(const ImageNG &image);
 
 	void setId(int id);

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>
+#include <regex>
 
 using namespace std;
 
@@ -122,9 +123,13 @@ ImageNG::ImageNG(int id, const char *nom, const Dimension &dimension)
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation complet de ImageNG\033[0m"<<endl;
 #endif
+	static const regex isFileRegex("^(?:\\.?\\/)?(?:(?:.+\\/)*)?(.+)?:\\..+$");
+	bool isFile = regex_search(nom, isFileRegex);
 	setId(id);
-	setNom(nom);
+	setNom(isFile ? regex_replace(nom, isFileRegex, "$1").c_str() : nom);
 	setDimension(dimension);
+	if (isFile)
+		importFromFile(nom);
 #ifdef DEBUG
 	cout<<"\033[31;42mDEBUG : Fin Constructeur d'initialisation complet de ImageNG\033[0m"<<endl;
 #endif
@@ -135,11 +140,32 @@ ImageNG::ImageNG(int id, const char *nom)
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation partiel de ImageNG\033[0m"<<endl;
 #endif
+	static const regex isFileRegex("^(?:\\.?\\/)?(?:(?:.+\\/)*)?(.+)?:\\..+$");
+	bool isFile = regex_search(nom, isFileRegex);
 	setId(id);
-	setNom(nom);
+	setNom(isFile ? regex_replace(nom, isFileRegex, "$1").c_str() : nom);
 	setDimension(dimension);
+	if (isFile)
+		importFromFile(nom);
 #ifdef DEBUG
 	cout<<"\033[31;42mDEBUG : Fin Constructeur d'initialisation partiel de ImageNG\033[0m"<<endl;
+#endif
+}
+
+ImageNG::ImageNG(const char *nom)
+{
+#ifdef DEBUG
+	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation par fichier de ImageNG\033[0m"<<endl;
+#endif
+	static const regex isFileRegex("^(?:\\.?\\/)?(?:(?:.+\\/)*)?(.+)?:\\..+$");
+	bool isFile = regex_search(nom, isFileRegex);
+	setId(1);
+	setNom(isFile ? regex_replace(nom, isFileRegex, "$1").c_str() : nom);
+	setDimension(dimension);
+	if (isFile)
+		importFromFile(nom);
+#ifdef DEBUG
+	cout<<"\033[31;42mDEBUG : Fin Constructeur d'initialisation par fichier de ImageNG\033[0m"<<endl;
 #endif
 }
 
