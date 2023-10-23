@@ -1,6 +1,11 @@
 #ifndef IMAGENG_H
 #define IMAGENG_H
 
+#include <iostream>
+
+using std::istream;
+using std::ostream;
+
 #include "Dimension.h"
 
 class ImageNG
@@ -26,6 +31,25 @@ public:
 	ImageNG(const char *nom);
 	ImageNG(const ImageNG &image);
 
+	ImageNG& operator=(const ImageNG &image);
+	ImageNG operator+(int valeur)const;
+	friend ImageNG operator+(int valeur, const ImageNG &image);
+	ImageNG operator+(const ImageNG &image)const;
+	ImageNG operator-(int valeur)const;
+	friend ImageNG operator-(int valeur, const ImageNG &image);
+	ImageNG operator-(const ImageNG &image)const;
+	ImageNG& operator++();
+	ImageNG operator++(int);
+	ImageNG& operator--();
+	ImageNG operator--(int);
+	bool operator==(const ImageNG &image)const;
+	bool operator!=(const ImageNG &image)const;
+	bool operator<(const ImageNG &image)const;
+	bool operator<=(const ImageNG &image)const;
+	bool operator>(const ImageNG &image)const;
+	bool operator>=(const ImageNG &image)const;
+	friend ostream& operator<<(ostream &outputStream, const ImageNG &image);
+
 	void setId(int id);
 	int getId()const;
 	void setNom(const char *nom);
@@ -35,6 +59,11 @@ public:
 	void setBackground(int couleur);
 	void setPixel(int x, int y, int couleur);
 	int getPixel(int x, int y)const;
+
+	int getLuminance()const;
+	int getMinimum()const;
+	int getMaximum()const;
+	float getContraste()const;
 
 	void Affiche()const;
 	void Dessine()const;

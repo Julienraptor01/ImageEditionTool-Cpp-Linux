@@ -187,6 +187,226 @@ ImageNG::ImageNG(const ImageNG &image)
 #endif
 }
 
+ImageNG& ImageNG::operator=(const ImageNG &image)
+{
+#ifdef DEBUG
+	cout<<"\033[33;45mDEBUG : Operateur d'affectation de ImageNG\033[0m"<<endl;
+#endif
+	setId(image.id);
+	setNom(image.nom);
+	setDimension(image.dimension);
+	copyMatrice(image);
+	return *this;
+}
+
+ImageNG ImageNG::operator+(int valeur)const
+{
+#ifdef DEBUG
+	cout<<"\033[33;45mDEBUG : Operateur d'addition avec int de ImageNG\033[0m"<<endl;
+#endif
+	ImageNG image(*this);
+	int largeur = dimension.getLargeur();
+	int hauteur = dimension.getHauteur();
+	for(int i=0;i<largeur;i++)
+		for(int j=0;j<hauteur;j++)
+			image.matrice[i][j] += valeur;
+	return image;
+}
+
+ImageNG operator+(int valeur, const ImageNG &image)
+{
+#ifdef DEBUG
+	cout<<"\033[33;46mDEBUG : Operateur inversé d'addition avec int de ImageNG\033[0m"<<endl;
+#endif
+	return image+valeur;
+}
+
+ImageNG ImageNG::operator+(const ImageNG &image)const
+{
+#ifdef DEBUG
+	cout<<"\033[33;45mDEBUG : Operateur d'addition avec ImageNG de ImageNG\033[0m"<<endl;
+#endif
+	ImageNG imageToReturn(*this);
+	int largeur = dimension.getLargeur();
+	int hauteur = dimension.getHauteur();
+	for(int i=0;i<largeur;i++)
+		for(int j=0;j<hauteur;j++)
+			imageToReturn.matrice[i][j] += image.matrice[i][j];
+	return imageToReturn;
+}
+
+ImageNG ImageNG::operator-(int valeur)const
+{
+#ifdef DEBUG
+	cout<<"\033[33;45mDEBUG : Operateur de soustraction avec int de ImageNG\033[0m"<<endl;
+#endif
+	ImageNG image(*this);
+	int largeur = dimension.getLargeur();
+	int hauteur = dimension.getHauteur();
+	for(int i=0;i<largeur;i++)
+		for(int j=0;j<hauteur;j++)
+			image.matrice[i][j] -= valeur;
+	return image;
+}
+
+ImageNG operator-(int valeur, const ImageNG &image)
+{
+#ifdef DEBUG
+	cout<<"\033[33;46mDEBUG : Operateur inversé de soustraction avec int de ImageNG\033[0m"<<endl;
+#endif
+	ImageNG imageToReturn(image);
+	int largeur = image.dimension.getLargeur();
+	int hauteur = image.dimension.getHauteur();
+	for(int i=0;i<largeur;i++)
+		for(int j=0;j<hauteur;j++)
+			imageToReturn.matrice[i][j] = valeur - imageToReturn.matrice[i][j];
+	return imageToReturn;
+}
+
+ImageNG ImageNG::operator-(const ImageNG &image)const
+{
+#ifdef DEBUG
+	cout<<"\033[33;45mDEBUG : Operateur de soustraction avec ImageNG de ImageNG\033[0m"<<endl;
+#endif
+	ImageNG imageToReturn(*this);
+	int largeur = dimension.getLargeur();
+	int hauteur = dimension.getHauteur();
+	for(int i=0;i<largeur;i++)
+		for(int j=0;j<hauteur;j++)
+			imageToReturn.matrice[i][j] -= image.matrice[i][j];
+	return imageToReturn;
+}
+
+ImageNG& ImageNG::operator++()
+{
+#ifdef DEBUG
+	cout<<"\033[33;45mDEBUG : Operateur de pré-incrémentation de ImageNG\033[0m"<<endl;
+#endif
+	int largeur = dimension.getLargeur();
+	int hauteur = dimension.getHauteur();
+	for(int i=0;i<largeur;i++)
+		for(int j=0;j<hauteur;j++)
+			matrice[i][j]++;
+	return *this;
+}
+
+ImageNG ImageNG::operator++(int)
+{
+#ifdef DEBUG
+	cout<<"\033[33;45mDEBUG : Operateur de post-incrémentation de ImageNG\033[0m"<<endl;
+#endif
+	ImageNG image(*this);
+	int largeur = dimension.getLargeur();
+	int hauteur = dimension.getHauteur();
+	for(int i=0;i<largeur;i++)
+		for(int j=0;j<hauteur;j++)
+			matrice[i][j]++;
+	return image;
+}
+
+ImageNG& ImageNG::operator--()
+{
+#ifdef DEBUG
+	cout<<"\033[33;45mDEBUG : Operateur de pré-décrémentation de ImageNG\033[0m"<<endl;
+#endif
+	int largeur = dimension.getLargeur();
+	int hauteur = dimension.getHauteur();
+	for(int i=0;i<largeur;i++)
+		for(int j=0;j<hauteur;j++)
+			matrice[i][j]--;
+	return *this;
+}
+
+ImageNG ImageNG::operator--(int)
+{
+#ifdef DEBUG
+	cout<<"\033[33;45mDEBUG : Operateur de post-décrémentation de ImageNG\033[0m"<<endl;
+#endif
+	ImageNG image(*this);
+	int largeur = dimension.getLargeur();
+	int hauteur = dimension.getHauteur();
+	for(int i=0;i<largeur;i++)
+		for(int j=0;j<hauteur;j++)
+			matrice[i][j]--;
+	return image;
+}
+
+bool ImageNG::operator==(const ImageNG &image)const
+{
+#ifdef DEBUG
+	cout<<"\033[33;45mDEBUG : Operateur d'égalité de ImageNG\033[0m"<<endl;
+#endif
+	int largeur = dimension.getLargeur();
+	int hauteur = dimension.getHauteur();
+	if (largeur != image.dimension.getLargeur() || hauteur != image.dimension.getHauteur())
+		return false;
+	for(int i=0;i<largeur;i++)
+		for(int j=0;j<hauteur;j++)
+			if (matrice[i][j] != image.matrice[i][j])
+				return false;
+	return true;
+}
+
+bool ImageNG::operator!=(const ImageNG &image)const
+{
+#ifdef DEBUG
+	cout<<"\033[33;45mDEBUG : Operateur de différence de ImageNG\033[0m"<<endl;
+#endif
+	return !(*this == image);
+}
+
+bool ImageNG::operator<(const ImageNG &image)const
+{
+#ifdef DEBUG
+	cout<<"\033[33;45mDEBUG : Operateur de comparaison inférieur de ImageNG\033[0m"<<endl;
+#endif
+	//TODO: implement operator<
+	return -69;
+}
+
+bool ImageNG::operator<=(const ImageNG &image)const
+{
+#ifdef DEBUG
+	cout<<"\033[33;45mDEBUG : Operateur de comparaison inférieur ou égal de ImageNG\033[0m"<<endl;
+#endif
+	//TODO: implement operator<=
+	return -69;
+}
+
+bool ImageNG::operator>(const ImageNG &image)const
+{
+#ifdef DEBUG
+	cout<<"\033[33;45mDEBUG : Operateur de comparaison supérieur de ImageNG\033[0m"<<endl;
+#endif
+	//TODO: implement operator>
+	return -69;
+}
+
+bool ImageNG::operator>=(const ImageNG &image)const
+{
+#ifdef DEBUG
+	cout<<"\033[33;45mDEBUG : Operateur de comparaison supérieur ou égal de ImageNG\033[0m"<<endl;
+#endif
+	//TODO: implement operator>=
+	return -69;
+}
+
+ostream& operator<<(ostream &outputStream, const ImageNG &image)
+{
+#ifdef DEBUG
+	cout<<"\033[33;45mDEBUG : Operateur d'écriture de ImageNG\033[0m"<<endl;
+#endif
+	// this will print on the same line all of thoses:
+	//- the id of the image
+	//- the name of the image
+	//- the width of the image
+	//- the height of the image
+	//- the luminance of the image
+	//- the contrast of the image
+	outputStream << image.id << " " << image.nom << " " << image.dimension.getLargeur() << " " << image.dimension.getHauteur() << " " << image.getLuminance() << " " << image.getContraste();
+	return outputStream;
+}
+
 void ImageNG::setId(int id)
 {
 #ifdef DEBUGVERBOSE
@@ -279,6 +499,60 @@ int ImageNG::getPixel(int x, int y) const
 	if(x>=0 && x<dimension.getLargeur() && y>=0 && y<dimension.getHauteur())
 		return matrice[x][y];
 	return -1;
+}
+
+int ImageNG::getLuminance() const
+{
+#ifdef DEBUGVERBOSE
+	cout<<"\033[32;44mDEBUGVERBOSE : getLuminance de ImageNG\033[0m"<<endl;
+#endif
+	int largeur = dimension.getLargeur();
+	int hauteur = dimension.getHauteur();
+	int luminance = 0;
+	for(int i=0;i<largeur;i++)
+		for(int j=0;j<hauteur;j++)
+			luminance += matrice[i][j];
+	return luminance/(largeur*hauteur);
+}
+
+int ImageNG::getMinimum() const
+{
+#ifdef DEBUGVERBOSE
+	cout<<"\033[32;44mDEBUGVERBOSE : getMinimum de ImageNG\033[0m"<<endl;
+#endif
+	int largeur = dimension.getLargeur();
+	int hauteur = dimension.getHauteur();
+	int minimum = matrice[0][0];
+	for(int i=0;i<largeur;i++)
+		for(int j=0;j<hauteur;j++)
+			if (matrice[i][j] < minimum)
+				minimum = matrice[i][j];
+	return minimum;
+}
+
+int ImageNG::getMaximum() const
+{
+#ifdef DEBUGVERBOSE
+	cout<<"\033[32;44mDEBUGVERBOSE : getMaximum de ImageNG\033[0m"<<endl;
+#endif
+	int largeur = dimension.getLargeur();
+	int hauteur = dimension.getHauteur();
+	int maximum = matrice[0][0];
+	for(int i=0;i<largeur;i++)
+		for(int j=0;j<hauteur;j++)
+			if (matrice[i][j] > maximum)
+				maximum = matrice[i][j];
+	return maximum;
+}
+
+float ImageNG::getContraste() const
+{
+#ifdef DEBUGVERBOSE
+	cout<<"\033[32;44mDEBUGVERBOSE : getContraste de ImageNG\033[0m"<<endl;
+#endif
+	int minimum = getMinimum();
+	int maximum = getMaximum();
+	return (float)(maximum-minimum)/(maximum+minimum);
 }
 
 void ImageNG::Affiche()const
