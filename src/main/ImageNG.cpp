@@ -189,7 +189,7 @@ ImageNG::ImageNG(const ImageNG &image)
 
 ImageNG& ImageNG::operator=(const ImageNG &image)
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur d'affectation de ImageNG\033[0m"<<endl;
 #endif
 	setId(image.id);
@@ -201,7 +201,7 @@ ImageNG& ImageNG::operator=(const ImageNG &image)
 
 ImageNG ImageNG::operator+(int valeur)const
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur d'addition avec int de ImageNG\033[0m"<<endl;
 #endif
 	ImageNG image(*this);
@@ -215,7 +215,7 @@ ImageNG ImageNG::operator+(int valeur)const
 
 ImageNG operator+(int valeur, const ImageNG &image)
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur inversé d'addition avec int de ImageNG\033[0m"<<endl;
 #endif
 	return image+valeur;
@@ -223,7 +223,7 @@ ImageNG operator+(int valeur, const ImageNG &image)
 
 ImageNG ImageNG::operator+(const ImageNG &image)const
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur d'addition avec ImageNG de ImageNG\033[0m"<<endl;
 #endif
 	ImageNG imageToReturn(*this);
@@ -237,7 +237,7 @@ ImageNG ImageNG::operator+(const ImageNG &image)const
 
 ImageNG ImageNG::operator-(int valeur)const
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de soustraction avec int de ImageNG\033[0m"<<endl;
 #endif
 	ImageNG image(*this);
@@ -251,7 +251,7 @@ ImageNG ImageNG::operator-(int valeur)const
 
 ImageNG operator-(int valeur, const ImageNG &image)
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur inversé de soustraction avec int de ImageNG\033[0m"<<endl;
 #endif
 	ImageNG imageToReturn(image);
@@ -265,7 +265,7 @@ ImageNG operator-(int valeur, const ImageNG &image)
 
 ImageNG ImageNG::operator-(const ImageNG &image)const
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de soustraction avec ImageNG de ImageNG\033[0m"<<endl;
 #endif
 	ImageNG imageToReturn(*this);
@@ -279,7 +279,7 @@ ImageNG ImageNG::operator-(const ImageNG &image)const
 
 ImageNG& ImageNG::operator++()
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de pré-incrémentation de ImageNG\033[0m"<<endl;
 #endif
 	int largeur = dimension.getLargeur();
@@ -292,7 +292,7 @@ ImageNG& ImageNG::operator++()
 
 ImageNG ImageNG::operator++(int)
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de post-incrémentation de ImageNG\033[0m"<<endl;
 #endif
 	ImageNG image(*this);
@@ -306,7 +306,7 @@ ImageNG ImageNG::operator++(int)
 
 ImageNG& ImageNG::operator--()
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de pré-décrémentation de ImageNG\033[0m"<<endl;
 #endif
 	int largeur = dimension.getLargeur();
@@ -319,7 +319,7 @@ ImageNG& ImageNG::operator--()
 
 ImageNG ImageNG::operator--(int)
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de post-décrémentation de ImageNG\033[0m"<<endl;
 #endif
 	ImageNG image(*this);
@@ -333,7 +333,7 @@ ImageNG ImageNG::operator--(int)
 
 bool ImageNG::operator==(const ImageNG &image)const
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur d'égalité de ImageNG\033[0m"<<endl;
 #endif
 	int largeur = dimension.getLargeur();
@@ -349,7 +349,7 @@ bool ImageNG::operator==(const ImageNG &image)const
 
 bool ImageNG::operator!=(const ImageNG &image)const
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de différence de ImageNG\033[0m"<<endl;
 #endif
 	return !(*this == image);
@@ -357,7 +357,7 @@ bool ImageNG::operator!=(const ImageNG &image)const
 
 bool ImageNG::operator<(const ImageNG &image)const
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de comparaison inférieur de ImageNG\033[0m"<<endl;
 #endif
 	//TODO: implement operator<
@@ -366,7 +366,7 @@ bool ImageNG::operator<(const ImageNG &image)const
 
 bool ImageNG::operator<=(const ImageNG &image)const
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de comparaison inférieur ou égal de ImageNG\033[0m"<<endl;
 #endif
 	//TODO: implement operator<=
@@ -375,7 +375,7 @@ bool ImageNG::operator<=(const ImageNG &image)const
 
 bool ImageNG::operator>(const ImageNG &image)const
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de comparaison supérieur de ImageNG\033[0m"<<endl;
 #endif
 	//TODO: implement operator>
@@ -384,7 +384,7 @@ bool ImageNG::operator>(const ImageNG &image)const
 
 bool ImageNG::operator>=(const ImageNG &image)const
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de comparaison supérieur ou égal de ImageNG\033[0m"<<endl;
 #endif
 	//TODO: implement operator>=
@@ -393,7 +393,7 @@ bool ImageNG::operator>=(const ImageNG &image)const
 
 ostream& operator<<(ostream &outputStream, const ImageNG &image)
 {
-#ifdef DEBUG
+#ifdef DEBUGVERBOSE
 	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur d'écriture de ImageNG\033[0m"<<endl;
 #endif
 	outputStream << image.id << " " << image.nom << " " << image.dimension << " " << image.getLuminance() << " " << image.getContraste();
