@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+using std::string;
 using std::istream;
 using std::ostream;
 
@@ -12,11 +13,10 @@ class ImageNG
 {
 private:
 	int id;
-	char * nom = NULL;
+	string nom;
 	Dimension dimension;
 	int ** matrice = nullptr;
 
-	void freeNom();
 	void createMatrice();
 	void freeMatrice(int **matrice, const Dimension &dimension);
 	void freeMatrice();
@@ -26,9 +26,9 @@ private:
 public:
 	ImageNG();
 	~ImageNG();
-	ImageNG(int id, const char *nom, const Dimension &dimension);
-	ImageNG(int id, const char *nom);
-	ImageNG(const char *nom);
+	ImageNG(int id, const string &nom, const Dimension &dimension);
+	ImageNG(int id, const string &nom);
+	ImageNG(const string &nom);
 	ImageNG(const ImageNG &image);
 
 	ImageNG& operator=(const ImageNG &image);
@@ -52,8 +52,8 @@ public:
 
 	void setId(int id);
 	int getId()const;
-	void setNom(const char *nom);
-	char *getNom()const;
+	void setNom(const string &nom);
+	string getNom()const;
 	void setDimension(const Dimension &dimension);
 	Dimension getDimension()const;
 	void setBackground(int couleur);
@@ -68,8 +68,8 @@ public:
 	void Affiche()const;
 	void Dessine()const;
 
-	void importFromFile(const char *nomFichier);
-	void exportToFile(const char *nomFichier, const char *formatFichier)const;
+	void importFromFile(const string &nomFichier);
+	void exportToFile(const string &nomFichier, const string &formatFichier)const;
 };
 
 #endif

@@ -12,18 +12,6 @@ using std::regex_replace;
 #include "Dimension.h"
 #include "MyQT.h"
 
-void ImageNG::freeNom()
-{
-#ifdef DEBUGVERBOSE
-	cout<<"\033[35;43mDEBUGVERBOSE : freeNom de ImageNG\033[0m"<<endl;
-#endif
-	free(nom);
-	nom=NULL;
-#ifdef DEBUGVERBOSE
-	cout<<"\033[36;43mDEBUGVERBOSE : Fin freeNom de ImageNG\033[0m"<<endl;
-#endif
-}
-
 void ImageNG::createMatrice()
 {
 #ifdef DEBUGVERBOSE
@@ -113,8 +101,6 @@ ImageNG::~ImageNG()
 #ifdef DEBUG
 	cout<<"\033[32;41mDEBUG : Destructeur de ImageNG\033[0m"<<endl;
 #endif
-	if(nom != NULL)
-		freeNom();
 	if(matrice != nullptr)
 		freeMatrice();
 #ifdef DEBUG
@@ -122,7 +108,7 @@ ImageNG::~ImageNG()
 #endif
 }
 
-ImageNG::ImageNG(int id, const char *nom, const Dimension &dimension)
+ImageNG::ImageNG(int id, const string &nom, const Dimension &dimension)
 {
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation complet de ImageNG\033[0m"<<endl;
@@ -130,7 +116,7 @@ ImageNG::ImageNG(int id, const char *nom, const Dimension &dimension)
 	static const regex isFileRegex("^(?:\\.?\\/)?(?:.+\\/)*(.+)?(?:\\..+)$");
 	bool isFile = regex_search(nom, isFileRegex);
 	setId(id);
-	setNom(isFile ? regex_replace(nom, isFileRegex, "$1").c_str() : nom);
+	setNom(isFile ? regex_replace(nom, isFileRegex, "$1") : nom);
 	setDimension(dimension);
 	if (isFile)
 		importFromFile(nom);
@@ -139,37 +125,37 @@ ImageNG::ImageNG(int id, const char *nom, const Dimension &dimension)
 #endif
 }
 
-ImageNG::ImageNG(int id, const char *nom)
+ImageNG::ImageNG(int id, const string &nom)
 {
 #ifdef DEBUG
-	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation partiel de ImageNG\033[0m"<<endl;
+	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation partiel de ImageNG (id, nom)\033[0m"<<endl;
 #endif
 	static const regex isFileRegex("^(?:\\.?\\/)?(?:.+\\/)*(.+)?(?:\\..+)$");
 	bool isFile = regex_search(nom, isFileRegex);
 	setId(id);
-	setNom(isFile ? regex_replace(nom, isFileRegex, "$1").c_str() : nom);
+	setNom(isFile ? regex_replace(nom, isFileRegex, "$1") : nom);
 	setDimension(dimension);
 	if (isFile)
 		importFromFile(nom);
 #ifdef DEBUG
-	cout<<"\033[31;42mDEBUG : Fin Constructeur d'initialisation partiel de ImageNG\033[0m"<<endl;
+	cout<<"\033[31;42mDEBUG : Fin Constructeur d'initialisation partiel de ImageNG (id, nom)\033[0m"<<endl;
 #endif
 }
 
-ImageNG::ImageNG(const char *nom)
+ImageNG::ImageNG(const string &nom)
 {
 #ifdef DEBUG
-	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation par fichier de ImageNG\033[0m"<<endl;
+	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation partiel de ImageNG (nom)\033[0m"<<endl;
 #endif
 	static const regex isFileRegex("^(?:\\.?\\/)?(?:.+\\/)*(.+)?(?:\\..+)$");
 	bool isFile = regex_search(nom, isFileRegex);
 	setId(1);
-	setNom(isFile ? regex_replace(nom, isFileRegex, "$1").c_str() : nom);
+	setNom(isFile ? regex_replace(nom, isFileRegex, "$1") : nom);
 	setDimension(dimension);
 	if (isFile)
 		importFromFile(nom);
 #ifdef DEBUG
-	cout<<"\033[31;42mDEBUG : Fin Constructeur d'initialisation par fichier de ImageNG\033[0m"<<endl;
+	cout<<"\033[31;42mDEBUG : Fin Constructeur d'initialisation partiel de ImageNG (nom)\033[0m"<<endl;
 #endif
 }
 
@@ -428,18 +414,15 @@ int ImageNG::getId()const
 	return id;
 }
 
-void ImageNG::setNom(const char *nom)
+void ImageNG::setNom(const string &nom)
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[31;44mDEBUGVERBOSE : setNom de ImageNG\033[0m"<<endl;
 #endif
-	if(nom != NULL)
-		freeNom();
-	this->nom=(char *)malloc(strlen(nom)+1);
-	strcpy(this->nom,nom);
+	this->nom=nom;
 }
 
-char *ImageNG::getNom()const
+string ImageNG::getNom()const
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[32;44mDEBUGVERBOSE : getNom de ImageNG\033[0m"<<endl;
@@ -573,23 +556,23 @@ void ImageNG::Dessine() const
 #endif
 }
 
-void ImageNG::importFromFile(const char *nomFichier)
+void ImageNG::importFromFile(const string &nomFichier)
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[35;43mDEBUGVERBOSE : importFromFile de ImageNG\033[0m"<<endl;
 #endif
-	MyQT::ImportFromFile(*this, nomFichier);
+	MyQT::ImportFromFile(*this, nomFichier.c_str());
 #ifdef DEBUGVERBOSE
 	cout<<"\033[36;43mDEBUGVERBOSE : Fin importFromFile de ImageNG\033[0m"<<endl;
 #endif
 }
 
-void ImageNG::exportToFile(const char *nomFichier, const char *formatFichier) const
+void ImageNG::exportToFile(const string &nomFichier, const string &formatFichier) const
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[35;43mDEBUGVERBOSE : exportToFile de ImageNG\033[0m"<<endl;
 #endif
-	MyQT::ExportToFile(*this, nomFichier, formatFichier);
+	MyQT::ExportToFile(*this, nomFichier.c_str(), formatFichier.c_str());
 #ifdef DEBUGVERBOSE
 	cout<<"\033[36;43mDEBUGVERBOSE : Fin exportToFile de ImageNG\033[0m"<<endl;
 #endif
