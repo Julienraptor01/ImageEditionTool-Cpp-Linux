@@ -360,8 +360,15 @@ bool ImageNG::operator<(const ImageNG &image)const
 #ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de comparaison inférieur de ImageNG\033[0m"<<endl;
 #endif
-	//TODO: implement operator<
-	return NULL;
+	if (dimension != image.dimension)
+		return getLuminance() < image.getLuminance();
+	int largeur = dimension.getLargeur();
+	int hauteur = dimension.getHauteur();
+	for(int i=0;i<largeur;i++)
+		for(int j=0;j<hauteur;j++)
+			if (matrice[i][j] >= image.matrice[i][j])
+				return false;
+	return true;
 }
 
 bool ImageNG::operator<=(const ImageNG &image)const
@@ -369,8 +376,7 @@ bool ImageNG::operator<=(const ImageNG &image)const
 #ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de comparaison inférieur ou égal de ImageNG\033[0m"<<endl;
 #endif
-	//TODO: implement operator<=
-	return NULL;
+	return !(*this > image);
 }
 
 bool ImageNG::operator>(const ImageNG &image)const
@@ -378,8 +384,15 @@ bool ImageNG::operator>(const ImageNG &image)const
 #ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de comparaison supérieur de ImageNG\033[0m"<<endl;
 #endif
-	//TODO: implement operator>
-	return NULL;
+	if (dimension != image.dimension)
+		return getLuminance() > image.getLuminance();
+	int largeur = dimension.getLargeur();
+	int hauteur = dimension.getHauteur();
+	for(int i=0;i<largeur;i++)
+		for(int j=0;j<hauteur;j++)
+			if (matrice[i][j] <= image.matrice[i][j])
+				return false;
+	return true;
 }
 
 bool ImageNG::operator>=(const ImageNG &image)const
@@ -387,8 +400,7 @@ bool ImageNG::operator>=(const ImageNG &image)const
 #ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de comparaison supérieur ou égal de ImageNG\033[0m"<<endl;
 #endif
-	//TODO: implement operator>=
-	return NULL;
+	return !(*this < image);
 }
 
 ostream& operator<<(ostream &outputStream, const ImageNG &image)
