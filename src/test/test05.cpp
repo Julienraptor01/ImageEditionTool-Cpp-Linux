@@ -10,6 +10,7 @@ using namespace std;
 #include "ImageB.h"
 #include "ImageRGB.h"
 #include "Couleur.h"
+
 int Menu();
 void Essai1();
 void Essai2();
