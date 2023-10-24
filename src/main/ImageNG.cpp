@@ -209,7 +209,7 @@ ImageNG ImageNG::operator+(int valeur)const
 	int hauteur = dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			image.matrice[i][j] += valeur;
+			image.setPixel(i,j,image.getPixel(i,j)+valeur);
 	return image;
 }
 
@@ -231,7 +231,7 @@ ImageNG ImageNG::operator+(const ImageNG &image)const
 	int hauteur = dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			imageToReturn.matrice[i][j] += image.matrice[i][j];
+			imageToReturn.setPixel(i,j,imageToReturn.getPixel(i,j)+image.getPixel(i,j));
 	return imageToReturn;
 }
 
@@ -245,7 +245,7 @@ ImageNG ImageNG::operator-(int valeur)const
 	int hauteur = dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			image.matrice[i][j] -= valeur;
+			image.setPixel(i,j,image.getPixel(i,j)-valeur);
 	return image;
 }
 
@@ -259,7 +259,7 @@ ImageNG operator-(int valeur, const ImageNG &image)
 	int hauteur = image.dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			imageToReturn.matrice[i][j] = valeur - imageToReturn.matrice[i][j];
+			imageToReturn.setPixel(i,j,valeur-imageToReturn.getPixel(i,j));
 	return imageToReturn;
 }
 
@@ -273,7 +273,7 @@ ImageNG ImageNG::operator-(const ImageNG &image)const
 	int hauteur = dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			imageToReturn.matrice[i][j] -= image.matrice[i][j];
+			imageToReturn.setPixel(i,j,imageToReturn.getPixel(i,j)-image.getPixel(i,j));
 	return imageToReturn;
 }
 
@@ -286,7 +286,7 @@ ImageNG& ImageNG::operator++()
 	int hauteur = dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			matrice[i][j]++;
+			setPixel(i,j,getPixel(i,j)+1);
 	return *this;
 }
 
@@ -300,7 +300,7 @@ ImageNG ImageNG::operator++(int)
 	int hauteur = dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			matrice[i][j]++;
+			setPixel(i,j,getPixel(i,j)+1);
 	return image;
 }
 
@@ -313,7 +313,7 @@ ImageNG& ImageNG::operator--()
 	int hauteur = dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			matrice[i][j]--;
+			setPixel(i,j,getPixel(i,j)-1);
 	return *this;
 }
 
@@ -327,7 +327,7 @@ ImageNG ImageNG::operator--(int)
 	int hauteur = dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			matrice[i][j]--;
+			setPixel(i,j,getPixel(i,j)-1);
 	return image;
 }
 
@@ -478,7 +478,7 @@ void ImageNG::setPixel(int x, int y, int couleur)
 	cout<<"\033[31;44mDEBUGVERYVERBOSE : setPixel de ImageNG\033[0m"<<endl;
 #endif
 	if(x>=0 && x<dimension.getLargeur() && y>=0 && y<dimension.getHauteur())
-		matrice[x][y] = couleur;
+		matrice[x][y] = couleur < 0 ? 0 : couleur > 255 ? 255 : couleur;
 }
 
 int ImageNG::getPixel(int x, int y) const
