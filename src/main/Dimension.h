@@ -1,6 +1,11 @@
 #ifndef DIMENSION_H
 #define DIMENSION_H
 
+#include <iostream>
+
+using std::istream;
+using std::ostream;
+
 #ifndef DIMENSION_H_DEFAULT_LARGEUR
 #define DIMENSION_H_DEFAULT_LARGEUR 400
 #endif
@@ -19,6 +24,11 @@ public:
 	~Dimension();
 	Dimension(int largeur, int hauteur);
 	Dimension(const Dimension &dimension);
+
+	bool operator==(const Dimension &dimension)const;
+	bool operator!=(const Dimension &dimension)const;
+	friend istream& operator>>(istream &inputStream, Dimension &dimension);
+	friend ostream& operator<<(ostream &outputStream, const Dimension &dimension);
 
 	void setLargeur(int largeur);
 	int getLargeur()const;

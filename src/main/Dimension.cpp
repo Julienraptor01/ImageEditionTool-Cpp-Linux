@@ -52,6 +52,40 @@ Dimension::Dimension(const Dimension &dimension)
 #endif
 }
 
+bool Dimension::operator==(const Dimension &dimension)const
+{
+#ifdef DEBUGVERYVERBOSE
+	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur == de Dimension\033[0m"<<endl;
+#endif
+	return (largeur==dimension.largeur && hauteur==dimension.hauteur);
+}
+
+bool Dimension::operator!=(const Dimension &dimension)const
+{
+#ifdef DEBUGVERYVERBOSE
+	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur != de Dimension\033[0m"<<endl;
+#endif
+	return !(*this==dimension);
+}
+
+istream &operator>>(istream &inputStream, Dimension &dimension)
+{
+#ifdef DEBUGVERYVERBOSE
+	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur >> de Dimension\033[0m"<<endl;
+#endif
+	inputStream>>dimension.largeur>>dimension.hauteur;
+	return inputStream;
+}
+
+ostream &operator<<(ostream &outputStream, const Dimension &dimension)
+{
+#ifdef DEBUGVERYVERBOSE
+	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur << de Dimension\033[0m"<<endl;
+#endif
+	outputStream<<dimension.largeur<<" "<<dimension.hauteur;
+	return outputStream;
+}
+
 void Dimension::setLargeur(int largeur)
 {
 #ifdef DEBUGVERYVERBOSE
