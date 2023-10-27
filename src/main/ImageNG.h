@@ -3,18 +3,16 @@
 
 #include <iostream>
 
+#include "Image.h"
+#include "Dimension.h"
+
 using std::string;
 using std::istream;
 using std::ostream;
 
-#include "Dimension.h"
-
-class ImageNG
+class ImageNG : public Image
 {
 private:
-	int id;
-	string nom;
-	Dimension dimension;
 	int ** matrice = nullptr;
 
 	void createMatrice();
@@ -50,12 +48,7 @@ public:
 	bool operator>=(const ImageNG &image)const;
 	friend ostream& operator<<(ostream &outputStream, const ImageNG &image);
 
-	void setId(int id);
-	int getId()const;
-	void setNom(const string &nom);
-	string getNom()const;
 	void setDimension(const Dimension &dimension);
-	Dimension getDimension()const;
 	void setBackground(int couleur);
 	void setPixel(int x, int y, int couleur);
 	int getPixel(int x, int y)const;
@@ -65,11 +58,7 @@ public:
 	int getMaximum()const;
 	float getContraste()const;
 
-	void Affiche()const;
-	void Dessine()const;
-
 	void importFromFile(const string &nomFichier);
-	void exportToFile(const string &nomFichier, const string &formatFichier)const;
 };
 
 #endif

@@ -1,16 +1,13 @@
-#include <iostream>
-#include <string.h>
 #include <regex>
+
+#include "ImageNG.h"
+#include "MyQT.h"
 
 using std::cout;
 using std::endl;
 using std::regex;
 using std::regex_search;
 using std::regex_replace;
-
-#include "ImageNG.h"
-#include "Dimension.h"
-#include "MyQT.h"
 
 void ImageNG::createMatrice()
 {
@@ -398,38 +395,6 @@ ostream& operator<<(ostream &outputStream, const ImageNG &image)
 	return outputStream;
 }
 
-void ImageNG::setId(int id)
-{
-#ifdef DEBUGVERBOSE
-	cout<<"\033[31;44mDEBUGVERBOSE : setId de ImageNG\033[0m"<<endl;
-#endif
-	this->id=id;
-}
-
-int ImageNG::getId()const
-{
-#ifdef DEBUGVERBOSE
-	cout<<"\033[32;44mDEBUGVERBOSE : getId de ImageNG\033[0m"<<endl;
-#endif
-	return id;
-}
-
-void ImageNG::setNom(const string &nom)
-{
-#ifdef DEBUGVERBOSE
-	cout<<"\033[31;44mDEBUGVERBOSE : setNom de ImageNG\033[0m"<<endl;
-#endif
-	this->nom=nom;
-}
-
-string ImageNG::getNom()const
-{
-#ifdef DEBUGVERBOSE
-	cout<<"\033[32;44mDEBUGVERBOSE : getNom de ImageNG\033[0m"<<endl;
-#endif
-	return nom;
-}
-
 void ImageNG::setDimension(const Dimension &dimension)
 {
 #ifdef DEBUGVERBOSE
@@ -445,14 +410,6 @@ void ImageNG::setDimension(const Dimension &dimension)
 		copyMatrice(matrice,this->dimension,oldMatrice,oldDimension);
 		freeMatrice(oldMatrice, oldDimension);
 	}
-}
-
-Dimension ImageNG::getDimension()const
-{
-#ifdef DEBUGVERBOSE
-	cout<<"\033[32;44mDEBUGVERBOSE : getDimension de ImageNG\033[0m"<<endl;
-#endif
-	return dimension;
 }
 
 void ImageNG::setBackground(int couleur)
@@ -540,22 +497,6 @@ float ImageNG::getContraste() const
 	return (float)(maximum-minimum)/(maximum+minimum);
 }
 
-void ImageNG::Affiche()const
-{
-	cout<<" id="<<id<<" nom="<<nom<<" dimension=("<<dimension.getLargeur()<<","<<dimension.getHauteur()<<")"<<endl;
-}
-
-void ImageNG::Dessine() const
-{
-#ifdef DEBUGVERBOSE
-	cout<<"\033[35;43mDEBUGVERBOSE : Dessine de ImageNG\033[0m"<<endl;
-#endif
-	MyQT::ViewImage(*this);
-#ifdef DEBUGVERBOSE
-	cout<<"\033[36;43mDEBUGVERBOSE : Fin Dessine de ImageNG\033[0m"<<endl;
-#endif
-}
-
 void ImageNG::importFromFile(const string &nomFichier)
 {
 #ifdef DEBUGVERBOSE
@@ -564,16 +505,5 @@ void ImageNG::importFromFile(const string &nomFichier)
 	MyQT::ImportFromFile(*this, nomFichier.c_str());
 #ifdef DEBUGVERBOSE
 	cout<<"\033[36;43mDEBUGVERBOSE : Fin importFromFile de ImageNG\033[0m"<<endl;
-#endif
-}
-
-void ImageNG::exportToFile(const string &nomFichier, const string &formatFichier) const
-{
-#ifdef DEBUGVERBOSE
-	cout<<"\033[35;43mDEBUGVERBOSE : exportToFile de ImageNG\033[0m"<<endl;
-#endif
-	MyQT::ExportToFile(*this, nomFichier.c_str(), formatFichier.c_str());
-#ifdef DEBUGVERBOSE
-	cout<<"\033[36;43mDEBUGVERBOSE : Fin exportToFile de ImageNG\033[0m"<<endl;
 #endif
 }

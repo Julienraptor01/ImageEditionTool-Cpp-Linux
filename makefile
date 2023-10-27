@@ -49,8 +49,8 @@ TEST_BIN=$(BIN)$(TEST)
 LIB_BIN=$(BIN)$(LIB)
 MYQT_LIB_BIN=$(LIB_BIN)$(MYQT)
 # lists
-HEADERS=$(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/Dimension.h $(MYQT_LIB_SRC)/MyQT.h
-OBJECTS=$(MAIN_OBJ)/ImageNG.o $(MAIN_OBJ)/Dimension.o $(MYQT_LIB_OBJ)/MyQT.o
+HEADERS=$(MAIN_SRC)/Image.h $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/Dimension.h $(MYQT_LIB_SRC)/MyQT.h
+OBJECTS=$(MAIN_OBJ)/Image.o $(MAIN_OBJ)/ImageNG.o $(MAIN_OBJ)/Dimension.o $(MYQT_LIB_OBJ)/MyQT.o
 ### commands
 # compile arguments
 SRC_DEBUG_LINKER=-Xlinker --verbose
@@ -73,6 +73,14 @@ LOG=@printf
 
 all:	full-clean $(TEST_BIN)/test01 $(TEST_BIN)/test02 $(TEST_BIN)/test03 $(TEST_BIN)/test04 $(TEST_BIN)/test05
 	$(LOG) '\n\033[44mmake all finished\033[49m\n\n'
+
+$(MAIN_OBJ)/Image.o:	$(MAIN_SRC)/Image.cpp $(HEADERS)
+	$(LOG) '\n\033[42mcreation of the Image object file\033[49m\n'
+	$(SRC_COMPILE) \
+	-I $(MYQT_LIB_SRC) \
+	$(MAIN_SRC)/Image.cpp \
+	-c \
+	-o $(MAIN_OBJ)/Image.o
 
 $(MAIN_OBJ)/ImageNG.o:	$(MAIN_SRC)/ImageNG.cpp $(HEADERS)
 	$(LOG) '\n\033[42mcreation of the ImageNG object file\033[49m\n'

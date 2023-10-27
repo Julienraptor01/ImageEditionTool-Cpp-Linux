@@ -262,7 +262,7 @@ void Essai6()
 
 		case 1 :
 			image[i] = new ImageNG();
-			((ImageNG*)(image[i]))->setBackground(128);
+			((ImageNG*)(image[i]))->setBackground(127);
 			cout << "ImageNG" << endl;
 			break;
 
@@ -336,7 +336,7 @@ void Essai7()
 		if (pNG != NULL)
 		{
 			cout << "est une ImageNG";
-			pNG->setBackground(128);
+			pNG->setBackground(127);
 		}
 		ImageRGB* pRGB = dynamic_cast<ImageRGB*>(image[i]);
 		if (pRGB != NULL)
