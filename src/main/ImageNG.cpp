@@ -16,19 +16,19 @@ void ImageNG::createMatrice()
 #endif
 	int largeur = dimension.getLargeur();
 	int hauteur = dimension.getHauteur();
-	matrice = new int*[largeur];
+	matrice = new unsigned char*[largeur];
 	for(int i=0;i<largeur;i++)
 	{
-		matrice[i] = new int[hauteur];
+		matrice[i] = new unsigned char[hauteur];
 		for(int j=0;j<hauteur;j++)
-			matrice[i][j] = 0x00000000;
+			matrice[i][j] = 0x00;
 	}
 #ifdef DEBUGVERBOSE
 	cout<<"\033[36;43mDEBUGVERBOSE : Fin createMatrice de ImageNG\033[0m"<<endl;
 #endif
 }
 
-void ImageNG::freeMatrice(int **matrice, const Dimension &dimension)
+void ImageNG::freeMatrice(unsigned char **matrice, const Dimension &dimension)
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[35;43mDEBUGVERBOSE : freeMatrice de ImageNG (matrice, dimension)\033[0m"<<endl;
@@ -54,7 +54,7 @@ void ImageNG::freeMatrice()
 #endif
 }
 
-void ImageNG::copyMatrice(int **matrice, const Dimension &dimension, int **matriceToCopy, const Dimension &dimensionOfMatriceToCopy)
+void ImageNG::copyMatrice(unsigned char **matrice, const Dimension &dimension, unsigned char **matriceToCopy, const Dimension &dimensionOfMatriceToCopy)
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[35;43mDEBUGVERBOSE : copyMatrice de ImageNG (matrice, dimension, matriceToCopy, dimensionOfMatriceToCopy)\033[0m"<<endl;
@@ -182,7 +182,7 @@ ImageNG& ImageNG::operator=(const ImageNG &image)
 	return *this;
 }
 
-ImageNG ImageNG::operator+(int grayLevel)const
+ImageNG ImageNG::operator+(unsigned char grayLevel)const
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur d'addition avec int de ImageNG\033[0m"<<endl;
@@ -196,7 +196,7 @@ ImageNG ImageNG::operator+(int grayLevel)const
 	return image;
 }
 
-ImageNG operator+(int grayLevel, const ImageNG &image)
+ImageNG operator+(unsigned char grayLevel, const ImageNG &image)
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur inversé d'addition avec int de ImageNG\033[0m"<<endl;
@@ -218,7 +218,7 @@ ImageNG ImageNG::operator+(const ImageNG &image)const
 	return imageToReturn;
 }
 
-ImageNG ImageNG::operator-(int grayLevel)const
+ImageNG ImageNG::operator-(unsigned char grayLevel)const
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de soustraction avec int de ImageNG\033[0m"<<endl;
@@ -232,7 +232,7 @@ ImageNG ImageNG::operator-(int grayLevel)const
 	return image;
 }
 
-ImageNG operator-(int grayLevel, const ImageNG &image)
+ImageNG operator-(unsigned char grayLevel, const ImageNG &image)
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur inversé de soustraction avec int de ImageNG\033[0m"<<endl;
@@ -400,7 +400,7 @@ void ImageNG::setDimension(const Dimension &dimension)
 #ifdef DEBUGVERBOSE
 	cout<<"\033[31;44mDEBUGVERBOSE : setDimension de ImageNG\033[0m"<<endl;
 #endif
-	int **oldMatrice = matrice;
+	unsigned char **oldMatrice = matrice;
 	matrice = nullptr;
 	Dimension oldDimension(this->dimension);
 	this->dimension=dimension;
@@ -412,7 +412,7 @@ void ImageNG::setDimension(const Dimension &dimension)
 	}
 }
 
-void ImageNG::setBackground(int grayLevel)
+void ImageNG::setBackground(unsigned char grayLevel)
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[31;44mDEBUGVERBOSE : setBackground de ImageNG\033[0m"<<endl;
@@ -424,13 +424,13 @@ void ImageNG::setBackground(int grayLevel)
 			setPixel(i,j,grayLevel);
 }
 
-void ImageNG::setPixel(int x, int y, int grayLevel)
+void ImageNG::setPixel(int x, int y, unsigned char grayLevel)
 {
 #ifdef DEBUGVERYVERBOSE
 	cout<<"\033[31;44mDEBUGVERYVERBOSE : setPixel de ImageNG\033[0m"<<endl;
 #endif
 	if(x>=0 && x<dimension.getLargeur() && y>=0 && y<dimension.getHauteur())
-		matrice[x][y] = grayLevel < 0 ? 0 : grayLevel > 255 ? 255 : grayLevel;
+		matrice[x][y] = grayLevel;
 }
 
 int ImageNG::getPixel(int x, int y) const
