@@ -182,7 +182,7 @@ ImageNG& ImageNG::operator=(const ImageNG &image)
 	return *this;
 }
 
-ImageNG ImageNG::operator+(int valeur)const
+ImageNG ImageNG::operator+(int grayLevel)const
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur d'addition avec int de ImageNG\033[0m"<<endl;
@@ -192,16 +192,16 @@ ImageNG ImageNG::operator+(int valeur)const
 	int hauteur = dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			image.setPixel(i,j,image.getPixel(i,j)+valeur);
+			image.setPixel(i,j,image.getPixel(i,j)+grayLevel);
 	return image;
 }
 
-ImageNG operator+(int valeur, const ImageNG &image)
+ImageNG operator+(int grayLevel, const ImageNG &image)
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur inversé d'addition avec int de ImageNG\033[0m"<<endl;
 #endif
-	return image+valeur;
+	return image+grayLevel;
 }
 
 ImageNG ImageNG::operator+(const ImageNG &image)const
@@ -218,7 +218,7 @@ ImageNG ImageNG::operator+(const ImageNG &image)const
 	return imageToReturn;
 }
 
-ImageNG ImageNG::operator-(int valeur)const
+ImageNG ImageNG::operator-(int grayLevel)const
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de soustraction avec int de ImageNG\033[0m"<<endl;
@@ -228,11 +228,11 @@ ImageNG ImageNG::operator-(int valeur)const
 	int hauteur = dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			image.setPixel(i,j,image.getPixel(i,j)-valeur);
+			image.setPixel(i,j,image.getPixel(i,j)-grayLevel);
 	return image;
 }
 
-ImageNG operator-(int valeur, const ImageNG &image)
+ImageNG operator-(int grayLevel, const ImageNG &image)
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur inversé de soustraction avec int de ImageNG\033[0m"<<endl;
@@ -242,7 +242,7 @@ ImageNG operator-(int valeur, const ImageNG &image)
 	int hauteur = image.dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			imageToReturn.setPixel(i,j,valeur-imageToReturn.getPixel(i,j));
+			imageToReturn.setPixel(i,j,grayLevel-imageToReturn.getPixel(i,j));
 	return imageToReturn;
 }
 
@@ -412,7 +412,7 @@ void ImageNG::setDimension(const Dimension &dimension)
 	}
 }
 
-void ImageNG::setBackground(int couleur)
+void ImageNG::setBackground(int grayLevel)
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[31;44mDEBUGVERBOSE : setBackground de ImageNG\033[0m"<<endl;
@@ -421,16 +421,16 @@ void ImageNG::setBackground(int couleur)
 	int hauteur = dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			setPixel(i,j,couleur);
+			setPixel(i,j,grayLevel);
 }
 
-void ImageNG::setPixel(int x, int y, int couleur)
+void ImageNG::setPixel(int x, int y, int grayLevel)
 {
 #ifdef DEBUGVERYVERBOSE
 	cout<<"\033[31;44mDEBUGVERYVERBOSE : setPixel de ImageNG\033[0m"<<endl;
 #endif
 	if(x>=0 && x<dimension.getLargeur() && y>=0 && y<dimension.getHauteur())
-		matrice[x][y] = couleur < 0 ? 0 : couleur > 255 ? 255 : couleur;
+		matrice[x][y] = grayLevel < 0 ? 0 : grayLevel > 255 ? 255 : grayLevel;
 }
 
 int ImageNG::getPixel(int x, int y) const

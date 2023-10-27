@@ -30,11 +30,11 @@ public:
 	ImageNG(const ImageNG &image);
 
 	ImageNG& operator=(const ImageNG &image);
-	ImageNG operator+(int valeur)const;
-	friend ImageNG operator+(int valeur, const ImageNG &image);
+	ImageNG operator+(int grayLevel)const;
+	friend ImageNG operator+(int grayLevel, const ImageNG &image);
 	ImageNG operator+(const ImageNG &image)const;
-	ImageNG operator-(int valeur)const;
-	friend ImageNG operator-(int valeur, const ImageNG &image);
+	ImageNG operator-(int grayLevel)const;
+	friend ImageNG operator-(int grayLevel, const ImageNG &image);
 	ImageNG operator-(const ImageNG &image)const;
 	ImageNG& operator++();
 	ImageNG operator++(int);
@@ -49,8 +49,8 @@ public:
 	friend ostream& operator<<(ostream &outputStream, const ImageNG &image);
 
 	void setDimension(const Dimension &dimension);
-	void setBackground(int couleur);
-	void setPixel(int x, int y, int couleur);
+	void setBackground(int grayLevel);
+	void setPixel(int x, int y, int grayLevel);
 	int getPixel(int x, int y)const;
 
 	int getLuminance()const;
