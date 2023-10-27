@@ -13,12 +13,12 @@ using std::ostream;
 class ImageNG : public Image
 {
 private:
-	int ** matrice = nullptr;
+	unsigned char ** matrice = nullptr;
 
 	void createMatrice();
-	void freeMatrice(int **matrice, const Dimension &dimension);
+	void freeMatrice(unsigned char **matrice, const Dimension &dimension);
 	void freeMatrice();
-	void copyMatrice(int **matrice, const Dimension &dimension, int** matriceToCopy, const Dimension &dimensionOfMatriceToCopy);
+	void copyMatrice(unsigned char **matrice, const Dimension &dimension, unsigned char** matriceToCopy, const Dimension &dimensionOfMatriceToCopy);
 	void copyMatrice(const ImageNG &image);
 
 public:
@@ -30,11 +30,11 @@ public:
 	ImageNG(const ImageNG &image);
 
 	ImageNG& operator=(const ImageNG &image);
-	ImageNG operator+(int grayLevel)const;
-	friend ImageNG operator+(int grayLevel, const ImageNG &image);
+	ImageNG operator+(unsigned char grayLevel)const;
+	friend ImageNG operator+(unsigned char grayLevel, const ImageNG &image);
 	ImageNG operator+(const ImageNG &image)const;
-	ImageNG operator-(int grayLevel)const;
-	friend ImageNG operator-(int grayLevel, const ImageNG &image);
+	ImageNG operator-(unsigned char grayLevel)const;
+	friend ImageNG operator-(unsigned char grayLevel, const ImageNG &image);
 	ImageNG operator-(const ImageNG &image)const;
 	ImageNG& operator++();
 	ImageNG operator++(int);
@@ -49,8 +49,8 @@ public:
 	friend ostream& operator<<(ostream &outputStream, const ImageNG &image);
 
 	void setDimension(const Dimension &dimension);
-	void setBackground(int grayLevel);
-	void setPixel(int x, int y, int grayLevel);
+	void setBackground(unsigned char grayLevel);
+	void setPixel(int x, int y, unsigned char grayLevel);
 	int getPixel(int x, int y)const;
 
 	int getLuminance()const;
