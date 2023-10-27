@@ -1,10 +1,7 @@
-#include <iostream>
-#include <string.h>
+#include "Dimension.h"
 
 using std::cout;
 using std::endl;
-
-#include "Dimension.h"
 
 Dimension::Dimension()
 {
