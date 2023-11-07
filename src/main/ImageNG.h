@@ -50,7 +50,9 @@ public:
 
 	void setDimension(const Dimension &dimension);
 	void setBackground(unsigned char grayLevel);
+	void setBackground(int grayLevel);
 	void setPixel(int x, int y, unsigned char grayLevel);
+	void setPixel(int x, int y, int grayLevel);
 	int getPixel(int x, int y)const;
 
 	int getLuminance()const;

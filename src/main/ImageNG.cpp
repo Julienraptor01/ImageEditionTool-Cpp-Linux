@@ -1,4 +1,5 @@
 #include <regex>
+#include <limits.h>
 
 #include "ImageNG.h"
 #include "MyQT.h"
@@ -8,6 +9,7 @@ using std::endl;
 using std::regex;
 using std::regex_search;
 using std::regex_replace;
+using std::clamp;
 
 void ImageNG::createMatrice()
 {
@@ -415,7 +417,7 @@ void ImageNG::setDimension(const Dimension &dimension)
 void ImageNG::setBackground(unsigned char grayLevel)
 {
 #ifdef DEBUGVERBOSE
-	cout<<"\033[31;44mDEBUGVERBOSE : setBackground de ImageNG\033[0m"<<endl;
+	cout<<"\033[31;44mDEBUGVERBOSE : setBackground de ImageNG (unsigned char)\033[0m"<<endl;
 #endif
 	int largeur = dimension.getLargeur();
 	int hauteur = dimension.getHauteur();
@@ -424,13 +426,29 @@ void ImageNG::setBackground(unsigned char grayLevel)
 			setPixel(i,j,grayLevel);
 }
 
+void ImageNG::setBackground(int grayLevel)
+{
+#ifdef DEBUGVERBOSE
+	cout<<"\033[31;44mDEBUGVERBOSE : setBackground de ImageNG (int)\033[0m"<<endl;
+#endif
+	setBackground((unsigned char)clamp(grayLevel, 0, UCHAR_MAX));
+}
+
 void ImageNG::setPixel(int x, int y, unsigned char grayLevel)
 {
 #ifdef DEBUGVERYVERBOSE
-	cout<<"\033[31;44mDEBUGVERYVERBOSE : setPixel de ImageNG\033[0m"<<endl;
+	cout<<"\033[31;44mDEBUGVERYVERBOSE : setPixel de ImageNG (unsigned char)\033[0m"<<endl;
 #endif
 	if(x>=0 && x<dimension.getLargeur() && y>=0 && y<dimension.getHauteur())
 		matrice[x][y] = grayLevel;
+}
+
+void ImageNG::setPixel(int x, int y, int grayLevel)
+{
+#ifdef DEBUGVERYVERBOSE
+	cout<<"\033[31;44mDEBUGVERYVERBOSE : setPixel de ImageNG (int)\033[0m"<<endl;
+#endif
+	setPixel(x,y,(unsigned char)clamp(grayLevel, 0, UCHAR_MAX));
 }
 
 int ImageNG::getPixel(int x, int y) const
