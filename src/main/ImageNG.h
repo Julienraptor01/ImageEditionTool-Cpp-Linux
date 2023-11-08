@@ -7,7 +7,6 @@
 #include "Dimension.h"
 
 using std::string;
-using std::istream;
 using std::ostream;
 
 class ImageNG : public Image
@@ -48,7 +47,7 @@ public:
 	bool operator>=(const ImageNG &image)const;
 	friend ostream& operator<<(ostream &outputStream, const ImageNG &image);
 
-	void setDimension(const Dimension &dimension);
+	void setDimension(const Dimension &dimension)override;
 	void setBackground(unsigned char grayLevel);
 	void setBackground(int grayLevel);
 	void setPixel(int x, int y, unsigned char grayLevel);
@@ -60,7 +59,10 @@ public:
 	int getMaximum()const;
 	float getContraste()const;
 
+	void Dessine()const override;
+
 	void importFromFile(const string &nomFichier);
+	void exportToFile(const string &nomFichier, const string &formatFichier)const override;
 };
 
 #endif

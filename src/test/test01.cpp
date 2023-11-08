@@ -57,6 +57,8 @@ int main()
 
 	cout << endl << "(5) ***** Test d'allocation dynamique ******************************************************" << endl;
 	{
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdelete-non-virtual-dtor"
 		// Vous n'avez rien à faire... juste comprendre et savoir expliquer!!!
 		ImageNG *i = new ImageNG();
 		i->Affiche();
@@ -65,6 +67,7 @@ int main()
 		i->setNom("rose");
 		i->Affiche();
 		delete i;
+#pragma GCC diagnostic pop
 	}
 
 	return 0;

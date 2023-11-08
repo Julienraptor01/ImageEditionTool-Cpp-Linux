@@ -21,13 +21,13 @@ public:
 	int getId()const;
 	void setNom(const string &nom);
 	string getNom()const;
-	void setDimension(const Dimension &dimension);
+	virtual void setDimension(const Dimension &dimension);
 	Dimension getDimension()const;
 
 	void Affiche()const;
-	void Dessine()const;
+	virtual void Dessine()const;
 
-	void exportToFile(const string &nomFichier, const string &formatFichier)const;
+	virtual void exportToFile(const string &nomFichier, const string &formatFichier)const;
 };
 
 #endif

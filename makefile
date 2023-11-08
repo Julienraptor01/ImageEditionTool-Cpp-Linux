@@ -49,8 +49,8 @@ TEST_BIN=$(BIN)$(TEST)
 LIB_BIN=$(BIN)$(LIB)
 MYQT_LIB_BIN=$(LIB_BIN)$(MYQT)
 # lists
-HEADERS=$(MAIN_SRC)/Image.h $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/Dimension.h $(MYQT_LIB_SRC)/MyQT.h
-OBJECTS=$(MAIN_OBJ)/Image.o $(MAIN_OBJ)/ImageNG.o $(MAIN_OBJ)/Dimension.o $(MYQT_LIB_OBJ)/MyQT.o
+HEADERS=$(MAIN_SRC)/Image.h $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/ImageRGB.h $(MAIN_SRC)/Dimension.h $(MAIN_SRC)/Couleur.h $(MYQT_LIB_SRC)/MyQT.h
+OBJECTS=$(MAIN_OBJ)/Image.o $(MAIN_OBJ)/ImageNG.o $(MAIN_OBJ)/ImageRGB.o $(MAIN_OBJ)/Dimension.o $(MAIN_OBJ)/Couleur.o $(MYQT_LIB_OBJ)/MyQT.o
 ### commands
 # compile arguments
 SRC_DEBUG_LINKER=-Xlinker --verbose
@@ -90,12 +90,28 @@ $(MAIN_OBJ)/ImageNG.o:	$(MAIN_SRC)/ImageNG.cpp $(HEADERS)
 	-c \
 	-o $(MAIN_OBJ)/ImageNG.o
 
+$(MAIN_OBJ)/ImageRGB.o:	$(MAIN_SRC)/ImageRGB.cpp $(HEADERS)
+	$(LOG) '\n\033[42mcreation of the ImageRGB object file\033[49m\n'
+	$(SRC_COMPILE) \
+	-I $(MYQT_LIB_SRC) \
+	$(MAIN_SRC)/ImageRGB.cpp \
+	-c \
+	-o $(MAIN_OBJ)/ImageRGB.o
+
 $(MAIN_OBJ)/Dimension.o:	$(MAIN_SRC)/Dimension.cpp $(MAIN_SRC)/Dimension.h
 	$(LOG) '\n\033[42mcreation of the Dimension object file\033[49m\n'
 	$(SRC_COMPILE) \
 	$(MAIN_SRC)/Dimension.cpp \
 	-c \
 	-o $(MAIN_OBJ)/Dimension.o
+
+$(MAIN_OBJ)/Couleur.o:	$(MAIN_SRC)/Couleur.cpp $(MAIN_SRC)/Couleur.h
+	$(LOG) '\n\033[42mcreation of the Couleur object file\033[49m\n'
+	$(SRC_COMPILE) \
+	-std=c++17 \
+	$(MAIN_SRC)/Couleur.cpp \
+	-c \
+	-o $(MAIN_OBJ)/Couleur.o
 
 $(TEST_BIN)/test01:	$(TEST_OBJ)/test01.o $(OBJECTS)
 	$(LOG) '\n\033[42mcreation of the test01 executable\033[49m\n'

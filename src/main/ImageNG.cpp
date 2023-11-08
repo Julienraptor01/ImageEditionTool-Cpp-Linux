@@ -1,4 +1,5 @@
 #include <regex>
+#include <algorithm>
 #include <limits.h>
 
 #include "ImageNG.h"
@@ -19,10 +20,10 @@ void ImageNG::createMatrice()
 	int largeur = dimension.getLargeur();
 	int hauteur = dimension.getHauteur();
 	matrice = new unsigned char*[largeur];
-	for(int i=0;i<largeur;i++)
+	for(int i=0; i<largeur; i++)
 	{
 		matrice[i] = new unsigned char[hauteur];
-		for(int j=0;j<hauteur;j++)
+		for(int j=0; j<hauteur; j++)
 			matrice[i][j] = 0x00;
 	}
 #ifdef DEBUGVERBOSE
@@ -36,7 +37,7 @@ void ImageNG::freeMatrice(unsigned char **matrice, const Dimension &dimension)
 	cout<<"\033[35;43mDEBUGVERBOSE : freeMatrice de ImageNG (matrice, dimension)\033[0m"<<endl;
 #endif
 	int largeur = dimension.getLargeur();
-	for(int i=0;i<largeur;i++)
+	for(int i=0; i<largeur; i++)
 		delete[] matrice[i];
 	delete[] matrice;
 #ifdef DEBUGVERBOSE
@@ -63,8 +64,8 @@ void ImageNG::copyMatrice(unsigned char **matrice, const Dimension &dimension, u
 #endif
 	int minLargeur = (dimension.getLargeur() < dimensionOfMatriceToCopy.getLargeur()) ? dimension.getLargeur() : dimensionOfMatriceToCopy.getLargeur();
 	int minHauteur = (dimension.getHauteur() < dimensionOfMatriceToCopy.getHauteur()) ? dimension.getHauteur() : dimensionOfMatriceToCopy.getHauteur();
-	for(int i=0;i<minLargeur;i++)
-		for(int j=0;j<minHauteur;j++)
+	for(int i=0; i<minLargeur; i++)
+		for(int j=0; j<minHauteur; j++)
 			matrice[i][j] = matriceToCopy[i][j];
 #ifdef DEBUGVERBOSE
 	cout<<"\033[36;43mDEBUGVERBOSE : Fin copyMatrice de ImageNG (matrice, dimension, matriceToCopy, dimensionOfMatriceToCopy)\033[0m"<<endl;
@@ -163,9 +164,9 @@ ImageNG::ImageNG(const ImageNG &image)
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur de copie de ImageNG\033[0m"<<endl;
 #endif
-	setId(image.id);
-	setNom(image.nom);
-	setDimension(image.dimension);
+	setId(image.getId());
+	setNom(image.getNom());
+	setDimension(image.getDimension());
 	copyMatrice(image);
 #ifdef DEBUG
 	cout<<"\033[31;42mDEBUG : Fin Constructeur de copie de ImageNG\033[0m"<<endl;
@@ -177,9 +178,9 @@ ImageNG& ImageNG::operator=(const ImageNG &image)
 #ifdef DEBUGVERBOSE
 	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur d'affectation de ImageNG\033[0m"<<endl;
 #endif
-	setId(image.id);
-	setNom(image.nom);
-	setDimension(image.dimension);
+	setId(image.getId());
+	setNom(image.getNom());
+	setDimension(image.getDimension());
 	copyMatrice(image);
 	return *this;
 }
@@ -187,78 +188,78 @@ ImageNG& ImageNG::operator=(const ImageNG &image)
 ImageNG ImageNG::operator+(unsigned char grayLevel)const
 {
 #ifdef DEBUGVERBOSE
-	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur d'addition avec int de ImageNG\033[0m"<<endl;
+	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur d'addition de ImageNG (grayLevel)\033[0m"<<endl;
 #endif
 	ImageNG image(*this);
 	int largeur = dimension.getLargeur();
 	int hauteur = dimension.getHauteur();
-	for(int i=0;i<largeur;i++)
-		for(int j=0;j<hauteur;j++)
-			image.setPixel(i,j,image.getPixel(i,j)+grayLevel);
+	for(int i=0; i<largeur; i++)
+		for(int j=0; j<hauteur; j++)
+			image.setPixel(i, j, image.getPixel(i, j) + grayLevel);
 	return image;
 }
 
 ImageNG operator+(unsigned char grayLevel, const ImageNG &image)
 {
 #ifdef DEBUGVERBOSE
-	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur inversé d'addition avec int de ImageNG\033[0m"<<endl;
+	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur d'addition de ImageNG (grayLevel, image)\033[0m"<<endl;
 #endif
-	return image+grayLevel;
+	return image + grayLevel;
 }
 
 ImageNG ImageNG::operator+(const ImageNG &image)const
 {
 #ifdef DEBUGVERBOSE
-	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur d'addition avec ImageNG de ImageNG\033[0m"<<endl;
+	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur d'addition de ImageNG (image)\033[0m"<<endl;
 #endif
 	ImageNG imageToReturn(*this);
 	int largeur = dimension.getLargeur();
 	int hauteur = dimension.getHauteur();
-	for(int i=0;i<largeur;i++)
-		for(int j=0;j<hauteur;j++)
-			imageToReturn.setPixel(i,j,imageToReturn.getPixel(i,j)+image.getPixel(i,j));
+	for(int i=0; i<largeur; i++)
+		for(int j=0; j<hauteur; j++)
+			imageToReturn.setPixel(i, j, imageToReturn.getPixel(i, j) + image.getPixel(i, j));
 	return imageToReturn;
 }
 
 ImageNG ImageNG::operator-(unsigned char grayLevel)const
 {
 #ifdef DEBUGVERBOSE
-	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de soustraction avec int de ImageNG\033[0m"<<endl;
+	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de soustraction de ImageNG (grayLevel)\033[0m"<<endl;
 #endif
 	ImageNG image(*this);
 	int largeur = dimension.getLargeur();
 	int hauteur = dimension.getHauteur();
-	for(int i=0;i<largeur;i++)
-		for(int j=0;j<hauteur;j++)
-			image.setPixel(i,j,image.getPixel(i,j)-grayLevel);
+	for(int i=0; i<largeur; i++)
+		for(int j=0; j<hauteur; j++)
+			image.setPixel(i, j, image.getPixel(i, j) - grayLevel);
 	return image;
 }
 
 ImageNG operator-(unsigned char grayLevel, const ImageNG &image)
 {
 #ifdef DEBUGVERBOSE
-	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur inversé de soustraction avec int de ImageNG\033[0m"<<endl;
+	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur de soustraction de ImageNG (grayLevel, image)\033[0m"<<endl;
 #endif
 	ImageNG imageToReturn(image);
 	int largeur = image.dimension.getLargeur();
 	int hauteur = image.dimension.getHauteur();
-	for(int i=0;i<largeur;i++)
-		for(int j=0;j<hauteur;j++)
-			imageToReturn.setPixel(i,j,grayLevel-imageToReturn.getPixel(i,j));
+	for(int i=0; i<largeur; i++)
+		for(int j=0; j<hauteur; j++)
+			imageToReturn.setPixel(i, j, grayLevel - imageToReturn.getPixel(i, j));
 	return imageToReturn;
 }
 
 ImageNG ImageNG::operator-(const ImageNG &image)const
 {
 #ifdef DEBUGVERBOSE
-	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de soustraction avec ImageNG de ImageNG\033[0m"<<endl;
+	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de soustraction de ImageNG (image)\033[0m"<<endl;
 #endif
 	ImageNG imageToReturn(*this);
 	int largeur = dimension.getLargeur();
 	int hauteur = dimension.getHauteur();
-	for(int i=0;i<largeur;i++)
-		for(int j=0;j<hauteur;j++)
-			imageToReturn.setPixel(i,j,imageToReturn.getPixel(i,j)-image.getPixel(i,j));
+	for(int i=0; i<largeur; i++)
+		for(int j=0; j<hauteur; j++)
+			imageToReturn.setPixel(i, j, imageToReturn.getPixel(i, j) - image.getPixel(i, j));
 	return imageToReturn;
 }
 
@@ -269,9 +270,9 @@ ImageNG& ImageNG::operator++()
 #endif
 	int largeur = dimension.getLargeur();
 	int hauteur = dimension.getHauteur();
-	for(int i=0;i<largeur;i++)
-		for(int j=0;j<hauteur;j++)
-			setPixel(i,j,getPixel(i,j)+20);
+	for(int i=0; i<largeur; i++)
+		for(int j=0; j<hauteur; j++)
+			setPixel(i, j, getPixel(i, j) + 20);
 	return *this;
 }
 
@@ -283,9 +284,9 @@ ImageNG ImageNG::operator++(int)
 	ImageNG image(*this);
 	int largeur = dimension.getLargeur();
 	int hauteur = dimension.getHauteur();
-	for(int i=0;i<largeur;i++)
-		for(int j=0;j<hauteur;j++)
-			setPixel(i,j,getPixel(i,j)+20);
+	for(int i=0; i<largeur; i++)
+		for(int j=0; j<hauteur; j++)
+			setPixel(i, j, getPixel(i, j) + 20);
 	return image;
 }
 
@@ -296,9 +297,9 @@ ImageNG& ImageNG::operator--()
 #endif
 	int largeur = dimension.getLargeur();
 	int hauteur = dimension.getHauteur();
-	for(int i=0;i<largeur;i++)
-		for(int j=0;j<hauteur;j++)
-			setPixel(i,j,getPixel(i,j)-20);
+	for(int i=0; i<largeur; i++)
+		for(int j=0; j<hauteur; j++)
+			setPixel(i, j, getPixel(i, j) - 20);
 	return *this;
 }
 
@@ -310,9 +311,9 @@ ImageNG ImageNG::operator--(int)
 	ImageNG image(*this);
 	int largeur = dimension.getLargeur();
 	int hauteur = dimension.getHauteur();
-	for(int i=0;i<largeur;i++)
-		for(int j=0;j<hauteur;j++)
-			setPixel(i,j,getPixel(i,j)-20);
+	for(int i=0; i<largeur; i++)
+		for(int j=0; j<hauteur; j++)
+			setPixel(i, j, getPixel(i, j) - 20);
 	return image;
 }
 
@@ -325,9 +326,9 @@ bool ImageNG::operator==(const ImageNG &image)const
 	int hauteur = dimension.getHauteur();
 	if (largeur != image.dimension.getLargeur() || hauteur != image.dimension.getHauteur())
 		return false;
-	for(int i=0;i<largeur;i++)
-		for(int j=0;j<hauteur;j++)
-			if (matrice[i][j] != image.matrice[i][j])
+	for(int i=0; i<largeur; i++)
+		for(int j=0; j<hauteur; j++)
+			if (getPixel(i, j) != image.getPixel(i, j))
 				return false;
 	return true;
 }
@@ -349,9 +350,9 @@ bool ImageNG::operator<(const ImageNG &image)const
 		return getLuminance() < image.getLuminance();
 	int largeur = dimension.getLargeur();
 	int hauteur = dimension.getHauteur();
-	for(int i=0;i<largeur;i++)
-		for(int j=0;j<hauteur;j++)
-			if (matrice[i][j] >= image.matrice[i][j])
+	for(int i=0; i<largeur; i++)
+		for(int j=0; j<hauteur; j++)
+			if (getPixel(i, j) >= image.getPixel(i, j))
 				return false;
 	return true;
 }
@@ -373,9 +374,9 @@ bool ImageNG::operator>(const ImageNG &image)const
 		return getLuminance() > image.getLuminance();
 	int largeur = dimension.getLargeur();
 	int hauteur = dimension.getHauteur();
-	for(int i=0;i<largeur;i++)
-		for(int j=0;j<hauteur;j++)
-			if (matrice[i][j] <= image.matrice[i][j])
+	for(int i=0; i<largeur; i++)
+		for(int j=0; j<hauteur; j++)
+			if (getPixel(i, j) <= image.getPixel(i, j))
 				return false;
 	return true;
 }
@@ -393,7 +394,7 @@ ostream& operator<<(ostream &outputStream, const ImageNG &image)
 #ifdef DEBUGVERBOSE
 	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur d'écriture de ImageNG\033[0m"<<endl;
 #endif
-	outputStream << image.id << " " << image.nom << " " << image.dimension << " " << image.getLuminance() << " " << image.getContraste();
+	outputStream << image.getId() << " " << image.getNom() << " " << image.getDimension() << " " << image.getLuminance() << " " << image.getContraste();
 	return outputStream;
 }
 
@@ -405,11 +406,11 @@ void ImageNG::setDimension(const Dimension &dimension)
 	unsigned char **oldMatrice = matrice;
 	matrice = nullptr;
 	Dimension oldDimension(this->dimension);
-	this->dimension=dimension;
+	this->dimension = dimension;
 	createMatrice();
 	if (oldMatrice != nullptr)
 	{
-		copyMatrice(matrice,this->dimension,oldMatrice,oldDimension);
+		copyMatrice(matrice, this->dimension, oldMatrice, oldDimension);
 		freeMatrice(oldMatrice, oldDimension);
 	}
 }
@@ -417,19 +418,19 @@ void ImageNG::setDimension(const Dimension &dimension)
 void ImageNG::setBackground(unsigned char grayLevel)
 {
 #ifdef DEBUGVERBOSE
-	cout<<"\033[31;44mDEBUGVERBOSE : setBackground de ImageNG (unsigned char)\033[0m"<<endl;
+	cout<<"\033[31;44mDEBUGVERBOSE : setBackground de ImageNG (unsigned char grayLevel)\033[0m"<<endl;
 #endif
 	int largeur = dimension.getLargeur();
 	int hauteur = dimension.getHauteur();
-	for(int i=0;i<largeur;i++)
-		for(int j=0;j<hauteur;j++)
-			setPixel(i,j,grayLevel);
+	for(int i=0; i<largeur; i++)
+		for(int j=0; j<hauteur; j++)
+			setPixel(i, j, grayLevel);
 }
 
 void ImageNG::setBackground(int grayLevel)
 {
 #ifdef DEBUGVERBOSE
-	cout<<"\033[31;44mDEBUGVERBOSE : setBackground de ImageNG (int)\033[0m"<<endl;
+	cout<<"\033[31;44mDEBUGVERBOSE : setBackground de ImageNG (int grayLevel)\033[0m"<<endl;
 #endif
 	setBackground((unsigned char)clamp(grayLevel, 0, UCHAR_MAX));
 }
@@ -437,16 +438,16 @@ void ImageNG::setBackground(int grayLevel)
 void ImageNG::setPixel(int x, int y, unsigned char grayLevel)
 {
 #ifdef DEBUGVERYVERBOSE
-	cout<<"\033[31;44mDEBUGVERYVERBOSE : setPixel de ImageNG (unsigned char)\033[0m"<<endl;
+	cout<<"\033[31;44mDEBUGVERYVERBOSE : setPixel de ImageNG (x, y, unsigned char grayLevel)\033[0m"<<endl;
 #endif
-	if(x>=0 && x<dimension.getLargeur() && y>=0 && y<dimension.getHauteur())
+	if(x >= 0 && x < dimension.getLargeur() && y >= 0 && y < dimension.getHauteur())
 		matrice[x][y] = grayLevel;
 }
 
 void ImageNG::setPixel(int x, int y, int grayLevel)
 {
 #ifdef DEBUGVERYVERBOSE
-	cout<<"\033[31;44mDEBUGVERYVERBOSE : setPixel de ImageNG (int)\033[0m"<<endl;
+	cout<<"\033[31;44mDEBUGVERYVERBOSE : setPixel de ImageNG (x, y, int grayLevel)\033[0m"<<endl;
 #endif
 	setPixel(x,y,(unsigned char)clamp(grayLevel, 0, UCHAR_MAX));
 }
@@ -456,8 +457,9 @@ int ImageNG::getPixel(int x, int y) const
 #ifdef DEBUGVERYVERBOSE
 	cout<<"\033[32;44mDEBUGVERYVERBOSE : getPixel de ImageNG\033[0m"<<endl;
 #endif
-	if(x>=0 && x<dimension.getLargeur() && y>=0 && y<dimension.getHauteur())
+	if (x >= 0 && x < dimension.getLargeur() && y >= 0 && y < dimension.getHauteur())
 		return matrice[x][y];
+	//TODO: throw exception
 	return -1;
 }
 
@@ -515,6 +517,17 @@ float ImageNG::getContraste() const
 	return (float)(maximum-minimum)/(maximum+minimum);
 }
 
+void ImageNG::Dessine() const
+{
+#ifdef DEBUGVERBOSE
+	cout<<"\033[35;43mDEBUGVERBOSE : Dessine de ImageNG\033[0m"<<endl;
+#endif
+	MyQT::ViewImage(*this);
+#ifdef DEBUGVERBOSE
+	cout<<"\033[36;43mDEBUGVERBOSE : Fin Dessine de ImageNG\033[0m"<<endl;
+#endif
+}
+
 void ImageNG::importFromFile(const string &nomFichier)
 {
 #ifdef DEBUGVERBOSE
@@ -523,5 +536,16 @@ void ImageNG::importFromFile(const string &nomFichier)
 	MyQT::ImportFromFile(*this, nomFichier.c_str());
 #ifdef DEBUGVERBOSE
 	cout<<"\033[36;43mDEBUGVERBOSE : Fin importFromFile de ImageNG\033[0m"<<endl;
+#endif
+}
+
+void ImageNG::exportToFile(const string &nomFichier, const string &formatFichier) const
+{
+#ifdef DEBUGVERBOSE
+	cout<<"\033[35;43mDEBUGVERBOSE : exportToFile de ImageNG\033[0m"<<endl;
+#endif
+	MyQT::ExportToFile(*this, nomFichier.c_str(), formatFichier.c_str());
+#ifdef DEBUGVERBOSE
+	cout<<"\033[36;43mDEBUGVERBOSE : Fin exportToFile de ImageNG\033[0m"<<endl;
 #endif
 }

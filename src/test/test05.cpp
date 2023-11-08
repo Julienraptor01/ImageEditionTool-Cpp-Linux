@@ -1,3 +1,6 @@
+//TODO: remove this pragma when this test is done
+#pragma GCC diagnostic ignored "-Wcomment"
+
 #include <stdlib.h>
 #include <iostream>
 #include <unistd.h>
@@ -7,7 +10,7 @@
 using namespace std;
 
 #include "ImageNG.h"
-#include "ImageB.h"
+//#include "ImageB.h"
 #include "ImageRGB.h"
 #include "Couleur.h"
 
@@ -15,10 +18,12 @@ int Menu();
 void Essai1();
 void Essai2();
 void Essai3();
+/*
 void Essai4();
 void Essai5();
 void Essai6();
 void Essai7();
+*/
 
 int main(int argc,char* argv[])
 {
@@ -48,6 +53,7 @@ int main(int argc,char* argv[])
 		case 3 :
 			Essai3();
 			break;
+		/*
 		case 4 :
 			Essai4();
 			break;
@@ -60,6 +66,7 @@ int main(int argc,char* argv[])
 		case 7 :
 			Essai7();
 			break;
+		*/
 		default :
 			fini = true;
 			break;
@@ -115,9 +122,15 @@ void Essai1()
 		couleur.setVert(60);
 		couleur.setBleu(210);
 		couleur.Affiche();
+		/*
 		cout << "Rouge = " << couleur.getRouge() << endl;
 		cout << "Vert = " << couleur.getVert() << endl;
 		cout << "Bleu = " << couleur.getBleu() << endl;
+		*/
+		//same but with display as int
+		cout << "Rouge = " << (int)couleur.getRouge() << endl;
+		cout << "Vert = " << (int)couleur.getVert() << endl;
+		cout << "Bleu = " << (int)couleur.getBleu() << endl;
 	}
 
 	cout << endl << "(1.3) ***** Tests de base des objets statiques + operateur << ******************************" << endl;
@@ -180,6 +193,7 @@ void Essai3()
 	image.exportToFile("./out/joconde2.png","PNG");
 }
 
+/*
 //*************************************************************************************************
 //*** Tests de setBackground, setPixel, Dessine et constructeur de copie de ImageB ****************
 //*************************************************************************************************
@@ -352,3 +366,4 @@ void Essai7()
 	cout << "(7.3) Liberation memoire ****************************************************************" << endl;
 	for (int i=0 ; i<10 ; i++) delete image[i];
 }
+*/

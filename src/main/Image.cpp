@@ -66,25 +66,29 @@ void Image::Affiche()const
 #endif
 }
 
+//DON'T USE AS IS, OVERRIDE IT
 void Image::Dessine()const
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[35;43mDEBUGVERBOSE : Dessine de Image\033[0m"<<endl;
 #endif
-	//TODO: Remove that nasty cast when all Image derived classes will be implemented
-	MyQT::ViewImage((ImageNG&)*this);
+	//MyQT::ViewImage(*this);
+	cout << "!!! OVERRIDE DESSINE !!!" << endl;
+	exit(EXIT_FAILURE);
 #ifdef DEBUGVERBOSE
 	cout<<"\033[36;43mDEBUGVERBOSE : Fin Dessine de Image\033[0m"<<endl;
 #endif
 }
 
+//DON'T USE AS IS, OVERRIDE IT
 void Image::exportToFile(const string &nomFichier, const string &formatFichier)const
 {
 #ifdef DEBUGVERBOSE
 	cout<<"\033[35;43mDEBUGVERBOSE : exportToFile de Image\033[0m"<<endl;
 #endif
-	//TODO: Remove that nasty cast when all Image derived classes will be implemented
-	MyQT::ExportToFile((ImageNG&)*this, nomFichier.c_str(), formatFichier.c_str());
+	//MyQT::ExportToFile(*this, nomFichier.c_str(), formatFichier.c_str());
+	cout << "!!! OVERRIDE EXPORTTOFILE !!!" << endl;
+	exit(EXIT_FAILURE);
 #ifdef DEBUGVERBOSE
 	cout<<"\033[36;43mDEBUGVERBOSE : Fin exportToFile de Image\033[0m"<<endl;
 #endif
