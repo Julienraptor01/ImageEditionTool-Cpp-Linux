@@ -272,7 +272,7 @@ ImageNG& ImageNG::operator++()
 	int hauteur = dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			setPixel(i,j,getPixel(i,j)+1);
+			setPixel(i,j,getPixel(i,j)+20);
 	return *this;
 }
 
@@ -286,7 +286,7 @@ ImageNG ImageNG::operator++(int)
 	int hauteur = dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			setPixel(i,j,getPixel(i,j)+1);
+			setPixel(i,j,getPixel(i,j)+20);
 	return image;
 }
 
@@ -299,7 +299,7 @@ ImageNG& ImageNG::operator--()
 	int hauteur = dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			setPixel(i,j,getPixel(i,j)-1);
+			setPixel(i,j,getPixel(i,j)-20);
 	return *this;
 }
 
@@ -313,7 +313,7 @@ ImageNG ImageNG::operator--(int)
 	int hauteur = dimension.getHauteur();
 	for(int i=0;i<largeur;i++)
 		for(int j=0;j<hauteur;j++)
-			setPixel(i,j,getPixel(i,j)-1);
+			setPixel(i,j,getPixel(i,j)-20);
 	return image;
 }
 
