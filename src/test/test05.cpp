@@ -291,11 +291,9 @@ void Essai6()
 	cout << endl;
 
 	cout << "(6.3) Liberation memoire **************************************************************" << endl;
-	//for (int i=0 ; i<10 ; i++) delete image[i];
+	for (int i=0 ; i<10 ; i++) delete image[i];
 	// Tout se passe-t-il comme vous voulez ?
 	// Pour etre plus precis, quid des destructeurs et de la virtualite ?
-	//use destructor instead of delete
-	for (int i=0 ; i<10 ; i++) image[i]->~Image();
 }
 
 //***********************************************************************************************
@@ -359,7 +357,5 @@ void Essai7()
 	cout << endl;
 
 	cout << "(7.3) Liberation memoire ****************************************************************" << endl;
-	//for (int i=0 ; i<10 ; i++) delete image[i];
-	//use destructor instead of delete
-	for (int i=0 ; i<10 ; i++) image[i]->~Image();
+	for (int i=0 ; i<10 ; i++) delete image[i];
 }

@@ -60,15 +60,11 @@ int main()
 		// Vous n'avez rien à faire... juste comprendre et savoir expliquer!!!
 		ImageNG *i = new ImageNG();
 		i->Affiche();
-		//delete i;
-		//use destructor instead of delete
-		i->~ImageNG();
+		delete i;
 		i = new ImageNG(12,"fleur");
 		i->setNom("rose");
 		i->Affiche();
-		//delete i;
-		//use destructor instead of delete
-		i->~ImageNG();
+		delete i;
 	}
 
 	return 0;

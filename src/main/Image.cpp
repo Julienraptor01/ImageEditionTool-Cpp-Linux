@@ -5,6 +5,16 @@
 using std::cout;
 using std::endl;
 
+Image::~Image()
+{
+#ifdef DEBUG
+	cout<<"\033[32;41mDEBUG : Destructeur de Image\033[0m"<<endl;
+#endif
+#ifdef DEBUG
+	cout<<"\033[34;41mDEBUG : Fin Destructeur de Image\033[0m"<<endl;
+#endif
+}
+
 void Image::setId(int id)
 {
 #ifdef DEBUGVERBOSE

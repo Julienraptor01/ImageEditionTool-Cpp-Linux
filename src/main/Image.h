@@ -17,6 +17,8 @@ protected:
 	Dimension dimension;
 
 public:
+	virtual ~Image();
+
 	void setId(int id);
 	int getId()const;
 	void setNom(const string &nom);
