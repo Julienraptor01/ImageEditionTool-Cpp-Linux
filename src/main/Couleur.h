@@ -30,7 +30,7 @@ public:
 	Couleur(int red, int green, int blue);
 	Couleur(const Couleur &couleur);
 
-
+	Couleur& operator=(const Couleur &couleur);
 	friend ostream& operator<<(ostream &outputStream, const Couleur &couleur);
 
 	void setARGB(unsigned int packedARGB);

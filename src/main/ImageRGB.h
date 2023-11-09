@@ -29,6 +29,7 @@ class ImageRGB : public Image
 		ImageRGB(const string &nom);
 		ImageRGB(const ImageRGB &image);
 
+		ImageRGB& operator=(const ImageRGB &image);
 		friend ostream& operator<<(ostream &outputStream, const ImageRGB &image);
 
 		void setDimension(const Dimension &dimension)override;

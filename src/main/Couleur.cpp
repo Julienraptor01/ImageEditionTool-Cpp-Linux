@@ -94,10 +94,19 @@ Couleur::Couleur(const Couleur &couleur)
 #endif
 }
 
+Couleur& Couleur::operator=(const Couleur &couleur)
+{
+#ifdef DEBUGVERBOSE
+	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur d'affectation de Couleur\033[0m"<<endl;
+#endif
+	setARGB(couleur.getARGB());
+	return *this;
+}
+
 ostream& operator<<(ostream &outputStream, const Couleur &couleur)
 {
-#ifdef DEBUG
-	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur << de Couleur\033[0m"<<endl;
+#ifdef DEBUGVERBOSE
+	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur d'écriture de Couleur\033[0m"<<endl;
 #endif
 	outputStream << hex << (int)couleur.getAlpha() << dec << " " << hex << (int)couleur.getRouge() << dec << " " << hex << (int)couleur.getVert() << dec << " " << hex << (int)couleur.getBleu() << dec;
 	return outputStream;

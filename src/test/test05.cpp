@@ -1,6 +1,3 @@
-//TODO: remove this pragma when this test is done
-#pragma GCC diagnostic ignored "-Wcomment"
-
 #include <stdlib.h>
 #include <iostream>
 #include <unistd.h>
@@ -10,20 +7,18 @@
 using namespace std;
 
 #include "ImageNG.h"
-//#include "ImageB.h"
 #include "ImageRGB.h"
+#include "ImageB.h"
 #include "Couleur.h"
 
 int Menu();
 void Essai1();
 void Essai2();
 void Essai3();
-/*
 void Essai4();
 void Essai5();
 void Essai6();
 void Essai7();
-*/
 
 int main(int argc,char* argv[])
 {
@@ -53,7 +48,6 @@ int main(int argc,char* argv[])
 		case 3 :
 			Essai3();
 			break;
-		/*
 		case 4 :
 			Essai4();
 			break;
@@ -66,7 +60,6 @@ int main(int argc,char* argv[])
 		case 7 :
 			Essai7();
 			break;
-		*/
 		default :
 			fini = true;
 			break;
@@ -193,7 +186,7 @@ void Essai3()
 	image.exportToFile("./out/joconde2.png","PNG");
 }
 
-/*
+
 //*************************************************************************************************
 //*** Tests de setBackground, setPixel, Dessine et constructeur de copie de ImageB ****************
 //*************************************************************************************************
@@ -298,9 +291,11 @@ void Essai6()
 	cout << endl;
 
 	cout << "(6.3) Liberation memoire **************************************************************" << endl;
-	for (int i=0 ; i<10 ; i++) delete image[i];
+	//for (int i=0 ; i<10 ; i++) delete image[i];
 	// Tout se passe-t-il comme vous voulez ?
 	// Pour etre plus precis, quid des destructeurs et de la virtualite ?
+	//use destructor instead of delete
+	for (int i=0 ; i<10 ; i++) image[i]->~Image();
 }
 
 //***********************************************************************************************
@@ -364,6 +359,7 @@ void Essai7()
 	cout << endl;
 
 	cout << "(7.3) Liberation memoire ****************************************************************" << endl;
-	for (int i=0 ; i<10 ; i++) delete image[i];
+	//for (int i=0 ; i<10 ; i++) delete image[i];
+	//use destructor instead of delete
+	for (int i=0 ; i<10 ; i++) image[i]->~Image();
 }
-*/

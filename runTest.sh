@@ -35,6 +35,13 @@ then
 	./build/bin/test/test04 9 > ./logs/test04-09.log
 	./build/bin/test/test04 10 > ./logs/test04-10.log
 	./build/bin/test/test04 11 > ./logs/test04-11.log
+	./build/bin/test/test05 1 > ./logs/test05-1.log
+	./build/bin/test/test05 2 > ./logs/test05-2.log
+	./build/bin/test/test05 3 > ./logs/test05-3.log
+	./build/bin/test/test05 4 > ./logs/test05-4.log
+	./build/bin/test/test05 5 > ./logs/test05-5.log
+	./build/bin/test/test05 6 > ./logs/test05-6.log
+	./build/bin/test/test05 7 > ./logs/test05-7.log
 else
 	echo "GG, i have no idea how you got here, i probably forgot a way to escape my conditions"
 	exit -69

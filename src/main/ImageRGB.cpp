@@ -18,9 +18,7 @@ void ImageRGB::createMatrice()
 	int hauteur = dimension.getHauteur();
 	matrice = new Couleur*[hauteur];
 	for(int i=0; i<hauteur; i++)
-	{
 		matrice[i] = new Couleur[largeur];
-	}
 #ifdef DEBUGVERBOSE
 	cout<<"\033[36;43mDEBUGVERBOSE : Fin createMatrice de ImageRGB\033[0m"<<endl;
 #endif
@@ -170,10 +168,22 @@ ImageRGB::ImageRGB(const ImageRGB &image)
 #endif
 }
 
+ImageRGB& ImageRGB::operator=(const ImageRGB &image)
+{
+#ifdef DEBUGVERBOSE
+	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur d'affectation de ImageRGB\033[0m"<<endl;
+#endif
+	setId(image.getId());
+	setNom(image.getNom());
+	setDimension(image.getDimension());
+	copyMatrice(image);
+	return *this;
+}
+
 ostream& operator<<(ostream &outputStream, const ImageRGB &image)
 {
 #ifdef DEBUGVERBOSE
-	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur << de ImageRGB\033[0m"<<endl;
+	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur d'écriture de ImageRGB\033[0m"<<endl;
 #endif
 	outputStream<< image.getId() << " " << image.getNom() << " " << image.getDimension();
 	return outputStream;
