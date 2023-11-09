@@ -52,7 +52,7 @@ Dimension::Dimension(const Dimension &dimension)
 bool Dimension::operator==(const Dimension &dimension)const
 {
 #ifdef DEBUGVERYVERBOSE
-	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur == de Dimension\033[0m"<<endl;
+	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur d'égalité de Dimension\033[0m"<<endl;
 #endif
 	return (largeur==dimension.largeur && hauteur==dimension.hauteur);
 }
@@ -60,7 +60,7 @@ bool Dimension::operator==(const Dimension &dimension)const
 bool Dimension::operator!=(const Dimension &dimension)const
 {
 #ifdef DEBUGVERYVERBOSE
-	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur != de Dimension\033[0m"<<endl;
+	cout<<"\033[33;45mDEBUGVERBOSE : Opérateur de différence de Dimension\033[0m"<<endl;
 #endif
 	return !(*this==dimension);
 }
@@ -68,7 +68,7 @@ bool Dimension::operator!=(const Dimension &dimension)const
 istream &operator>>(istream &inputStream, Dimension &dimension)
 {
 #ifdef DEBUGVERYVERBOSE
-	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur >> de Dimension\033[0m"<<endl;
+	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur de lecture de Dimension\033[0m"<<endl;
 #endif
 	inputStream>>dimension.largeur>>dimension.hauteur;
 	return inputStream;
@@ -77,7 +77,7 @@ istream &operator>>(istream &inputStream, Dimension &dimension)
 ostream &operator<<(ostream &outputStream, const Dimension &dimension)
 {
 #ifdef DEBUGVERYVERBOSE
-	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur << de Dimension\033[0m"<<endl;
+	cout<<"\033[33;46mDEBUGVERBOSE : Opérateur d'écriture de Dimension\033[0m"<<endl;
 #endif
 	outputStream<<dimension.largeur<<" "<<dimension.hauteur;
 	return outputStream;
