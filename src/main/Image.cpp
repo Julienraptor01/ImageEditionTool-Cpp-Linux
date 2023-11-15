@@ -5,6 +5,17 @@
 using std::cout;
 using std::endl;
 
+Image::Image()
+{
+#ifdef DEBUG
+	cout<<"\033[34;42mDEBUG : Constructeur par défaut de Image\033[0m"<<endl;
+#endif
+	setId(0);
+#ifdef DEBUG
+	cout<<"\033[31;42mDEBUG : Fin Constructeur par défaut de Image\033[0m"<<endl;
+#endif
+}
+
 Image::~Image()
 {
 #ifdef DEBUG
@@ -12,6 +23,29 @@ Image::~Image()
 #endif
 #ifdef DEBUG
 	cout<<"\033[34;41mDEBUG : Fin Destructeur de Image\033[0m"<<endl;
+#endif
+}
+
+Image::Image(int id)
+{
+#ifdef DEBUG
+	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation partiel de Image (id, dimension)\033[0m"<<endl;
+#endif
+	setId(id);
+#ifdef DEBUG
+	cout<<"\033[31;42mDEBUG : Fin Constructeur d'initialisation partiel de Image (id, dimension)\033[0m"<<endl;
+#endif
+}
+
+Image::Image(const Image &image)
+{
+#ifdef DEBUG
+	cout<<"\033[34;42mDEBUG : Constructeur de copie de Image\033[0m"<<endl;
+#endif
+	setId(image.getId());
+	setNom(image.getNom());
+#ifdef DEBUG
+	cout<<"\033[31;42mDEBUG : Fin Constructeur de copie de Image\033[0m"<<endl;
 #endif
 }
 
@@ -47,15 +81,6 @@ string Image::getNom()const
 	return nom;
 }
 
-//DON'T USE AS IS, OVERRIDE IT
-void Image::setDimension(const Dimension &dimension)
-{
-#ifdef DEBUGVERBOSE
-	cout<<"\033[31;44mDEBUGVERBOSE : setDimension de Image\033[0m"<<endl;
-#endif
-	cout << "!!! OVERRIDE SETDIMENSION !!!" << endl;
-	exit(EXIT_FAILURE);
-}
 
 Dimension Image::getDimension()const
 {
@@ -73,33 +98,5 @@ void Image::Affiche()const
 	cout << "Id : " << id << "\t" << "Nom : " << nom << "\t" << "Dimension : (" << dimension << ")" << endl;
 #ifdef DEBUGVERBOSE
 	cout<<"\033[36;43mDEBUGVERBOSE : Fin Affiche de Image\033[0m"<<endl;
-#endif
-}
-
-//DON'T USE AS IS, OVERRIDE IT
-void Image::Dessine()const
-{
-#ifdef DEBUGVERBOSE
-	cout<<"\033[35;43mDEBUGVERBOSE : Dessine de Image\033[0m"<<endl;
-#endif
-	//MyQT::ViewImage(*this);
-	cout << "!!! OVERRIDE DESSINE !!!" << endl;
-	exit(EXIT_FAILURE);
-#ifdef DEBUGVERBOSE
-	cout<<"\033[36;43mDEBUGVERBOSE : Fin Dessine de Image\033[0m"<<endl;
-#endif
-}
-
-//DON'T USE AS IS, OVERRIDE IT
-void Image::exportToFile(const string &nomFichier, const string &formatFichier)const
-{
-#ifdef DEBUGVERBOSE
-	cout<<"\033[35;43mDEBUGVERBOSE : exportToFile de Image\033[0m"<<endl;
-#endif
-	//MyQT::ExportToFile(*this, nomFichier.c_str(), formatFichier.c_str());
-	cout << "!!! OVERRIDE EXPORTTOFILE !!!" << endl;
-	exit(EXIT_FAILURE);
-#ifdef DEBUGVERBOSE
-	cout<<"\033[36;43mDEBUGVERBOSE : Fin exportToFile de Image\033[0m"<<endl;
 #endif
 }

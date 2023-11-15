@@ -83,12 +83,11 @@ void ImageNG::copyMatrice(const ImageNG &image)
 #endif
 }
 
-ImageNG::ImageNG()
+ImageNG::ImageNG() : Image()
 {
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur par défaut de ImageNG\033[0m"<<endl;
 #endif
-	setId(1);
 	setNom("ImageNG sans nom");
 	setDimension(dimension);
 #ifdef DEBUG
@@ -108,14 +107,13 @@ ImageNG::~ImageNG()
 #endif
 }
 
-ImageNG::ImageNG(int id, const string &nom, const Dimension &dimension)
+ImageNG::ImageNG(int id, const string &nom, const Dimension &dimension) : Image(id)
 {
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation complet de ImageNG\033[0m"<<endl;
 #endif
 	static const regex isFileRegex("^(?:\\.?\\/)?(?:.+\\/)*(.+)?(?:\\..+)$");
 	bool isFile = regex_search(nom, isFileRegex);
-	setId(id);
 	setNom(isFile ? regex_replace(nom, isFileRegex, "$1") : nom);
 	setDimension(dimension);
 	if (isFile)
@@ -125,14 +123,13 @@ ImageNG::ImageNG(int id, const string &nom, const Dimension &dimension)
 #endif
 }
 
-ImageNG::ImageNG(int id, const string &nom)
+ImageNG::ImageNG(int id, const string &nom) : Image(id)
 {
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation partiel de ImageNG (id, nom)\033[0m"<<endl;
 #endif
 	static const regex isFileRegex("^(?:\\.?\\/)?(?:.+\\/)*(.+)?(?:\\..+)$");
 	bool isFile = regex_search(nom, isFileRegex);
-	setId(id);
 	setNom(isFile ? regex_replace(nom, isFileRegex, "$1") : nom);
 	setDimension(dimension);
 	if (isFile)
@@ -142,14 +139,13 @@ ImageNG::ImageNG(int id, const string &nom)
 #endif
 }
 
-ImageNG::ImageNG(const string &nom)
+ImageNG::ImageNG(const string &nom) : Image()
 {
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation partiel de ImageNG (nom)\033[0m"<<endl;
 #endif
 	static const regex isFileRegex("^(?:\\.?\\/)?(?:.+\\/)*(.+)?(?:\\..+)$");
 	bool isFile = regex_search(nom, isFileRegex);
-	setId(1);
 	setNom(isFile ? regex_replace(nom, isFileRegex, "$1") : nom);
 	setDimension(dimension);
 	if (isFile)
@@ -159,13 +155,11 @@ ImageNG::ImageNG(const string &nom)
 #endif
 }
 
-ImageNG::ImageNG(const ImageNG &image)
+ImageNG::ImageNG(const ImageNG &image) : Image(image)
 {
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur de copie de ImageNG\033[0m"<<endl;
 #endif
-	setId(image.getId());
-	setNom(image.getNom());
 	setDimension(image.getDimension());
 	copyMatrice(image);
 #ifdef DEBUG

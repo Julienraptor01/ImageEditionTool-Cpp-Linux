@@ -77,12 +77,11 @@ void ImageB::copyMatrice(const ImageB &image)
 #endif
 }
 
-ImageB::ImageB()
+ImageB::ImageB() : Image()
 {
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur par défaut de ImageB\033[0m"<<endl;
 #endif
-	setId(1);
 	setNom("ImageB sans nom");
 	setDimension(dimension);
 #ifdef DEBUG
@@ -102,12 +101,11 @@ ImageB::~ImageB()
 #endif
 }
 
-ImageB::ImageB(int id, const string &nom, const Dimension &dimension)
+ImageB::ImageB(int id, const string &nom, const Dimension &dimension) : Image(id)
 {
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation complet de ImageB\033[0m"<<endl;
 #endif
-	setId(id);
 	setNom(nom);
 	setDimension(dimension);
 #ifdef DEBUG
@@ -115,12 +113,11 @@ ImageB::ImageB(int id, const string &nom, const Dimension &dimension)
 #endif
 }
 
-ImageB::ImageB(int id, const string &nom)
+ImageB::ImageB(int id, const string &nom) : Image(id)
 {
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation partiel de ImageB (id, nom)\033[0m"<<endl;
 #endif
-	setId(id);
 	setNom(nom);
 	setDimension(dimension);
 #ifdef DEBUG
@@ -128,12 +125,11 @@ ImageB::ImageB(int id, const string &nom)
 #endif
 }
 
-ImageB::ImageB(const string &nom)
+ImageB::ImageB(const string &nom) : Image()
 {
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation partiel de ImageB (nom)\033[0m"<<endl;
 #endif
-	setId(1);
 	setNom(nom);
 	setDimension(dimension);
 #ifdef DEBUG
@@ -141,13 +137,11 @@ ImageB::ImageB(const string &nom)
 #endif
 }
 
-ImageB::ImageB(const ImageB &image)
+ImageB::ImageB(const ImageB &image) : Image(image)
 {
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur de copie de ImageB\033[0m"<<endl;
 #endif
-	setId(image.getId());
-	setNom(image.getNom());
 	setDimension(image.getDimension());
 	copyMatrice(image);
 #ifdef DEBUG

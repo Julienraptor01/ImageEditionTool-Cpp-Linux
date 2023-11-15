@@ -78,12 +78,11 @@ void ImageRGB::copyMatrice(const ImageRGB &image)
 #endif
 }
 
-ImageRGB::ImageRGB()
+ImageRGB::ImageRGB() : Image()
 {
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur par défaut de ImageRGB\033[0m"<<endl;
 #endif
-	setId(1);
 	setNom("ImageRGB sans nom");
 	setDimension(dimension);
 #ifdef DEBUG
@@ -103,14 +102,13 @@ ImageRGB::~ImageRGB()
 #endif
 }
 
-ImageRGB::ImageRGB(int id, const string &nom, const Dimension &dimension)
+ImageRGB::ImageRGB(int id, const string &nom, const Dimension &dimension) : Image(id)
 {
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation complet de ImageRGB\033[0m"<<endl;
 #endif
 	static const regex isFileRegex("^(?:\\.?\\/)?(?:.+\\/)*(.+)?(?:\\..+)$");
 	bool isFile = regex_search(nom, isFileRegex);
-	setId(id);
 	setNom(isFile ? regex_replace(nom, isFileRegex, "$1") : nom);
 	setDimension(dimension);
 	if(isFile)
@@ -120,14 +118,13 @@ ImageRGB::ImageRGB(int id, const string &nom, const Dimension &dimension)
 #endif
 }
 
-ImageRGB::ImageRGB(int id, const string &nom)
+ImageRGB::ImageRGB(int id, const string &nom) : Image(id)
 {
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation partiel de ImageRGB (id, nom)\033[0m"<<endl;
 #endif
 	static const regex isFileRegex("^(?:\\.?\\/)?(?:.+\\/)*(.+)?(?:\\..+)$");
 	bool isFile = regex_search(nom, isFileRegex);
-	setId(id);
 	setNom(isFile ? regex_replace(nom, isFileRegex, "$1") : nom);
 	setDimension(dimension);
 	if(isFile)
@@ -137,14 +134,13 @@ ImageRGB::ImageRGB(int id, const string &nom)
 #endif
 }
 
-ImageRGB::ImageRGB(const string &nom)
+ImageRGB::ImageRGB(const string &nom) : Image()
 {
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur d'initialisation partiel de ImageRGB (nom)\033[0m"<<endl;
 #endif
 	static const regex isFileRegex("^(?:\\.?\\/)?(?:.+\\/)*(.+)?(?:\\..+)$");
 	bool isFile = regex_search(nom, isFileRegex);
-	setId(1);
 	setNom(isFile ? regex_replace(nom, isFileRegex, "$1") : nom);
 	setDimension(dimension);
 	if(isFile)
@@ -154,13 +150,11 @@ ImageRGB::ImageRGB(const string &nom)
 #endif
 }
 
-ImageRGB::ImageRGB(const ImageRGB &image)
+ImageRGB::ImageRGB(const ImageRGB &image) : Image(image)
 {
 #ifdef DEBUG
 	cout<<"\033[34;42mDEBUG : Constructeur de copie de ImageRGB\033[0m"<<endl;
 #endif
-	setId(image.getId());
-	setNom(image.getNom());
 	setDimension(image.getDimension());
 	copyMatrice(image);
 #ifdef DEBUG
