@@ -25,21 +25,21 @@ public:
 	Dimension(int largeur, int hauteur);
 	Dimension(const Dimension &dimension);
 
-	bool operator==(const Dimension &dimension)const;
-	bool operator!=(const Dimension &dimension)const;
-	friend istream& operator>>(istream &inputStream, Dimension &dimension);
-	friend ostream& operator<<(ostream &outputStream, const Dimension &dimension);
+	bool operator==(const Dimension &dimension) const;
+	bool operator!=(const Dimension &dimension) const;
+	friend istream &operator>>(istream &inputStream, Dimension &dimension);
+	friend ostream &operator<<(ostream &outputStream, const Dimension &dimension);
 
 	void setLargeur(int largeur);
-	int getLargeur()const;
+	int getLargeur() const;
 	void setHauteur(int hauteur);
-	int getHauteur()const;
+	int getHauteur() const;
 
 	static const Dimension VGA;
 	static const Dimension HD;
 	static const Dimension FULL_HD;
 
-	void Affiche()const;
+	void Affiche() const;
 };
 
 #endif

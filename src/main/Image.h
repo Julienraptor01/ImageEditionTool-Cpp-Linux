@@ -5,9 +5,9 @@
 
 #include "Dimension.h"
 
-using std::string;
 using std::istream;
 using std::ostream;
+using std::string;
 
 class Image
 {
@@ -23,16 +23,16 @@ public:
 	Image(const Image &image);
 
 	void setId(int id);
-	int getId()const;
+	int getId() const;
 	void setNom(const string &nom);
-	string getNom()const;
+	string getNom() const;
 	virtual void setDimension(const Dimension &dimension) = 0;
-	Dimension getDimension()const;
+	Dimension getDimension() const;
 
-	void Affiche()const;
-	virtual void Dessine()const = 0;
+	void Affiche() const;
+	virtual void Dessine() const = 0;
 
-	virtual void exportToFile(const string &nomFichier, const string &formatFichier)const = 0;
+	virtual void exportToFile(const string &nomFichier, const string &formatFichier) const = 0;
 };
 
 #endif
