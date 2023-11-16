@@ -2,8 +2,8 @@
 #include <limits.h>
 
 #include "Couleur.h"
+#include "ColorException.h"
 
-using std::clamp;
 using std::cout;
 using std::dec;
 using std::endl;
@@ -157,7 +157,9 @@ void Couleur::setRouge(int red)
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[31;44mDEBUGVERYVERBOSE : setRouge de Couleur (int red)\033[0m" << endl;
 #endif
-	color.unpacked.red = (unsigned char)clamp(red, 0, UCHAR_MAX);
+	if (red < 0 || red > UCHAR_MAX)
+		throw ColorException("setRouge invalide", red);
+	color.unpacked.red = (unsigned char)red;
 }
 
 unsigned char Couleur::getRouge() const
@@ -181,7 +183,9 @@ void Couleur::setVert(int green)
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[31;44mDEBUGVERYVERBOSE : setVert de Couleur (int green)\033[0m" << endl;
 #endif
-	color.unpacked.green = (unsigned char)clamp(green, 0, UCHAR_MAX);
+	if (green < 0 || green > UCHAR_MAX)
+		throw ColorException("setVert invalide", green);
+	color.unpacked.green = (unsigned char)green;
 }
 
 unsigned char Couleur::getVert() const
@@ -205,7 +209,9 @@ void Couleur::setBleu(int blue)
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[31;44mDEBUGVERYVERBOSE : setBleu de Couleur (int blue)\033[0m" << endl;
 #endif
-	color.unpacked.blue = (unsigned char)clamp(blue, 0, UCHAR_MAX);
+	if (blue < 0 || blue > UCHAR_MAX)
+		throw ColorException("setBleu invalide", blue);
+	color.unpacked.blue = (unsigned char)blue;
 }
 
 unsigned char Couleur::getBleu() const

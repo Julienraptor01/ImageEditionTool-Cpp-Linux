@@ -6,13 +6,16 @@
 class XYException : public Exception
 {
 private:
-	char axe = NULL;
-	int x = NULL, y = NULL;
+	// theses values will never be used so i can safely use them for testing if the value is default or not
+	char axe = 0;
+	int x = 1, y = 1;
 
 public:
 	XYException();
 	~XYException();
-	XYException(const string &message);
+	XYException(const string &message, const char axe, const int x, const int y);
+	XYException(const string &message, const char axe, const int valeur);
+	XYException(const string &message, const char axe);
 	XYException(const XYException &xyException);
 
 	void setAxe(const char axe);

@@ -1,4 +1,5 @@
 #include "Dimension.h"
+#include "XYException.h"
 
 using std::cout;
 using std::endl;
@@ -8,8 +9,6 @@ Dimension::Dimension()
 #ifdef DEBUG
 	cout << "\033[34;42mDEBUG : Constructeur par défaut de Dimension\033[0m" << endl;
 #endif
-	setLargeur(DIMENSION_H_DEFAULT_LARGEUR);
-	setHauteur(DIMENSION_H_DEFAULT_HAUTEUR);
 #ifdef DEBUG
 	cout << "\033[31;42mDEBUG : Fin Constructeur par défaut de Dimension\033[0m" << endl;
 #endif
@@ -92,7 +91,9 @@ void Dimension::setLargeur(int largeur)
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[31;44mDEBUGVERYVERBOSE : setLargeur de Dimension\033[0m" << endl;
 #endif
-	this->largeur = (largeur <= 0) ? DIMENSION_H_DEFAULT_LARGEUR : largeur;
+	if (largeur <= 0)
+		throw XYException("setLargeur invalide", 'x', largeur);
+	this->largeur = largeur;
 }
 
 int Dimension::getLargeur() const
@@ -108,7 +109,9 @@ void Dimension::setHauteur(int hauteur)
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[31;44mDEBUGVERYVERBOSE : setHauteur de Dimension\033[0m" << endl;
 #endif
-	this->hauteur = (hauteur <= 0) ? DIMENSION_H_DEFAULT_HAUTEUR : hauteur;
+	if (hauteur <= 0)
+		throw XYException("setHauteur invalide", 'y', hauteur);
+	this->hauteur = hauteur;
 }
 
 int Dimension::getHauteur() const

@@ -1,5 +1,6 @@
 #include "ImageB.h"
 #include "MyQT.h"
+#include "XYException.h"
 
 using std::cout;
 using std::endl;
@@ -201,8 +202,14 @@ void ImageB::setPixel(int x, int y, bool couleur)
 #ifdef DEBUGVERBOSE
 	cout << "\033[31;44mDEBUGVERBOSE : setPixel de ImageB\033[0m" << endl;
 #endif
-	if (x >= 0 && x < dimension.getLargeur() && y >= 0 && y < dimension.getHauteur())
-		matrice[y][x] = couleur;
+	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
+	if ((x < 0 || x >= largeur) && (y < 0 || y >= hauteur))
+		throw XYException("setPixel invalide", 'd', x, y);
+	if (x < 0 || x >= largeur)
+		throw XYException("setPixel invalide", 'x', x);
+	if (y < 0 || y >= hauteur)
+		throw XYException("setPixel invalide", 'y', y);
+	matrice[y][x] = couleur;
 }
 
 bool ImageB::getPixel(int x, int y) const
@@ -210,10 +217,14 @@ bool ImageB::getPixel(int x, int y) const
 #ifdef DEBUGVERBOSE
 	cout << "\033[32;44mDEBUGVERBOSE : getPixel de ImageB\033[0m" << endl;
 #endif
-	if (x >= 0 && x < dimension.getLargeur() && y >= 0 && y < dimension.getHauteur())
-		return matrice[y][x];
-	// TODO: throw exception
-	return -1;
+	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
+	if ((x < 0 || x >= largeur) && (y < 0 || y >= hauteur))
+		throw XYException("getPixel invalide", 'd', x, y);
+	if (x < 0 || x >= largeur)
+		throw XYException("getPixel invalide", 'x', x);
+	if (y < 0 || y >= hauteur)
+		throw XYException("getPixel invalide", 'y', y);
+	return matrice[y][x];
 }
 
 Couleur ImageB::couleurFalse(0xFF000000);

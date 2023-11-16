@@ -4,7 +4,6 @@
 #include <iostream>
 
 #include "Image.h"
-#include "Dimension.h"
 #include "Couleur.h"
 
 using std::ostream;

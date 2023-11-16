@@ -4,8 +4,9 @@
 
 #include "ImageNG.h"
 #include "MyQT.h"
+#include "XYException.h"
+#include "ColorException.h"
 
-using std::clamp;
 using std::cout;
 using std::endl;
 using std::regex;
@@ -329,7 +330,7 @@ bool ImageNG::operator<(const ImageNG &image) const
 	cout << "\033[33;45mDEBUGVERBOSE : Opérateur de comparaison inférieur de ImageNG\033[0m" << endl;
 #endif
 	if (dimension != image.dimension)
-		return getLuminance() < image.getLuminance();
+		throw XYException("Comparaison invalide", 'd');
 	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
 	for (int i = 0; i < largeur; i++)
 		for (int j = 0; j < hauteur; j++)
@@ -352,7 +353,7 @@ bool ImageNG::operator>(const ImageNG &image) const
 	cout << "\033[33;45mDEBUGVERBOSE : Opérateur de comparaison supérieur de ImageNG\033[0m" << endl;
 #endif
 	if (dimension != image.dimension)
-		return getLuminance() > image.getLuminance();
+		throw XYException("Comparaison invalide", 'd');
 	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
 	for (int i = 0; i < largeur; i++)
 		for (int j = 0; j < hauteur; j++)
@@ -411,7 +412,9 @@ void ImageNG::setBackground(int grayLevel)
 #ifdef DEBUGVERBOSE
 	cout << "\033[31;44mDEBUGVERBOSE : setBackground de ImageNG (int grayLevel)\033[0m" << endl;
 #endif
-	setBackground((unsigned char)clamp(grayLevel, 0, UCHAR_MAX));
+	if (grayLevel < 0 || grayLevel > UCHAR_MAX)
+		throw ColorException("setBackground invalide", grayLevel);
+	setBackground((unsigned char)grayLevel);
 }
 
 void ImageNG::setPixel(int x, int y, unsigned char grayLevel)
@@ -419,8 +422,14 @@ void ImageNG::setPixel(int x, int y, unsigned char grayLevel)
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[31;44mDEBUGVERYVERBOSE : setPixel de ImageNG (x, y, unsigned char grayLevel)\033[0m" << endl;
 #endif
-	if (x >= 0 && x < dimension.getLargeur() && y >= 0 && y < dimension.getHauteur())
-		matrice[x][y] = grayLevel;
+	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
+	if ((x < 0 || x >= largeur) && (y < 0 || y >= hauteur))
+		throw XYException("SetPixel invalide", 'd', x, y);
+	if (x < 0 || x >= largeur)
+		throw XYException("SetPixel invalide", 'x', x);
+	if (y < 0 || y >= hauteur)
+		throw XYException("SetPixel invalide", 'y', y);
+	matrice[x][y] = grayLevel;
 }
 
 void ImageNG::setPixel(int x, int y, int grayLevel)
@@ -428,7 +437,9 @@ void ImageNG::setPixel(int x, int y, int grayLevel)
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[31;44mDEBUGVERYVERBOSE : setPixel de ImageNG (x, y, int grayLevel)\033[0m" << endl;
 #endif
-	setPixel(x, y, (unsigned char)clamp(grayLevel, 0, UCHAR_MAX));
+	if (grayLevel < 0 || grayLevel > UCHAR_MAX)
+		throw ColorException("setPixel invalide", grayLevel);
+	setPixel(x, y, (unsigned char)grayLevel);
 }
 
 int ImageNG::getPixel(int x, int y) const
@@ -436,10 +447,14 @@ int ImageNG::getPixel(int x, int y) const
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[32;44mDEBUGVERYVERBOSE : getPixel de ImageNG\033[0m" << endl;
 #endif
-	if (x >= 0 && x < dimension.getLargeur() && y >= 0 && y < dimension.getHauteur())
-		return matrice[x][y];
-	// TODO: throw exception
-	return -1;
+	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
+	if ((x < 0 || x >= largeur) && (y < 0 || y >= hauteur))
+		throw XYException("GetPixel invalide", 'd', x, y);
+	if (x < 0 || x >= largeur)
+		throw XYException("GetPixel invalide", 'x', x);
+	if (y < 0 || y >= hauteur)
+		throw XYException("GetPixel invalide", 'y', y);
+	return matrice[x][y];
 }
 
 int ImageNG::getLuminance() const
@@ -472,7 +487,7 @@ int ImageNG::getMaximum() const
 #ifdef DEBUGVERBOSE
 	cout << "\033[32;44mDEBUGVERBOSE : getMaximum de ImageNG\033[0m" << endl;
 #endif
-	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur(),maximum = matrice[0][0];
+	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur(), maximum = matrice[0][0];
 	for (int i = 0; i < largeur; i++)
 		for (int j = 0; j < hauteur; j++)
 			if (matrice[i][j] > maximum)

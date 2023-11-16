@@ -49,8 +49,8 @@ TEST_BIN=$(BIN)$(TEST)
 LIB_BIN=$(BIN)$(LIB)
 MYQT_LIB_BIN=$(LIB_BIN)$(MYQT)
 # lists
-HEADERS=$(MAIN_SRC)/Image.h $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/ImageRGB.h $(MAIN_SRC)/ImageB.h $(MAIN_SRC)/Dimension.h $(MAIN_SRC)/Couleur.h $(MYQT_LIB_SRC)/MyQT.h
-OBJECTS=$(MAIN_OBJ)/Image.o $(MAIN_OBJ)/ImageNG.o $(MAIN_OBJ)/ImageRGB.o $(MAIN_OBJ)/ImageB.o $(MAIN_OBJ)/Dimension.o $(MAIN_OBJ)/Couleur.o $(MYQT_LIB_OBJ)/MyQT.o
+HEADERS=$(MAIN_SRC)/Image.h $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/ImageRGB.h $(MAIN_SRC)/ImageB.h $(MAIN_SRC)/Dimension.h $(MAIN_SRC)/Couleur.h $(MAIN_SRC)/Exception.h $(MAIN_SRC)/XYException.h $(MAIN_SRC)/ColorException.h $(MYQT_LIB_SRC)/MyQT.h
+OBJECTS=$(MAIN_OBJ)/Image.o $(MAIN_OBJ)/ImageNG.o $(MAIN_OBJ)/ImageRGB.o $(MAIN_OBJ)/ImageB.o $(MAIN_OBJ)/Dimension.o $(MAIN_OBJ)/Couleur.o $(MAIN_OBJ)/Exception.o $(MAIN_OBJ)/XYException.o $(MAIN_OBJ)/ColorException.o $(MYQT_LIB_OBJ)/MyQT.o
 ### commands
 # compile arguments
 SRC_DEBUG_LINKER=-Xlinker --verbose
@@ -71,10 +71,10 @@ DELETE=rm -rf
 LOG=@printf
 
 
-all:	full-clean $(TEST_BIN)/test01 $(TEST_BIN)/test02 $(TEST_BIN)/test03 $(TEST_BIN)/test04 $(TEST_BIN)/test05
+all:	full-clean $(TEST_BIN)/test01 $(TEST_BIN)/test02 $(TEST_BIN)/test03 $(TEST_BIN)/test04 $(TEST_BIN)/test05 $(TEST_BIN)/test06
 	$(LOG) '\n\033[44mmake all finished\033[49m\n\n'
 
-$(MAIN_OBJ)/Image.o:	$(MAIN_SRC)/Image.cpp $(HEADERS)
+$(MAIN_OBJ)/Image.o:	$(MAIN_SRC)/Image.cpp $(MAIN_SRC)/Image.h $(MAIN_SRC)/Dimension.h $(MYQT_LIB_SRC)/MyQT.h
 	$(LOG) '\n\033[42mcreation of the Image object file\033[49m\n'
 	$(SRC_COMPILE) \
 	-I $(MYQT_LIB_SRC) \
@@ -82,7 +82,7 @@ $(MAIN_OBJ)/Image.o:	$(MAIN_SRC)/Image.cpp $(HEADERS)
 	-c \
 	-o $(MAIN_OBJ)/Image.o
 
-$(MAIN_OBJ)/ImageNG.o:	$(MAIN_SRC)/ImageNG.cpp $(HEADERS)
+$(MAIN_OBJ)/ImageNG.o:	$(MAIN_SRC)/ImageNG.cpp $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/Image.h $(MAIN_SRC)/Dimension.h $(MYQT_LIB_SRC)/MyQT.h $(MAIN_SRC)/XYException.h $(MAIN_SRC)/ColorException.h
 	$(LOG) '\n\033[42mcreation of the ImageNG object file\033[49m\n'
 	$(SRC_COMPILE) \
 	-I $(MYQT_LIB_SRC) \
@@ -90,7 +90,7 @@ $(MAIN_OBJ)/ImageNG.o:	$(MAIN_SRC)/ImageNG.cpp $(HEADERS)
 	-c \
 	-o $(MAIN_OBJ)/ImageNG.o
 
-$(MAIN_OBJ)/ImageRGB.o:	$(MAIN_SRC)/ImageRGB.cpp $(HEADERS)
+$(MAIN_OBJ)/ImageRGB.o:	$(MAIN_SRC)/ImageRGB.cpp $(MAIN_SRC)/ImageRGB.h $(MAIN_SRC)/Image.h $(MAIN_SRC)/Dimension.h $(MAIN_SRC)/Couleur.h $(MYQT_LIB_SRC)/MyQT.h $(MAIN_SRC)/XYException.h $(MAIN_SRC)/ColorException.h
 	$(LOG) '\n\033[42mcreation of the ImageRGB object file\033[49m\n'
 	$(SRC_COMPILE) \
 	-I $(MYQT_LIB_SRC) \
@@ -98,7 +98,7 @@ $(MAIN_OBJ)/ImageRGB.o:	$(MAIN_SRC)/ImageRGB.cpp $(HEADERS)
 	-c \
 	-o $(MAIN_OBJ)/ImageRGB.o
 
-$(MAIN_OBJ)/ImageB.o:	$(MAIN_SRC)/ImageB.cpp $(HEADERS)
+$(MAIN_OBJ)/ImageB.o:	$(MAIN_SRC)/ImageB.cpp $(MAIN_SRC)/ImageB.h $(MAIN_SRC)/Image.h $(MAIN_SRC)/Dimension.h $(MAIN_SRC)/Couleur.h $(MYQT_LIB_SRC)/MyQT.h $(MAIN_SRC)/XYException.h
 	$(LOG) '\n\033[42mcreation of the ImageB object file\033[49m\n'
 	$(SRC_COMPILE) \
 	-I $(MYQT_LIB_SRC) \
@@ -116,10 +116,30 @@ $(MAIN_OBJ)/Dimension.o:	$(MAIN_SRC)/Dimension.cpp $(MAIN_SRC)/Dimension.h
 $(MAIN_OBJ)/Couleur.o:	$(MAIN_SRC)/Couleur.cpp $(MAIN_SRC)/Couleur.h
 	$(LOG) '\n\033[42mcreation of the Couleur object file\033[49m\n'
 	$(SRC_COMPILE) \
-	-std=c++17 \
 	$(MAIN_SRC)/Couleur.cpp \
 	-c \
 	-o $(MAIN_OBJ)/Couleur.o
+
+$(MAIN_OBJ)/Exception.o:	$(MAIN_SRC)/Exception.cpp $(MAIN_SRC)/Exception.h
+	$(LOG) '\n\033[42mcreation of the Exception object file\033[49m\n'
+	$(SRC_COMPILE) \
+	$(MAIN_SRC)/Exception.cpp \
+	-c \
+	-o $(MAIN_OBJ)/Exception.o
+
+$(MAIN_OBJ)/XYException.o:	$(MAIN_SRC)/XYException.cpp $(MAIN_SRC)/XYException.h $(MAIN_SRC)/Exception.h
+	$(LOG) '\n\033[42mcreation of the XYException object file\033[49m\n'
+	$(SRC_COMPILE) \
+	$(MAIN_SRC)/XYException.cpp \
+	-c \
+	-o $(MAIN_OBJ)/XYException.o
+
+$(MAIN_OBJ)/ColorException.o:	$(MAIN_SRC)/ColorException.cpp $(MAIN_SRC)/ColorException.h $(MAIN_SRC)/Exception.h
+	$(LOG) '\n\033[42mcreation of the ColorException object file\033[49m\n'
+	$(SRC_COMPILE) \
+	$(MAIN_SRC)/ColorException.cpp \
+	-c \
+	-o $(MAIN_OBJ)/ColorException.o
 
 $(TEST_BIN)/test01:	$(TEST_OBJ)/test01.o $(OBJECTS)
 	$(LOG) '\n\033[42mcreation of the test01 executable\033[49m\n'
@@ -195,6 +215,21 @@ $(TEST_OBJ)/test05.o:	$(TEST_SRC)/test05.cpp $(HEADERS)
 	$(TEST_SRC)/test05.cpp \
 	-c \
 	-o $(TEST_OBJ)/test05.o
+
+$(TEST_BIN)/test06:	$(TEST_OBJ)/test06.o $(OBJECTS)
+	$(LOG) '\n\033[42mcreation of the test06 executable\033[49m\n'
+	$(TEST_COMPILE) \
+	$(TEST_OBJ)/test06.o \
+	$(TEST_COMPILE_ARGS) \
+	-o $(TEST_BIN)/test06 \
+	$(LIB_COMPILE_LINKER_ARGS)
+
+$(TEST_OBJ)/test06.o:	$(TEST_SRC)/test06.cpp $(HEADERS)
+	$(LOG) '\n\033[42mcreation of the test06 object file\033[49m\n'
+	$(TEST_COMPILE) \
+	$(TEST_SRC)/test06.cpp \
+	-c \
+	-o $(TEST_OBJ)/test06.o
 
 $(MYQT_LIB_OBJ)/MyQT.o:	$(MYQT_LIB_SRC)/MyQT.cpp $(HEADERS)
 	$(LOG) '\n\033[42mcreation of the MyQT object file\033[49m\n'

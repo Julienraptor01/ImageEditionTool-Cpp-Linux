@@ -4,7 +4,6 @@
 #include <iostream>
 
 #include "Image.h"
-#include "Dimension.h"
 
 using std::ostream;
 using std::string;

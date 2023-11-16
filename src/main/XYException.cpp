@@ -42,7 +42,7 @@ XYException::XYException(const string &message, const char axe, const int x, con
 XYException::XYException(const string &message, const char axe, const int valeur) : Exception(message)
 {
 #ifdef DEBUG
-	cout << "\033[34;42mDEBUG : Constructeur d'initialisation partiel de XYException\033[0m" << endl;
+	cout << "\033[34;42mDEBUG : Constructeur d'initialisation partiel de XYException (message, axe, valeur)\033[0m" << endl;
 #endif
 	setAxe(axe);
 	switch (axe)
@@ -54,10 +54,21 @@ XYException::XYException(const string &message, const char axe, const int valeur
 		setY(valeur);
 		break;
 	default:
-		cout << "You misused the constructor of XYException" << endl;
+		cout << "You misused XYException" << endl;
 	}
 #ifdef DEBUG
-	cout << "\033[31;42mDEBUG : Fin Constructeur d'initialisation partiel de XYException\033[0m" << endl;
+	cout << "\033[31;42mDEBUG : Fin Constructeur d'initialisation partiel de XYException (message, axe, valeur)\033[0m" << endl;
+#endif
+}
+
+XYException::XYException(const string &message, const char axe) : Exception(message)
+{
+#ifdef DEBUG
+	cout << "\033[34;42mDEBUG : Constructeur d'initialisation partiel de XYException (message, axe)\033[0m" << endl;
+#endif
+	setAxe(axe);
+#ifdef DEBUG
+	cout << "\033[31;42mDEBUG : Fin Constructeur d'initialisation partiel de XYException (message, axe)\033[0m" << endl;
 #endif
 }
 
@@ -125,11 +136,21 @@ int XYException::getY() const
 void XYException::Affiche() const
 {
 	cout << "XYException : " << message;
-	if (axe != NULL)
-		cout << "\t" << "Axe : " << axe;
-	if (axe == 'x' || axe == 'd')
-		cout << "\t" << "X : " << x;
-	if (axe == 'y' || axe == 'd')
-		cout << "\t" << "Y : " << y;
+	if (axe != 0)
+	{
+		cout << "\t" << "Axe : ";
+		if (axe == 'x' || axe == 'd')
+		{
+			cout << "X";
+			if (x != 1)
+				cout << " : " << x;
+		}
+		if (axe == 'y' || axe == 'd')
+		{
+			cout << "Y";
+			if (y != 1)
+				cout << " : " << y;
+		}
+	}
 	cout << endl;
 }

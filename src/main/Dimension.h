@@ -6,17 +6,10 @@
 using std::istream;
 using std::ostream;
 
-#ifndef DIMENSION_H_DEFAULT_LARGEUR
-#define DIMENSION_H_DEFAULT_LARGEUR 400
-#endif
-#ifndef DIMENSION_H_DEFAULT_HAUTEUR
-#define DIMENSION_H_DEFAULT_HAUTEUR 300
-#endif
-
 class Dimension
 {
 private:
-	int largeur, hauteur;
+	int largeur = 400, hauteur = 300;
 
 public:
 	Dimension();

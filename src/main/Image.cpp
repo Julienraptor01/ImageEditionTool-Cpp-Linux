@@ -1,5 +1,4 @@
 #include "Image.h"
-#include "Dimension.h"
 #include "MyQT.h"
 
 using std::cout;
