@@ -224,5 +224,5 @@ const Couleur Couleur::BLANC(0xFFFFFFFF);
 
 void Couleur::Affiche() const
 {
-	cout << "Couleur : " << hex << getARGB() << dec << endl;
+	cout << "Couleur : " << hex << color.packedARGB << dec << endl;
 }

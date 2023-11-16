@@ -13,10 +13,7 @@ private:
 		unsigned int packedARGB;
 		struct
 		{
-			unsigned char blue;
-			unsigned char green;
-			unsigned char red;
-			unsigned char alpha;
+			unsigned char blue, green, red, alpha;
 		} unpacked;
 	} argb;
 	argb color;

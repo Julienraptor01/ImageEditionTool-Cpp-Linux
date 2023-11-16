@@ -91,13 +91,5 @@ Dimension Image::getDimension() const
 
 void Image::Affiche() const
 {
-#ifdef DEBUGVERBOSE
-	cout << "\033[35;43mDEBUGVERBOSE : Affiche de Image\033[0m" << endl;
-#endif
-	cout << "Id : " << id << "\t"
-		 << "Nom : " << nom << "\t"
-		 << "Dimension : (" << dimension << ")" << endl;
-#ifdef DEBUGVERBOSE
-	cout << "\033[36;43mDEBUGVERBOSE : Fin Affiche de Image\033[0m" << endl;
-#endif
+	cout << "Id : " << id << "\t" << "Nom : " << nom << "\t" << "Dimension : (" << dimension << ")" << endl;
 }

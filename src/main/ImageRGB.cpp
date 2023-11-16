@@ -14,8 +14,7 @@ void ImageRGB::createMatrice()
 #ifdef DEBUGVERBOSE
 	cout << "\033[35;43mDEBUGVERBOSE : createMatrice de ImageRGB\033[0m" << endl;
 #endif
-	int largeur = dimension.getLargeur();
-	int hauteur = dimension.getHauteur();
+	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
 	matrice = new Couleur *[hauteur];
 	for (int i = 0; i < hauteur; i++)
 		matrice[i] = new Couleur[largeur];
@@ -57,8 +56,7 @@ void ImageRGB::copyMatrice(Couleur **matrice, const Dimension &dimension, Couleu
 #ifdef DEBUGVERBOSE
 	cout << "\033[35;43mDEBUGVERBOSE : copyMatrice de ImageRGB (matrice, dimension, matriceToCopy, dimensionOfMatriceToCopy)\033[0m" << endl;
 #endif
-	int minLargeur = (dimension.getLargeur() < dimensionOfMatriceToCopy.getLargeur()) ? dimension.getLargeur() : dimensionOfMatriceToCopy.getLargeur();
-	int minHauteur = (dimension.getHauteur() < dimensionOfMatriceToCopy.getHauteur()) ? dimension.getHauteur() : dimensionOfMatriceToCopy.getHauteur();
+	int minLargeur = (dimension.getLargeur() < dimensionOfMatriceToCopy.getLargeur()) ? dimension.getLargeur() : dimensionOfMatriceToCopy.getLargeur(), minHauteur = (dimension.getHauteur() < dimensionOfMatriceToCopy.getHauteur()) ? dimension.getHauteur() : dimensionOfMatriceToCopy.getHauteur();
 	for (int i = 0; i < minHauteur; i++)
 		for (int j = 0; j < minLargeur; j++)
 			matrice[i][j] = matriceToCopy[i][j];
@@ -205,8 +203,7 @@ void ImageRGB::setBackground(const Couleur &couleur)
 #ifdef DEBUGVERBOSE
 	cout << "\033[31;44mDEBUGVERBOSE : setBackground de ImageRGB\033[0m" << endl;
 #endif
-	int largeur = dimension.getLargeur();
-	int hauteur = dimension.getHauteur();
+	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
 	for (int i = 0; i < largeur; i++)
 		for (int j = 0; j < hauteur; j++)
 			setPixel(i, j, couleur);

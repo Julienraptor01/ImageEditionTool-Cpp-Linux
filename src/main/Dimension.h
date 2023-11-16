@@ -16,8 +16,7 @@ using std::ostream;
 class Dimension
 {
 private:
-	int largeur;
-	int hauteur;
+	int largeur, hauteur;
 
 public:
 	Dimension();

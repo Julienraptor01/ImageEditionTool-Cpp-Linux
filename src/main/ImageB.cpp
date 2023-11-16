@@ -9,8 +9,7 @@ void ImageB::createMatrice()
 #ifdef DEBUGVERBOSE
 	cout << "\033[35;43mDEBUGVERBOSE : createMatrice de ImageB\033[0m" << endl;
 #endif
-	int largeur = dimension.getLargeur();
-	int hauteur = dimension.getHauteur();
+	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
 	matrice = new bool *[hauteur];
 	for (int i = 0; i < hauteur; i++)
 	{
@@ -56,8 +55,7 @@ void ImageB::copyMatrice(bool **matrice, const Dimension &dimension, bool **matr
 #ifdef DEBUGVERBOSE
 	cout << "\033[35;43mDEBUGVERBOSE : copyMatrice de ImageB (matrice, dimension, matriceToCopy, dimensionOfMatriceToCopy)\033[0m" << endl;
 #endif
-	int minLargeur = (dimension.getLargeur() < dimensionOfMatriceToCopy.getLargeur()) ? dimension.getLargeur() : dimensionOfMatriceToCopy.getLargeur();
-	int minHauteur = (dimension.getHauteur() < dimensionOfMatriceToCopy.getHauteur()) ? dimension.getHauteur() : dimensionOfMatriceToCopy.getHauteur();
+	int minLargeur = (dimension.getLargeur() < dimensionOfMatriceToCopy.getLargeur()) ? dimension.getLargeur() : dimensionOfMatriceToCopy.getLargeur(), minHauteur = (dimension.getHauteur() < dimensionOfMatriceToCopy.getHauteur()) ? dimension.getHauteur() : dimensionOfMatriceToCopy.getHauteur();
 	for (int i = 0; i < minHauteur; i++)
 		for (int j = 0; j < minLargeur; j++)
 			matrice[i][j] = matriceToCopy[i][j];
@@ -192,8 +190,7 @@ void ImageB::setBackground(bool couleur)
 #ifdef DEBUGVERBOSE
 	cout << "\033[31;44mDEBUGVERBOSE : setBackground de ImageB\033[0m" << endl;
 #endif
-	int largeur = dimension.getLargeur();
-	int hauteur = dimension.getHauteur();
+	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
 	for (int i = 0; i < hauteur; i++)
 		for (int j = 0; j < largeur; j++)
 			setPixel(j, i, couleur);
@@ -219,9 +216,7 @@ bool ImageB::getPixel(int x, int y) const
 	return -1;
 }
 
-// for some reason Couleur ImageB::couleurFalse(Couleur::NOIR); doesn't work
 Couleur ImageB::couleurFalse(0xFF000000);
-// for some reason Couleur ImageB::couleurTrue(Couleur::BLANC); doesn't work
 Couleur ImageB::couleurTrue(0xFFFFFFFF);
 
 void ImageB::Dessine() const

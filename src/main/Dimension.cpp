@@ -42,8 +42,8 @@ Dimension::Dimension(const Dimension &dimension)
 #ifdef DEBUG
 	cout << "\033[34;42mDEBUG : Constructeur de copie de Dimension\033[0m" << endl;
 #endif
-	setLargeur(dimension.largeur);
-	setHauteur(dimension.hauteur);
+	setLargeur(dimension.getLargeur());
+	setHauteur(dimension.getHauteur());
 #ifdef DEBUG
 	cout << "\033[31;42mDEBUG : Fin Constructeur de copie de Dimension\033[0m" << endl;
 #endif
@@ -54,7 +54,7 @@ bool Dimension::operator==(const Dimension &dimension) const
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[33;45mDEBUGVERBOSE : Opérateur d'égalité de Dimension\033[0m" << endl;
 #endif
-	return (largeur == dimension.largeur && hauteur == dimension.hauteur);
+	return (getLargeur() == dimension.getLargeur() && getHauteur() == dimension.getHauteur());
 }
 
 bool Dimension::operator!=(const Dimension &dimension) const
@@ -70,7 +70,11 @@ istream &operator>>(istream &inputStream, Dimension &dimension)
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[33;46mDEBUGVERBOSE : Opérateur de lecture de Dimension\033[0m" << endl;
 #endif
-	inputStream >> dimension.largeur >> dimension.hauteur;
+	int largeur, hauteur;
+	inputStream >> largeur;
+	dimension.setLargeur(largeur);
+	inputStream >> hauteur;
+	dimension.setHauteur(hauteur);
 	return inputStream;
 }
 
@@ -79,7 +83,7 @@ ostream &operator<<(ostream &outputStream, const Dimension &dimension)
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[33;46mDEBUGVERBOSE : Opérateur d'écriture de Dimension\033[0m" << endl;
 #endif
-	outputStream << dimension.largeur << " " << dimension.hauteur;
+	outputStream << dimension.getLargeur() << " " << dimension.getHauteur();
 	return outputStream;
 }
 
@@ -121,5 +125,5 @@ const Dimension Dimension::FULL_HD(1920, 1080);
 
 void Dimension::Affiche() const
 {
-	cout << " largeur=" << largeur << " hauteur=" << hauteur << endl;
+	cout << "Largeur : " << largeur << "\t" << "Hauteur : " << hauteur << endl;
 }
