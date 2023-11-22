@@ -15,10 +15,8 @@ endif
 endif
 ifeq "$(OS)" "debian"
 QT5_HEADERS=/usr/include/x86_64-linux-gnu/qt5
-SHARED_OBJECTS=/usr/lib/x86_64-linux-gnu
 else ifeq "$(OS)" "fedora"
 QT5_HEADERS=/usr/include/qt5
-SHARED_OBJECTS=/usr/lib64
 else ifndef OS
 $(error OS not supported)
 endif
@@ -54,10 +52,10 @@ OBJECTS=$(MAIN_OBJ)/Image.o $(MAIN_OBJ)/ImageNG.o $(MAIN_OBJ)/ImageRGB.o $(MAIN_
 ### commands
 # compile arguments
 SRC_DEBUG_LINKER=-Xlinker --verbose
-SRC_COMPILE_ARGS=-I $(MAIN_SRC) -Wall
+SRC_COMPILE_ARGS=-I $(MAIN_SRC) -Wall -Wextra
 SRC_COMPILE_ADD_ARGS=#-DDEBUG -DDEBUGVERBOSE -DDEBUGVERYVERBOSE
 LIB_COMPILE_ARGS=-pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I$(SHARED_OBJECTS)/qt5/mkspecs/linux-g++ -isystem $(QT5_HEADERS) -isystem $(QT5_HEADERS)/QtWidgets -isystem $(QT5_HEADERS)/QtGui -isystem $(QT5_HEADERS)/QtCore -I $(LIB_SRC)
-LIB_COMPILE_LINKER_ARGS=-lSDL -lpthread -Wl,-O1 $(SHARED_OBJECTS)/libQt5Widgets.so $(SHARED_OBJECTS)/libQt5Gui.so $(SHARED_OBJECTS)/libQt5Core.so $(SHARED_OBJECTS)/libGL.so
+LIB_COMPILE_LINKER_ARGS=-Wl,-O1 -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lSDL -lpthread
 MYQT_LIB_COMPILE=$(LIB_COMPILE)$(MyQT) $(SRC_COMPILE_ARGS)
 TEST_COMPILE_ARGS=$(OBJECTS)
 # compilation
@@ -74,7 +72,7 @@ LOG=@printf
 all:	full-clean $(TEST_BIN)/test01 $(TEST_BIN)/test02 $(TEST_BIN)/test03 $(TEST_BIN)/test04 $(TEST_BIN)/test05 $(TEST_BIN)/test06
 	$(LOG) '\n\033[44mmake all finished\033[49m\n\n'
 
-$(MAIN_OBJ)/Image.o:	$(MAIN_SRC)/Image.cpp $(MAIN_SRC)/Image.h $(MAIN_SRC)/Dimension.h $(MYQT_LIB_SRC)/MyQT.h
+$(MAIN_OBJ)/Image.o:	$(MAIN_SRC)/Image.cpp $(HEADERS)
 	$(LOG) '\n\033[42mcreation of the Image object file\033[49m\n'
 	$(SRC_COMPILE) \
 	-I $(MYQT_LIB_SRC) \
@@ -82,7 +80,7 @@ $(MAIN_OBJ)/Image.o:	$(MAIN_SRC)/Image.cpp $(MAIN_SRC)/Image.h $(MAIN_SRC)/Dimen
 	-c \
 	-o $(MAIN_OBJ)/Image.o
 
-$(MAIN_OBJ)/ImageNG.o:	$(MAIN_SRC)/ImageNG.cpp $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/Image.h $(MAIN_SRC)/Dimension.h $(MYQT_LIB_SRC)/MyQT.h $(MAIN_SRC)/XYException.h $(MAIN_SRC)/ColorException.h
+$(MAIN_OBJ)/ImageNG.o:	$(MAIN_SRC)/ImageNG.cpp $(HEADERS)
 	$(LOG) '\n\033[42mcreation of the ImageNG object file\033[49m\n'
 	$(SRC_COMPILE) \
 	-I $(MYQT_LIB_SRC) \
@@ -90,7 +88,7 @@ $(MAIN_OBJ)/ImageNG.o:	$(MAIN_SRC)/ImageNG.cpp $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)
 	-c \
 	-o $(MAIN_OBJ)/ImageNG.o
 
-$(MAIN_OBJ)/ImageRGB.o:	$(MAIN_SRC)/ImageRGB.cpp $(MAIN_SRC)/ImageRGB.h $(MAIN_SRC)/Image.h $(MAIN_SRC)/Dimension.h $(MAIN_SRC)/Couleur.h $(MYQT_LIB_SRC)/MyQT.h $(MAIN_SRC)/XYException.h $(MAIN_SRC)/ColorException.h
+$(MAIN_OBJ)/ImageRGB.o:	$(MAIN_SRC)/ImageRGB.cpp $(HEADERS)
 	$(LOG) '\n\033[42mcreation of the ImageRGB object file\033[49m\n'
 	$(SRC_COMPILE) \
 	-I $(MYQT_LIB_SRC) \
@@ -98,7 +96,7 @@ $(MAIN_OBJ)/ImageRGB.o:	$(MAIN_SRC)/ImageRGB.cpp $(MAIN_SRC)/ImageRGB.h $(MAIN_S
 	-c \
 	-o $(MAIN_OBJ)/ImageRGB.o
 
-$(MAIN_OBJ)/ImageB.o:	$(MAIN_SRC)/ImageB.cpp $(MAIN_SRC)/ImageB.h $(MAIN_SRC)/Image.h $(MAIN_SRC)/Dimension.h $(MAIN_SRC)/Couleur.h $(MYQT_LIB_SRC)/MyQT.h $(MAIN_SRC)/XYException.h
+$(MAIN_OBJ)/ImageB.o:	$(MAIN_SRC)/ImageB.cpp $(HEADERS)
 	$(LOG) '\n\033[42mcreation of the ImageB object file\033[49m\n'
 	$(SRC_COMPILE) \
 	-I $(MYQT_LIB_SRC) \
@@ -106,35 +104,35 @@ $(MAIN_OBJ)/ImageB.o:	$(MAIN_SRC)/ImageB.cpp $(MAIN_SRC)/ImageB.h $(MAIN_SRC)/Im
 	-c \
 	-o $(MAIN_OBJ)/ImageB.o
 
-$(MAIN_OBJ)/Dimension.o:	$(MAIN_SRC)/Dimension.cpp $(MAIN_SRC)/Dimension.h
+$(MAIN_OBJ)/Dimension.o:	$(MAIN_SRC)/Dimension.cpp $(HEADERS)
 	$(LOG) '\n\033[42mcreation of the Dimension object file\033[49m\n'
 	$(SRC_COMPILE) \
 	$(MAIN_SRC)/Dimension.cpp \
 	-c \
 	-o $(MAIN_OBJ)/Dimension.o
 
-$(MAIN_OBJ)/Couleur.o:	$(MAIN_SRC)/Couleur.cpp $(MAIN_SRC)/Couleur.h
+$(MAIN_OBJ)/Couleur.o:	$(MAIN_SRC)/Couleur.cpp $(HEADERS)
 	$(LOG) '\n\033[42mcreation of the Couleur object file\033[49m\n'
 	$(SRC_COMPILE) \
 	$(MAIN_SRC)/Couleur.cpp \
 	-c \
 	-o $(MAIN_OBJ)/Couleur.o
 
-$(MAIN_OBJ)/Exception.o:	$(MAIN_SRC)/Exception.cpp $(MAIN_SRC)/Exception.h
+$(MAIN_OBJ)/Exception.o:	$(MAIN_SRC)/Exception.cpp $(HEADERS)
 	$(LOG) '\n\033[42mcreation of the Exception object file\033[49m\n'
 	$(SRC_COMPILE) \
 	$(MAIN_SRC)/Exception.cpp \
 	-c \
 	-o $(MAIN_OBJ)/Exception.o
 
-$(MAIN_OBJ)/XYException.o:	$(MAIN_SRC)/XYException.cpp $(MAIN_SRC)/XYException.h $(MAIN_SRC)/Exception.h
+$(MAIN_OBJ)/XYException.o:	$(MAIN_SRC)/XYException.cpp $(HEADERS)
 	$(LOG) '\n\033[42mcreation of the XYException object file\033[49m\n'
 	$(SRC_COMPILE) \
 	$(MAIN_SRC)/XYException.cpp \
 	-c \
 	-o $(MAIN_OBJ)/XYException.o
 
-$(MAIN_OBJ)/ColorException.o:	$(MAIN_SRC)/ColorException.cpp $(MAIN_SRC)/ColorException.h $(MAIN_SRC)/Exception.h
+$(MAIN_OBJ)/ColorException.o:	$(MAIN_SRC)/ColorException.cpp $(HEADERS)
 	$(LOG) '\n\033[42mcreation of the ColorException object file\033[49m\n'
 	$(SRC_COMPILE) \
 	$(MAIN_SRC)/ColorException.cpp \
