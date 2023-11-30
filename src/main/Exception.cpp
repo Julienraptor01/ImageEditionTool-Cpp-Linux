@@ -10,7 +10,7 @@ Exception::Exception()
 #ifdef DEBUG
 	cout << "\033[34;42mDEBUG : Constructeur par défaut de Exception\033[0m" << endl;
 #endif
-	setMessage("Exception non spécifiée");
+	setMessage("Unspecified exception");
 #ifdef DEBUG
 	cout << "\033[31;42mDEBUG : Fin Constructeur par défaut de Exception\033[0m" << endl;
 #endif

@@ -10,7 +10,7 @@ XYException::XYException() : Exception()
 #ifdef DEBUG
 	cout << "\033[34;42mDEBUG : Constructeur par défaut de XYException\033[0m" << endl;
 #endif
-	setMessage("Exception XY non spécifiée");
+	setMessage("Unspecified XY exception");
 #ifdef DEBUG
 	cout << "\033[31;42mDEBUG : Fin Constructeur par défaut de XYException\033[0m" << endl;
 #endif
@@ -138,13 +138,15 @@ void XYException::Affiche() const
 	cout << "XYException : " << message;
 	if (axe != 0)
 	{
-		cout << "\t" << "Axe : ";
+		cout << "\t" << "Axe" << (axe == 'd' ? "s" : "") << " : ";
 		if (axe == 'x' || axe == 'd')
 		{
 			cout << "X";
 			if (x != 1)
 				cout << " : " << x;
 		}
+		if (axe == 'd')
+			cout << " ";
 		if (axe == 'y' || axe == 'd')
 		{
 			cout << "Y";
