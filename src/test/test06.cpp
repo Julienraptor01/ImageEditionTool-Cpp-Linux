@@ -235,6 +235,10 @@ void Essai3()
 	{
 		e.Affiche();
 	}
+	catch (ColorException &e)
+	{
+		e.Affiche();
+	}
 
 	cout << endl;
 }
@@ -310,6 +314,10 @@ void Essai4()
 		}
 	}
 	catch (XYException &e)
+	{
+		e.Affiche();
+	}
+	catch (ColorException &e)
 	{
 		e.Affiche();
 	}

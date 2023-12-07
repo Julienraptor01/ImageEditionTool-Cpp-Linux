@@ -187,7 +187,14 @@ ImageNG ImageNG::operator+(unsigned char grayLevel) const
 	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
 	for (int i = 0; i < largeur; i++)
 		for (int j = 0; j < hauteur; j++)
-			image.setPixel(i, j, image.getPixel(i, j) + grayLevel);
+			try
+			{
+				image.setPixel(i, j, image.getPixel(i, j) + grayLevel);
+			}
+			catch (ColorException &colorException)
+			{
+				throw colorException;
+			}
 	return image;
 }
 
@@ -196,7 +203,14 @@ ImageNG operator+(unsigned char grayLevel, const ImageNG &image)
 #ifdef DEBUGVERBOSE
 	cout << "\033[33;46mDEBUGVERBOSE : Opérateur d'addition de ImageNG (grayLevel, image)\033[0m" << endl;
 #endif
-	return image + grayLevel;
+	try
+	{
+		return image + grayLevel;
+	}
+	catch (ColorException &colorException)
+	{
+		throw colorException;
+	}
 }
 
 ImageNG ImageNG::operator+(const ImageNG &image) const
@@ -208,7 +222,14 @@ ImageNG ImageNG::operator+(const ImageNG &image) const
 	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
 	for (int i = 0; i < largeur; i++)
 		for (int j = 0; j < hauteur; j++)
-			imageToReturn.setPixel(i, j, imageToReturn.getPixel(i, j) + image.getPixel(i, j));
+			try
+			{
+				imageToReturn.setPixel(i, j, imageToReturn.getPixel(i, j) + image.getPixel(i, j));
+			}
+			catch (ColorException &colorException)
+			{
+				throw colorException;
+			}
 	return imageToReturn;
 }
 
@@ -221,7 +242,14 @@ ImageNG ImageNG::operator-(unsigned char grayLevel) const
 	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
 	for (int i = 0; i < largeur; i++)
 		for (int j = 0; j < hauteur; j++)
-			image.setPixel(i, j, image.getPixel(i, j) - grayLevel);
+			try
+			{
+				image.setPixel(i, j, image.getPixel(i, j) - grayLevel);
+			}
+			catch (ColorException &colorException)
+			{
+				throw colorException;
+			}
 	return image;
 }
 
@@ -234,7 +262,14 @@ ImageNG operator-(unsigned char grayLevel, const ImageNG &image)
 	int largeur = image.dimension.getLargeur(), hauteur = image.dimension.getHauteur();
 	for (int i = 0; i < largeur; i++)
 		for (int j = 0; j < hauteur; j++)
-			imageToReturn.setPixel(i, j, grayLevel - imageToReturn.getPixel(i, j));
+			try
+			{
+				imageToReturn.setPixel(i, j, grayLevel - imageToReturn.getPixel(i, j));
+			}
+			catch (ColorException &colorException)
+			{
+				throw colorException;
+			}
 	return imageToReturn;
 }
 
@@ -247,7 +282,14 @@ ImageNG ImageNG::operator-(const ImageNG &image) const
 	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
 	for (int i = 0; i < largeur; i++)
 		for (int j = 0; j < hauteur; j++)
-			imageToReturn.setPixel(i, j, imageToReturn.getPixel(i, j) - image.getPixel(i, j));
+			try
+			{
+				imageToReturn.setPixel(i, j, imageToReturn.getPixel(i, j) - image.getPixel(i, j));
+			}
+			catch (ColorException &colorException)
+			{
+				throw colorException;
+			}
 	return imageToReturn;
 }
 
@@ -259,7 +301,14 @@ ImageNG &ImageNG::operator++()
 	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
 	for (int i = 0; i < largeur; i++)
 		for (int j = 0; j < hauteur; j++)
-			setPixel(i, j, getPixel(i, j) + 20);
+			try
+			{
+				setPixel(i, j, getPixel(i, j) + 20);
+			}
+			catch (ColorException &colorException)
+			{
+				throw colorException;
+			}
 	return *this;
 }
 
@@ -272,7 +321,14 @@ ImageNG ImageNG::operator++(int)
 	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
 	for (int i = 0; i < largeur; i++)
 		for (int j = 0; j < hauteur; j++)
-			setPixel(i, j, getPixel(i, j) + 20);
+			try
+			{
+				setPixel(i, j, getPixel(i, j) + 20);
+			}
+			catch (ColorException &colorException)
+			{
+				throw colorException;
+			}
 	return image;
 }
 
@@ -284,7 +340,14 @@ ImageNG &ImageNG::operator--()
 	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
 	for (int i = 0; i < largeur; i++)
 		for (int j = 0; j < hauteur; j++)
-			setPixel(i, j, getPixel(i, j) - 20);
+			try
+			{
+				setPixel(i, j, getPixel(i, j) - 20);
+			}
+			catch (ColorException &colorException)
+			{
+				throw colorException;
+			}
 	return *this;
 }
 
@@ -297,7 +360,14 @@ ImageNG ImageNG::operator--(int)
 	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
 	for (int i = 0; i < largeur; i++)
 		for (int j = 0; j < hauteur; j++)
-			setPixel(i, j, getPixel(i, j) - 20);
+			try
+			{
+				setPixel(i, j, getPixel(i, j) - 20);
+			}
+			catch (ColorException &colorException)
+			{
+				throw colorException;
+			}
 	return image;
 }
 
@@ -439,7 +509,14 @@ void ImageNG::setPixel(int x, int y, int grayLevel)
 #endif
 	if (grayLevel < 0 || grayLevel > UCHAR_MAX)
 		throw ColorException("setPixel invalide", grayLevel);
+	try
+	{
 	setPixel(x, y, (unsigned char)grayLevel);
+	}
+	catch (XYException &xyException)
+	{
+		throw xyException;
+	}
 }
 
 int ImageNG::getPixel(int x, int y) const

@@ -42,6 +42,7 @@ ColorException::ColorException(const ColorException &ColorException) : Exception
 #ifdef DEBUG
 	cout << "\033[34;42mDEBUG : Constructeur de copie de ColorException\033[0m" << endl;
 #endif
+	setValeur(ColorException.getValeur());
 #ifdef DEBUG
 	cout << "\033[31;42mDEBUG : Fin Constructeur de copie de ColorException\033[0m" << endl;
 #endif
