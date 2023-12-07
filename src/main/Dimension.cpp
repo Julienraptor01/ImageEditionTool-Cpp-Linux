@@ -48,6 +48,16 @@ Dimension::Dimension(const Dimension &dimension)
 #endif
 }
 
+Dimension &Dimension::operator=(const Dimension &dimension)
+{
+#ifdef DEBUGVERYVERBOSE
+	cout << "\033[33;45mDEBUGVERBOSE : Opérateur d'affectation de Dimension\033[0m" << endl;
+#endif
+	setLargeur(dimension.getLargeur());
+	setHauteur(dimension.getHauteur());
+	return *this;
+}
+
 bool Dimension::operator==(const Dimension &dimension) const
 {
 #ifdef DEBUGVERYVERBOSE

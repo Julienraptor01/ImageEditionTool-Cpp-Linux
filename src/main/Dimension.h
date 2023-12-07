@@ -17,6 +17,7 @@ public:
 	Dimension(int largeur, int hauteur);
 	Dimension(const Dimension &dimension);
 
+	Dimension &operator=(const Dimension &dimension);
 	bool operator==(const Dimension &dimension) const;
 	bool operator!=(const Dimension &dimension) const;
 	friend istream &operator>>(istream &inputStream, Dimension &dimension);
