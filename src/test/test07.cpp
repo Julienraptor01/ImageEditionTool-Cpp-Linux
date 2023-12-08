@@ -12,8 +12,10 @@ void Essai1();
 void Essai2();
 void Essai3();
 void Essai4();
+/*
 void Essai5();
 void Essai6();
+*/
 
 int main(int argc,char* argv[])
 {
@@ -42,12 +44,14 @@ int main(int argc,char* argv[])
 		case 4 :
 			Essai4();
 			break;
+		/*
 		case 5 :
 			Essai5();
 			break;
 		case 6 :
 			Essai6();
 			break;
+		*/
 		default :
 			fini = true ;
 			break;
@@ -56,6 +60,7 @@ int main(int argc,char* argv[])
 
 	return 0;
 }
+
 int Menu()
 {
 	cout << endl;
@@ -78,7 +83,6 @@ int Menu()
 	return ch;
 }
 
-/*******************************************************************************************************/
 void Essai1()
 {
 	cout << "----- 1. Test de base du template ArrayList avec des entiers --------------------------------" << endl;
@@ -120,7 +124,6 @@ void Essai1()
 	cout << endl;
 }
 
-/*******************************************************************************************************/
 void Essai2()
 {
 	cout << "----- 2. Test du constructeur de copie ArrayList avec des entiers ---------------------------" << endl;
@@ -153,7 +156,6 @@ void Essai2()
 	cout << endl;
 }
 
-/*******************************************************************************************************/
 void Essai3()
 {
 	cout << "----- 3. Test de l'operateur = de ArrayList avec des entiers ---------------------------------" << endl;
@@ -187,7 +189,6 @@ void Essai3()
 	cout << endl;
 }
 
-/*********************************************************************************************/
 void Essai4()
 {
 	cout << "----- 4. Test du template ArrayList avec des objets de la classe Couleur --------------" << endl;
@@ -213,7 +214,7 @@ void Essai4()
 	cout << endl;
 }
 
-/*******************************************************************************************************/
+/*
 void Essai5()
 {
 	cout << "----- 5. Test de l'iterateur avec une ArrayList d'entiers ------------------------" << endl;
@@ -251,7 +252,6 @@ void Essai5()
 	}
 }
 
-/*******************************************************************************************************/
 void Essai6()
 {
 	cout << "----- 6. Test de l'iterateur avec une ArrayList de couleurs ---------------------" << endl;
@@ -282,4 +282,4 @@ void Essai6()
 		it++;
 	}
 }
-/*******************************************************************************************************/
+*/
