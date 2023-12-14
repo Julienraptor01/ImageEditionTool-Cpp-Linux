@@ -22,6 +22,6 @@ public:
 	bool end() const;
 };
 
-#include "Iterateur.tpp"
+//#include "Iterateur.tpp"
 
 #endif

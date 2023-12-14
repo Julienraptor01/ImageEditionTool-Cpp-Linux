@@ -167,3 +167,7 @@ template <class T> void ArrayList<T>::Affiche() const
 		currentNode = currentNode->next;
 	}
 }
+
+template class ArrayList<int>;
+#include "Couleur.h"
+template class ArrayList<Couleur>;

@@ -84,3 +84,7 @@ template <class T> bool Iterateur<T>::end() const
 #endif
 	return (current == nullptr);
 }
+
+template class Iterateur<int>;
+#include "Couleur.h"
+template class Iterateur<Couleur>;

@@ -7,6 +7,8 @@ template <class T> struct node
 	node<T> *next = nullptr;
 };
 
+template <class T> class Iterateur;
+
 template <class T> class ArrayList
 {
 private:
@@ -31,9 +33,9 @@ public:
 
 	void Affiche() const;
 
-	template <class U> friend class Iterateur;
+	/*template <class U> */friend class Iterateur<T>;
 };
 
-#include "ArrayList.tpp"
+//#include "ArrayList.tpp"
 
 #endif
