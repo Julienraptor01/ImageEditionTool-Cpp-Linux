@@ -53,6 +53,7 @@ then
 	./build/bin/test/test07 3 > ./logs/test07-3.log
 	./build/bin/test/test07 4 > ./logs/test07-4.log
 	./build/bin/test/test07 5 > ./logs/test07-5.log
+	./build/bin/test/test07 6 > ./logs/test07-6.log
 elif [ $test_number -eq -1 ]
 then
 	./build/bin/test/test01 > ./logs/test01.log
@@ -90,6 +91,7 @@ then
 	./build/bin/test/test07 3 > ./logs/test07-3.log
 	./build/bin/test/test07 4 > ./logs/test07-4.log
 	./build/bin/test/test07 5 > ./logs/test07-5.log
+	./build/bin/test/test07 6 > ./logs/test07-6.log
 else
 	echo "GG, i have no idea how you got here, i probably forgot a way to escape my conditions"
 	exit -69
