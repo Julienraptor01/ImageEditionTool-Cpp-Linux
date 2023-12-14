@@ -42,6 +42,17 @@ then
 	./build/bin/test/test05 5 > ./logs/test05-5.log
 	./build/bin/test/test05 6 > ./logs/test05-6.log
 	./build/bin/test/test05 7 > ./logs/test05-7.log
+	./build/bin/test/test06 1 > ./logs/test06-1.log
+	./build/bin/test/test06 2 > ./logs/test06-2.log
+	./build/bin/test/test06 3 > ./logs/test06-3.log
+	./build/bin/test/test06 4 > ./logs/test06-4.log
+	./build/bin/test/test06 5 > ./logs/test06-5.log
+	./build/bin/test/test06 6 > ./logs/test06-6.log
+	./build/bin/test/test07 1 > ./logs/test07-1.log
+	./build/bin/test/test07 2 > ./logs/test07-2.log
+	./build/bin/test/test07 3 > ./logs/test07-3.log
+	./build/bin/test/test07 4 > ./logs/test07-4.log
+	./build/bin/test/test07 5 > ./logs/test07-5.log
 elif [ $test_number -eq -1 ]
 then
 	./build/bin/test/test01 > ./logs/test01.log
@@ -68,6 +79,17 @@ then
 	./build/bin/test/test05 5 > ./logs/test05-5.log
 	./build/bin/test/test05 6 > ./logs/test05-6.log
 	./build/bin/test/test05 7 > ./logs/test05-7.log
+	#./build/bin/test/test06 1 > ./logs/test06-1.log
+	#./build/bin/test/test06 2 > ./logs/test06-2.log
+	#./build/bin/test/test06 3 > ./logs/test06-3.log
+	#./build/bin/test/test06 4 > ./logs/test06-4.log
+	#./build/bin/test/test06 5 > ./logs/test06-5.log
+	#./build/bin/test/test06 6 > ./logs/test06-6.log
+	./build/bin/test/test07 1 > ./logs/test07-1.log
+	./build/bin/test/test07 2 > ./logs/test07-2.log
+	./build/bin/test/test07 3 > ./logs/test07-3.log
+	./build/bin/test/test07 4 > ./logs/test07-4.log
+	./build/bin/test/test07 5 > ./logs/test07-5.log
 else
 	echo "GG, i have no idea how you got here, i probably forgot a way to escape my conditions"
 	exit -69

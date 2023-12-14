@@ -163,8 +163,7 @@ template <class T> void ArrayList<T>::Affiche() const
 	node<T> *currentNode = head;
 	while (currentNode != nullptr)
 	{
-		cout << currentNode->data << " ";
+		cout << currentNode->data << endl;
 		currentNode = currentNode->next;
 	}
-	cout << endl;
 }

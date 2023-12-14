@@ -30,6 +30,8 @@ public:
 	int getNombreElements() const;
 
 	void Affiche() const;
+
+	template <class U> friend class Iterateur;
 };
 
 #include "ArrayList.tpp"
