@@ -11,6 +11,7 @@ private:
 
 public:
 	Iterateur(const ArrayList<T> &arrayList);
+	~Iterateur();
 
 	bool operator++();
 	bool operator++(int);

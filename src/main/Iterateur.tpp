@@ -11,6 +11,16 @@ template <class T> Iterateur<T>::Iterateur(const ArrayList<T> &arrayList) : arra
 #endif
 }
 
+template <class T> Iterateur<T>::~Iterateur()
+{
+#ifdef DEBUGVERYVERBOSE
+	cout << "\033[32;41mDEBUGVERYVERBOSE : Destructeur de Iterateur\033[0m" << endl;
+#endif
+#ifdef DEBUGVERYVERBOSE
+	cout << "\033[34;41mDEBUGVERYVERBOSE : Fin Destructeur de Iterateur\033[0m" << endl;
+#endif
+}
+
 template <class T> bool Iterateur<T>::operator++()
 {
 #ifdef DEBUGVERYVERBOSE
