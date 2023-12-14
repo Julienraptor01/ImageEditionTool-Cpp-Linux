@@ -32,4 +32,6 @@ public:
 	void Affiche() const;
 };
 
+#include "ArrayList.tpp"
+
 #endif

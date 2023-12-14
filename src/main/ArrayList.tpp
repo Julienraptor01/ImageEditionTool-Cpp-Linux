@@ -75,6 +75,7 @@ template <class T> ArrayList<T> &ArrayList<T>::operator=(const ArrayList &arrayL
 #endif
 	clearList();
 	copyList(arrayList);
+	return *this;
 }
 
 template <class T> void ArrayList<T>::insereElement(const T &data)
@@ -162,7 +163,8 @@ template <class T> void ArrayList<T>::Affiche() const
 	node<T> *currentNode = head;
 	while (currentNode != nullptr)
 	{
-		cout << currentNode->data << endl;
+		cout << currentNode->data << " ";
 		currentNode = currentNode->next;
 	}
+	cout << endl;
 }
