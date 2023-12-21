@@ -1,4 +1,5 @@
 #include "Iterateur.h"
+#include "Exception.h"
 
 template <class T> Iterateur<T>::Iterateur(const ArrayList<T> &arrayList) : arrayList(arrayList)
 {
@@ -51,9 +52,7 @@ template <class T> Iterateur<T>::operator T() const
 	if (current != nullptr)
 		return current->data;
 	else
-		//throw Exception("L'itérateur est à la fin de la liste");
-		//without Exception
-		throw "L'itérateur est à la fin de la liste";
+		throw Exception("L'itérateur est à la fin de la liste");
 }
 
 template <class T> T &Iterateur<T>::operator&() const
@@ -64,9 +63,7 @@ template <class T> T &Iterateur<T>::operator&() const
 	if (current != nullptr)
 		return current->data;
 	else
-		//throw Exception("L'itérateur est à la fin de la liste");
-		//without Exception
-		throw "L'itérateur est à la fin de la liste";
+		throw Exception("L'itérateur est à la fin de la liste");
 }
 
 template <class T> void Iterateur<T>::reset()
