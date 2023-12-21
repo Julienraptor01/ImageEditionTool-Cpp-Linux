@@ -90,12 +90,12 @@ void Essai1() // Attention : utilisez les flux bytes (read et write) !!!!
 	cout << endl;
 
 	cout << "----- Sauvegarde de la dimension dans le fichier D.dat -----" << endl;
-	ofstream fichier1("D.dat",ios::out);
+	ofstream fichier1("./out/D.cbif",ios::out);
 	d1.Save(fichier1);
 	fichier1.close();
 
 	cout << "----- Chargement de l'objet dimension situe dans le fichier D.dat -----" << endl;
-	ifstream fichier2("D.dat",ios::in);
+	ifstream fichier2("./out/D.cbif",ios::in);
 	Dimension d2;
 	d2.Load(fichier2);
 	fichier2.close();
@@ -114,12 +114,12 @@ void Essai2() // Attention : utilisez les flux bytes (read et write) !!!!
 	cout << endl;
 
 	cout << "----- Sauvegarde de l'image dans le fichier NG.dat -----" << endl;
-	ofstream fichier1("NG.dat",ios::out);
+	ofstream fichier1("./out/NG.cbif",ios::out);
 	i1.Save(fichier1);
 	fichier1.close();
 
 	cout << "----- Chargement de l'image situee dans le fichier NG.dat -----" << endl;
-	ifstream fichier2("NG.dat",ios::in);
+	ifstream fichier2("./out/NG.cbif",ios::in);
 	ImageNG i2;
 	i2.Load(fichier2);
 	fichier2.close();
@@ -141,12 +141,12 @@ void Essai3() // Attention : utilisez les flux bytes (read et write) !!!!
 	cout << endl;
 
 	cout << "----- Sauvegarde de l'image dans le fichier B.dat -----" << endl;
-	ofstream fichier1("B.dat",ios::out);
+	ofstream fichier1("./out/B.cbif",ios::out);
 	i1.Save(fichier1);
 	fichier1.close();
 
 	cout << "----- Chargement de l'image situee dans le fichier B.dat -----" << endl;
-	ifstream fichier2("B.dat",ios::in);
+	ifstream fichier2("./out/B.cbif",ios::in);
 	ImageB i2;
 	i2.Load(fichier2);
 	fichier2.close();
@@ -165,12 +165,12 @@ void Essai4() // Attention : utilisez les flux bytes (read et write) !!!!
 	cout << endl;
 
 	cout << "----- Sauvegarde de la couleur dans le fichier C.dat -----" << endl;
-	ofstream fichier1("C.dat",ios::out);
+	ofstream fichier1("./out/C.cbif",ios::out);
 	c1.Save(fichier1);
 	fichier1.close();
 
-µ	cout << "----- Chargement de la couleur situee dans le fichier C.dat -----" << endl;
-	ifstream fichier2("C.dat",ios::in);
+	cout << "----- Chargement de la couleur situee dans le fichier C.dat -----" << endl;
+	ifstream fichier2("./out/C.cbif",ios::in);
 	Couleur c2;
 	c2.Load(fichier2);
 	fichier2.close();
@@ -189,12 +189,12 @@ void Essai5() // Attention : utilisez les flux bytes (read et write) !!!!
 	cout << endl;
 
 	cout << "----- Sauvegarde de l'image dans le fichier RGB.dat -----" << endl;
-	ofstream fichier1("RGB.dat",ios::out);
+	ofstream fichier1("./out/RGB.cbif",ios::out);
 	i1.Save(fichier1);
 	fichier1.close();
 
 	cout << "----- Chargement de l'image situee dans le fichier RGB.dat -----" << endl;
-	ifstream fichier2("RGB.dat",ios::in);
+	ifstream fichier2("./out/RGB.cbif",ios::in);
 	ImageRGB* i2 = new ImageRGB();
 	i2->Load(fichier2);
 	fichier2.close();
