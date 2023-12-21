@@ -1,12 +1,8 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include <iostream>
-
 #include "Dimension.h"
 
-using std::istream;
-using std::ostream;
 using std::string;
 
 class Image

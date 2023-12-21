@@ -7,7 +7,6 @@
 #include "Couleur.h"
 
 using std::ostream;
-using std::string;
 
 class ImageB : public Image
 {

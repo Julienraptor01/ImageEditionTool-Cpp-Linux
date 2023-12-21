@@ -6,7 +6,6 @@
 #include "Image.h"
 
 using std::ostream;
-using std::string;
 
 class ImageNG : public Image
 {
