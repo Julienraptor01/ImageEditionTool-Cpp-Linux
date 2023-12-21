@@ -49,7 +49,7 @@ MYQT_LIB_BIN=$(LIB_BIN)$(MYQT)
 # lists
 HEADERS=$(MAIN_SRC)/Image.h $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/ImageRGB.h $(MAIN_SRC)/ImageB.h $(MAIN_SRC)/Dimension.h $(MAIN_SRC)/Couleur.h $(MAIN_SRC)/ArrayList.h $(MAIN_SRC)/Iterateur.h $(MAIN_SRC)/Exception.h $(MAIN_SRC)/XYException.h $(MAIN_SRC)/ColorException.h $(MYQT_LIB_SRC)/MyQT.h
 OBJECTS=$(MAIN_OBJ)/Image.o $(MAIN_OBJ)/ImageNG.o $(MAIN_OBJ)/ImageRGB.o $(MAIN_OBJ)/ImageB.o $(MAIN_OBJ)/Dimension.o $(MAIN_OBJ)/Couleur.o $(MAIN_OBJ)/Exception.o $(MAIN_OBJ)/XYException.o $(MAIN_OBJ)/ColorException.o $(MYQT_LIB_OBJ)/MyQT.o
-TESTS=$(TEST_BIN)/test01 $(TEST_BIN)/test02 $(TEST_BIN)/test03 $(TEST_BIN)/test04 $(TEST_BIN)/test05 $(TEST_BIN)/test06 $(TEST_BIN)/test07 $(TEST_BIN)/test08
+TESTS=$(TEST_BIN)/test01 $(TEST_BIN)/test02 $(TEST_BIN)/test03 $(TEST_BIN)/test04 $(TEST_BIN)/test05 $(TEST_BIN)/test06 $(TEST_BIN)/test07 $(TEST_BIN)/test08 #$(TEST_BIN)/test09
 ### commands
 # compile arguments
 SRC_DEBUG_LINKER=-Xlinker --verbose
@@ -140,125 +140,20 @@ $(MAIN_OBJ)/ColorException.o:	$(MAIN_SRC)/ColorException.cpp $(HEADERS)
 	-c \
 	-o $(MAIN_OBJ)/ColorException.o
 
-$(TEST_BIN)/test01:	$(TEST_OBJ)/test01.o $(OBJECTS)
-	$(LOG) '\n\033[42mcreation of the test01 executable\033[49m\n'
-	$(TEST_COMPILE) $(LIB_COMPILE_ARGS)$(MYQT) \
-	$(TEST_OBJ)/test01.o \
+$(TEST_BIN)/%:	$(TEST_OBJ)/%.o $(OBJECTS)
+	$(LOG) '\n\033[42mcreation of the $* executable\033[49m\n'
+	$(TEST_COMPILE) \
+	$(TEST_OBJ)/$*.o \
 	$(TEST_COMPILE_ARGS) \
-	-o $(TEST_BIN)/test01 \
+	-o $(TEST_BIN)/$* \
 	$(LIB_COMPILE_LINKER_ARGS)
 
-$(TEST_OBJ)/test01.o:	$(TEST_SRC)/test01.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the test01 object file\033[49m\n'
+$(TEST_OBJ)/%.o:	$(TEST_SRC)/%.cpp $(HEADERS)
+	$(LOG) '\n\033[42mcreation of the $* object file\033[49m\n'
 	$(TEST_COMPILE) \
-	$(TEST_SRC)/test01.cpp \
+	$(TEST_SRC)/$*.cpp \
 	-c \
-	-o $(TEST_OBJ)/test01.o
-
-$(TEST_BIN)/test02:	$(TEST_OBJ)/test02.o $(OBJECTS)
-	$(LOG) '\n\033[42mcreation of the test02 executable\033[49m\n'
-	$(TEST_COMPILE) \
-	$(TEST_OBJ)/test02.o \
-	$(TEST_COMPILE_ARGS) \
-	-o $(TEST_BIN)/test02 \
-	$(LIB_COMPILE_LINKER_ARGS)
-
-$(TEST_OBJ)/test02.o:	$(TEST_SRC)/test02.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the test02 object file\033[49m\n'
-	$(TEST_COMPILE) \
-	$(TEST_SRC)/test02.cpp \
-	-c \
-	-o $(TEST_OBJ)/test02.o
-
-$(TEST_BIN)/test03:	$(TEST_OBJ)/test03.o $(OBJECTS)
-	$(LOG) '\n\033[42mcreation of the test03 executable\033[49m\n'
-	$(TEST_COMPILE) \
-	$(TEST_OBJ)/test03.o \
-	$(TEST_COMPILE_ARGS) \
-	-o $(TEST_BIN)/test03 \
-	$(LIB_COMPILE_LINKER_ARGS)
-
-$(TEST_OBJ)/test03.o:	$(TEST_SRC)/test03.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the test03 object file\033[49m\n'
-	$(TEST_COMPILE) \
-	$(TEST_SRC)/test03.cpp \
-	-c \
-	-o $(TEST_OBJ)/test03.o
-
-$(TEST_BIN)/test04:	$(TEST_OBJ)/test04.o $(OBJECTS)
-	$(LOG) '\n\033[42mcreation of the test04 executable\033[49m\n'
-	$(TEST_COMPILE) \
-	$(TEST_OBJ)/test04.o \
-	$(TEST_COMPILE_ARGS) \
-	-o $(TEST_BIN)/test04 \
-	$(LIB_COMPILE_LINKER_ARGS)
-
-$(TEST_OBJ)/test04.o:	$(TEST_SRC)/test04.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the test04 object file\033[49m\n'
-	$(TEST_COMPILE) \
-	$(TEST_SRC)/test04.cpp \
-	-c \
-	-o $(TEST_OBJ)/test04.o
-
-$(TEST_BIN)/test05:	$(TEST_OBJ)/test05.o $(OBJECTS)
-	$(LOG) '\n\033[42mcreation of the test05 executable\033[49m\n'
-	$(TEST_COMPILE) \
-	$(TEST_OBJ)/test05.o \
-	$(TEST_COMPILE_ARGS) \
-	-o $(TEST_BIN)/test05 \
-	$(LIB_COMPILE_LINKER_ARGS)
-
-$(TEST_OBJ)/test05.o:	$(TEST_SRC)/test05.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the test05 object file\033[49m\n'
-	$(TEST_COMPILE) \
-	$(TEST_SRC)/test05.cpp \
-	-c \
-	-o $(TEST_OBJ)/test05.o
-
-$(TEST_BIN)/test06:	$(TEST_OBJ)/test06.o $(OBJECTS)
-	$(LOG) '\n\033[42mcreation of the test06 executable\033[49m\n'
-	$(TEST_COMPILE) \
-	$(TEST_OBJ)/test06.o \
-	$(TEST_COMPILE_ARGS) \
-	-o $(TEST_BIN)/test06 \
-	$(LIB_COMPILE_LINKER_ARGS)
-
-$(TEST_OBJ)/test06.o:	$(TEST_SRC)/test06.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the test06 object file\033[49m\n'
-	$(TEST_COMPILE) \
-	$(TEST_SRC)/test06.cpp \
-	-c \
-	-o $(TEST_OBJ)/test06.o
-
-$(TEST_BIN)/test07:	$(TEST_OBJ)/test07.o $(OBJECTS)
-	$(LOG) '\n\033[42mcreation of the test07 executable\033[49m\n'
-	$(TEST_COMPILE) \
-	$(TEST_OBJ)/test07.o \
-	$(TEST_COMPILE_ARGS) \
-	-o $(TEST_BIN)/test07 \
-	$(LIB_COMPILE_LINKER_ARGS)
-
-$(TEST_OBJ)/test07.o:	$(TEST_SRC)/test07.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the test07 object file\033[49m\n'
-	$(TEST_COMPILE) \
-	$(TEST_SRC)/test07.cpp \
-	-c \
-	-o $(TEST_OBJ)/test07.o
-
-$(TEST_BIN)/test08:	$(TEST_OBJ)/test08.o $(OBJECTS)
-	$(LOG) '\n\033[42mcreation of the test08 executable\033[49m\n'
-	$(TEST_COMPILE) \
-	$(TEST_OBJ)/test08.o \
-	$(TEST_COMPILE_ARGS) \
-	-o $(TEST_BIN)/test08 \
-	$(LIB_COMPILE_LINKER_ARGS)
-
-$(TEST_OBJ)/test08.o:	$(TEST_SRC)/test08.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the test08 object file\033[49m\n'
-	$(TEST_COMPILE) \
-	$(TEST_SRC)/test08.cpp \
-	-c \
-	-o $(TEST_OBJ)/test08.o
+	-o $(TEST_OBJ)/$*.o
 
 $(MYQT_LIB_OBJ)/MyQT.o:	$(MYQT_LIB_SRC)/MyQT.cpp $(HEADERS)
 	$(LOG) '\n\033[42mcreation of the MyQT object file\033[49m\n'
