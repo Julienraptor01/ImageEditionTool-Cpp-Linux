@@ -73,73 +73,33 @@ LOG=@printf
 all:	full-clean $(TESTS)
 	$(LOG) '\n\033[44mmake all finished\033[49m\n\n'
 
-$(MAIN_OBJ)/Image.o:	$(MAIN_SRC)/Image.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the Image object file\033[49m\n'
+#specific rule for the creation of the main object files of all the Image classes
+#this uses some cursedness where if it's just Image % will contain "e" and if it's ImageNG % will contain "eNG", etc.
+$(MAIN_OBJ)/Imag%.o:	$(MAIN_SRC)/Imag%.cpp $(HEADERS)
+	$(LOG) '\n\033[42mcreation of the Imag$* object file\033[49m\n'
 	$(SRC_COMPILE) \
 	-I $(MYQT_LIB_SRC) \
-	$(MAIN_SRC)/Image.cpp \
+	$(MAIN_SRC)/Imag$*.cpp \
 	-c \
-	-o $(MAIN_OBJ)/Image.o
+	-o $(MAIN_OBJ)/Imag$*.o
 
-$(MAIN_OBJ)/ImageNG.o:	$(MAIN_SRC)/ImageNG.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the ImageNG object file\033[49m\n'
+#generic rule for the creation of the main object files
+$(MAIN_OBJ)/%.o:	$(MAIN_SRC)/%.cpp $(HEADERS)
+	$(LOG) '\n\033[42mcreation of the $* object file\033[49m\n'
 	$(SRC_COMPILE) \
-	-I $(MYQT_LIB_SRC) \
-	$(MAIN_SRC)/ImageNG.cpp \
+	$(MAIN_SRC)/$*.cpp \
 	-c \
-	-o $(MAIN_OBJ)/ImageNG.o
+	-o $(MAIN_OBJ)/$*.o
 
-$(MAIN_OBJ)/ImageRGB.o:	$(MAIN_SRC)/ImageRGB.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the ImageRGB object file\033[49m\n'
-	$(SRC_COMPILE) \
-	-I $(MYQT_LIB_SRC) \
-	$(MAIN_SRC)/ImageRGB.cpp \
+#generic rule for the creation of the test object files
+$(TEST_OBJ)/%.o:	$(TEST_SRC)/%.cpp $(HEADERS)
+	$(LOG) '\n\033[42mcreation of the $* object file\033[49m\n'
+	$(TEST_COMPILE) \
+	$(TEST_SRC)/$*.cpp \
 	-c \
-	-o $(MAIN_OBJ)/ImageRGB.o
+	-o $(TEST_OBJ)/$*.o
 
-$(MAIN_OBJ)/ImageB.o:	$(MAIN_SRC)/ImageB.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the ImageB object file\033[49m\n'
-	$(SRC_COMPILE) \
-	-I $(MYQT_LIB_SRC) \
-	$(MAIN_SRC)/ImageB.cpp \
-	-c \
-	-o $(MAIN_OBJ)/ImageB.o
-
-$(MAIN_OBJ)/Dimension.o:	$(MAIN_SRC)/Dimension.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the Dimension object file\033[49m\n'
-	$(SRC_COMPILE) \
-	$(MAIN_SRC)/Dimension.cpp \
-	-c \
-	-o $(MAIN_OBJ)/Dimension.o
-
-$(MAIN_OBJ)/Couleur.o:	$(MAIN_SRC)/Couleur.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the Couleur object file\033[49m\n'
-	$(SRC_COMPILE) \
-	$(MAIN_SRC)/Couleur.cpp \
-	-c \
-	-o $(MAIN_OBJ)/Couleur.o
-
-$(MAIN_OBJ)/Exception.o:	$(MAIN_SRC)/Exception.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the Exception object file\033[49m\n'
-	$(SRC_COMPILE) \
-	$(MAIN_SRC)/Exception.cpp \
-	-c \
-	-o $(MAIN_OBJ)/Exception.o
-
-$(MAIN_OBJ)/XYException.o:	$(MAIN_SRC)/XYException.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the XYException object file\033[49m\n'
-	$(SRC_COMPILE) \
-	$(MAIN_SRC)/XYException.cpp \
-	-c \
-	-o $(MAIN_OBJ)/XYException.o
-
-$(MAIN_OBJ)/ColorException.o:	$(MAIN_SRC)/ColorException.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the ColorException object file\033[49m\n'
-	$(SRC_COMPILE) \
-	$(MAIN_SRC)/ColorException.cpp \
-	-c \
-	-o $(MAIN_OBJ)/ColorException.o
-
+#generic rule for the creation of the test executables
 $(TEST_BIN)/%:	$(TEST_OBJ)/%.o $(OBJECTS)
 	$(LOG) '\n\033[42mcreation of the $* executable\033[49m\n'
 	$(TEST_COMPILE) \
@@ -147,13 +107,6 @@ $(TEST_BIN)/%:	$(TEST_OBJ)/%.o $(OBJECTS)
 	$(TEST_COMPILE_ARGS) \
 	-o $(TEST_BIN)/$* \
 	$(LIB_COMPILE_LINKER_ARGS)
-
-$(TEST_OBJ)/%.o:	$(TEST_SRC)/%.cpp $(HEADERS)
-	$(LOG) '\n\033[42mcreation of the $* object file\033[49m\n'
-	$(TEST_COMPILE) \
-	$(TEST_SRC)/$*.cpp \
-	-c \
-	-o $(TEST_OBJ)/$*.o
 
 $(MYQT_LIB_OBJ)/MyQT.o:	$(MYQT_LIB_SRC)/MyQT.cpp $(HEADERS)
 	$(LOG) '\n\033[42mcreation of the MyQT object file\033[49m\n'
