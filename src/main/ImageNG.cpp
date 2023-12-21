@@ -613,3 +613,42 @@ void ImageNG::exportToFile(const string &nomFichier, const string &formatFichier
 	cout << "\033[36;43mDEBUGVERBOSE : Fin exportToFile de ImageNG\033[0m" << endl;
 #endif
 }
+
+void ImageNG::Save(ofstream &fichier) const
+{
+#ifdef DEBUGVERBOSE
+	cout << "\033[35;43mDEBUGVERBOSE : Save de ImageNG\033[0m" << endl;
+#endif
+	Image::Save(fichier);
+	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
+	unsigned char *vector = new unsigned char[largeur * hauteur];
+	for (int i = 0; i < largeur; i++)
+		for (int j = 0; j < hauteur; j++)
+			vector[i * hauteur + j] = getPixel(i, j);
+	fichier.write((char *)vector, largeur * hauteur * sizeof(unsigned char));
+	delete[] vector;
+#ifdef DEBUGVERBOSE
+	cout << "\033[36;43mDEBUGVERBOSE : Fin Save de ImageNG\033[0m" << endl;
+#endif
+}
+
+void ImageNG::Load(ifstream &fichier)
+{
+#ifdef DEBUGVERBOSE
+	cout << "\033[35;43mDEBUGVERBOSE : Load de ImageNG\033[0m" << endl;
+#endif
+	Image::Load(fichier);
+	Dimension dimension;
+	dimension.Load(fichier);
+	setDimension(dimension);
+	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
+	unsigned char *vector = new unsigned char[largeur * hauteur];
+	fichier.read((char *)vector, largeur * hauteur * sizeof(unsigned char));
+	for (int i = 0; i < largeur; i++)
+		for (int j = 0; j < hauteur; j++)
+			setPixel(i, j, vector[i * hauteur + j]);
+	delete[] vector;
+#ifdef DEBUGVERBOSE
+	cout << "\033[36;43mDEBUGVERBOSE : Fin Load de ImageNG\033[0m" << endl;
+#endif
+}

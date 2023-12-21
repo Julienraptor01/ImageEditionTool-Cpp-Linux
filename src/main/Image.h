@@ -1,8 +1,12 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
+#include <fstream>
+
 #include "Dimension.h"
 
+using std::ifstream;
+using std::ofstream;
 using std::string;
 
 class Image
@@ -29,6 +33,9 @@ public:
 	virtual void Dessine() const = 0;
 
 	virtual void exportToFile(const string &nomFichier, const string &formatFichier) const = 0;
+
+	void Save(ofstream &fichier) const;
+	void Load(ifstream &fichier);
 };
 
 #endif

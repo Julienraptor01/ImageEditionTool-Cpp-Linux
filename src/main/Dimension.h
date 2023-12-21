@@ -2,7 +2,10 @@
 #define DIMENSION_H
 
 #include <iostream>
+#include <fstream>
 
+using std::ifstream;
+using std::ofstream;
 using std::istream;
 using std::ostream;
 
@@ -33,6 +36,9 @@ public:
 	static const Dimension FULL_HD;
 
 	void Affiche() const;
+
+	void Save(ofstream &fichier) const;
+	void Load(ifstream &fichier);
 };
 
 #endif

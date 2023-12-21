@@ -2,7 +2,10 @@
 #define COULEUR_H
 
 #include <iostream>
+#include <fstream>
 
+using std::ifstream;
+using std::ofstream;
 using std::ostream;
 
 class Couleur
@@ -51,6 +54,9 @@ public:
 	static const Couleur BLANC;
 
 	void Affiche() const;
+
+	void Save(ofstream &fichier) const;
+	void Load(ifstream &fichier);
 };
 
 #endif

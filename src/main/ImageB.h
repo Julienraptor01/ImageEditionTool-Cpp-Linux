@@ -41,6 +41,9 @@ public:
 	void Dessine() const override;
 
 	void exportToFile(const string &nomFichier, const string &formatFichier) const override;
+
+	void Save(ofstream &fichier) const;
+	void Load(ifstream &fichier);
 };
 
 #endif

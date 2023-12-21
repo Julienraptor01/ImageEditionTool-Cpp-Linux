@@ -232,3 +232,28 @@ void Couleur::Affiche() const
 {
 	cout << "Couleur : " << hex << color.packedARGB << dec << endl;
 }
+
+void Couleur::Save(ofstream &fichier) const
+{
+#ifdef DEBUGVERYVERBOSE
+	cout << "\033[35;43mDEBUGVERYVERBOSE : Save de Couleur\033[0m" << endl;
+#endif
+	unsigned int packedARGB = getARGB();
+	fichier.write((char *)&packedARGB, sizeof(unsigned int));
+#ifdef DEBUGVERYVERBOSE
+	cout << "\033[36;43mDEBUGVERYVERBOSE : Fin Save de Couleur\033[0m" << endl;
+#endif
+}
+
+void Couleur::Load(ifstream &fichier)
+{
+#ifdef DEBUGVERYVERBOSE
+	cout << "\033[35;43mDEBUGVERYVERBOSE : Load de Couleur\033[0m" << endl;
+#endif
+	unsigned int packedARGB;
+	fichier.read((char *)&packedARGB, sizeof(unsigned int));
+	setARGB(packedARGB);
+#ifdef DEBUGVERYVERBOSE
+	cout << "\033[36;43mDEBUGVERYVERBOSE : Fin Load de Couleur\033[0m" << endl;
+#endif
+}

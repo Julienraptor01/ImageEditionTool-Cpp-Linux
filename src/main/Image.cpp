@@ -92,3 +92,40 @@ void Image::Affiche() const
 {
 	cout << "Id : " << id << "\t" << "Nom : " << nom << "\t" << "Dimension : (" << dimension << ")" << endl;
 }
+
+void Image::Save(ofstream &fichier) const
+{
+#ifdef DEBUGVERBOSE
+	cout << "\033[35;43mDEBUGVERBOSE : Save de Image\033[0m" << endl;
+#endif
+	int id = getId();
+	fichier.write((char *)&id, sizeof(int));
+	string nom = getNom();
+	int taille = nom.size();
+	fichier.write((char *)&taille, sizeof(int));
+	fichier.write((char *)nom.data(), taille * sizeof(char));
+	Dimension dimension = getDimension();
+	dimension.Save(fichier);
+#ifdef DEBUGVERBOSE
+	cout << "\033[36;43mDEBUGVERBOSE : Fin Save de Image\033[0m" << endl;
+#endif
+}
+
+void Image::Load(ifstream &fichier)
+{
+#ifdef DEBUGVERBOSE
+	cout << "\033[35;43mDEBUGVERBOSE : Load de Image\033[0m" << endl;
+#endif
+	int id;
+	fichier.read((char *)&id, sizeof(int));
+	setId(id);
+	string nom;
+	int taille;
+	fichier.read((char *)&taille, sizeof(int));
+	nom.resize(taille);
+	fichier.read((char *)nom.data(), taille * sizeof(char));
+	setNom(nom);
+#ifdef DEBUGVERBOSE
+	cout << "\033[36;43mDEBUGVERBOSE : Fin Load de Image\033[0m" << endl;
+#endif
+}

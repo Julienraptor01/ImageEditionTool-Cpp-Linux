@@ -140,3 +140,31 @@ void Dimension::Affiche() const
 {
 	cout << "Largeur : " << largeur << "\t" << "Hauteur : " << hauteur << endl;
 }
+
+void Dimension::Save(ofstream &fichier) const
+{
+#ifdef DEBUGVERYVERBOSE
+	cout << "\033[35;43mDEBUGVERBOSE : Save de Dimension\033[0m" << endl;
+#endif
+	int largeur = getLargeur(), hauteur = getHauteur();
+	fichier.write((char *)&largeur, sizeof(int));
+	fichier.write((char *)&hauteur, sizeof(int));
+#ifdef DEBUGVERYVERBOSE
+	cout << "\033[36;43mDEBUGVERBOSE : Fin Save de Dimension\033[0m" << endl;
+#endif
+}
+
+void Dimension::Load(ifstream &fichier)
+{
+#ifdef DEBUGVERYVERBOSE
+	cout << "\033[35;43mDEBUGVERBOSE : Load de Dimension\033[0m" << endl;
+#endif
+	int largeur, hauteur;
+	fichier.read((char *)&largeur, sizeof(int));
+	fichier.read((char *)&hauteur, sizeof(int));
+	setLargeur(largeur);
+	setHauteur(hauteur);
+#ifdef DEBUGVERYVERBOSE
+	cout << "\033[36;43mDEBUGVERBOSE : Fin Load de Dimension\033[0m" << endl;
+#endif
+}

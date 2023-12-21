@@ -272,3 +272,42 @@ void ImageRGB::exportToFile(const string &nomFichier, const string &formatFichie
 	cout << "\033[36;43mDEBUGVERBOSE : Fin exportToFile de ImageRGB\033[0m" << endl;
 #endif
 }
+
+void ImageRGB::Save(ofstream &fichier) const
+{
+#ifdef DEBUGVERBOSE
+	cout << "\033[35;43mDEBUGVERBOSE : Save de ImageRGB\033[0m" << endl;
+#endif
+	Image::Save(fichier);
+	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
+	unsigned int *vector = new unsigned int[largeur * hauteur];
+	for (int i = 0; i < hauteur; i++)
+		for (int j = 0; j < largeur; j++)
+			vector[i * largeur + j] = getPixel(j, i).getARGB();
+	fichier.write((char *)vector, largeur * hauteur * sizeof(unsigned int));
+	delete[] vector;
+#ifdef DEBUGVERBOSE
+	cout << "\033[36;43mDEBUGVERBOSE : Fin Save de ImageRGB\033[0m" << endl;
+#endif
+}
+
+void ImageRGB::Load(ifstream &fichier)
+{
+#ifdef DEBUGVERBOSE
+	cout << "\033[35;43mDEBUGVERBOSE : Load de ImageRGB\033[0m" << endl;
+#endif
+	Image::Load(fichier);
+	Dimension dimension;
+	dimension.Load(fichier);
+	setDimension(dimension);
+	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
+	unsigned int *vector = new unsigned int[largeur * hauteur];
+	fichier.read((char *)vector, largeur * hauteur * sizeof(unsigned int));
+	for (int i = 0; i < hauteur; i++)
+		for (int j = 0; j < largeur; j++)
+			setPixel(j, i, Couleur(vector[i * largeur + j]));
+	delete[] vector;
+#ifdef DEBUGVERBOSE
+	cout << "\033[36;43mDEBUGVERBOSE : Fin Load de ImageRGB\033[0m" << endl;
+#endif
+}

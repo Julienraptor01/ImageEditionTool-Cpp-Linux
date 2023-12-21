@@ -61,6 +61,9 @@ public:
 
 	void importFromFile(const string &nomFichier);
 	void exportToFile(const string &nomFichier, const string &formatFichier) const override;
+
+	void Save(ofstream &fichier) const;
+	void Load(ifstream &fichier);
 };
 
 #endif
