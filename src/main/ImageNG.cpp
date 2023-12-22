@@ -1,8 +1,9 @@
+#include "ImageNG.h"
+
 #include <regex>
 #include <algorithm>
-#include <limits.h>
+#include <climits>
 
-#include "ImageNG.h"
 #include "MyQT.h"
 #include "XYException.h"
 #include "ColorException.h"

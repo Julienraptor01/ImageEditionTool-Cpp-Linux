@@ -1,4 +1,5 @@
 #include "Iterateur.h"
+
 #include "Exception.h"
 
 template <class T> Iterateur<T>::Iterateur(const ArrayList<T> &arrayList) : arrayList(arrayList)

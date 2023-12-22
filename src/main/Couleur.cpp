@@ -1,7 +1,8 @@
+#include "Couleur.h"
+
 #include <algorithm>
 #include <limits.h>
 
-#include "Couleur.h"
 #include "ColorException.h"
 
 using std::cout;

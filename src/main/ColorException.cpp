@@ -1,6 +1,6 @@
-#include <iostream>
-
 #include "ColorException.h"
+
+#include <iostream>
 
 using std::cout;
 using std::endl;

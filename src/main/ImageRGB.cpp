@@ -1,6 +1,7 @@
+#include "ImageRGB.h"
+
 #include <regex>
 
-#include "ImageRGB.h"
 #include "MyQT.h"
 #include "XYException.h"
 

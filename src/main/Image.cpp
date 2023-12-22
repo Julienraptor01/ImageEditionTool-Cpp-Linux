@@ -1,4 +1,5 @@
 #include "Image.h"
+
 #include "MyQT.h"
 
 using std::cout;
