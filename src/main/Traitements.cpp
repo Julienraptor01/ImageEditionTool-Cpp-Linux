@@ -22,7 +22,7 @@ ImageB Traitements::Seuillage(const ImageNG& imageIn, int threshold)
 #endif
 	if (threshold < 0 || threshold > UCHAR_MAX)
 		throw ColorException("Seuillage invalide", threshold);
-	ImageB imageOut(imageIn.getId(), imageIn.getNom() + "-seuil" + to_string(threshold), imageIn.getDimension());
+	ImageB imageOut(imageIn.getId(), imageIn.getNom().append("-seuil").append(to_string(threshold)), imageIn.getDimension());
 	int width = imageIn.getDimension().getLargeur(), height = imageIn.getDimension().getHauteur();
 	for (int i = 0; i < height; i++)
 		for (int j = 0; j < width; j++)
@@ -42,7 +42,7 @@ ImageNG Traitements::FiltreMoyenneur(const ImageNG& imageIn, int size)
 		throw Exception("La taille du filtre doit être positive");
 	if (size % 2 == 0)
 		throw Exception("La taille du filtre doit être impaire");
-	ImageNG imageOut(imageIn.getId(), imageIn.getNom() + "-moyenne" + to_string(size), imageIn.getDimension());
+	ImageNG imageOut(imageIn.getId(), imageIn.getNom().append("-moyenne").append(to_string(size)), imageIn.getDimension());
 	int width = imageIn.getDimension().getLargeur(), height = imageIn.getDimension().getHauteur();
 	int offset = (size - 1) / 2, sum, pixelCount;
 	for (int i = 0; i < height; i++)
@@ -73,7 +73,7 @@ ImageNG Traitements::FiltreMedian(const ImageNG& imageIn, int size)
 		throw Exception("La taille du filtre doit être positive");
 	if (size % 2 == 0)
 		throw Exception("La taille du filtre doit être impaire");
-	ImageNG imageOut(imageIn.getId(), imageIn.getNom() + "-median" + to_string(size), imageIn.getDimension());
+	ImageNG imageOut(imageIn.getId(), imageIn.getNom().append("-median").append(to_string(size)), imageIn.getDimension());
 	int width = imageIn.getDimension().getLargeur(), height = imageIn.getDimension().getHauteur();
 	int offset = (size - 1) / 2, median;
 	for (int i = 0; i < height; i++)
@@ -104,7 +104,7 @@ ImageNG Traitements::Erosion(const ImageNG& imageIn, int size)
 		throw Exception("La taille du filtre doit être positive");
 	if (size % 2 == 0)
 		throw Exception("La taille du filtre doit être impaire");
-	ImageNG imageOut(imageIn.getId(), imageIn.getNom() + "-erode" + to_string(size), imageIn.getDimension());
+	ImageNG imageOut(imageIn.getId(), imageIn.getNom().append("-erode").append(to_string(size)), imageIn.getDimension());
 	int width = imageIn.getDimension().getLargeur(), height = imageIn.getDimension().getHauteur();
 	int offset = (size - 1) / 2;
 	for (int i = 0; i < height; i++)
@@ -131,7 +131,7 @@ ImageNG Traitements::Dilatation(const ImageNG& imageIn, int size)
 		throw Exception("La taille du filtre doit être positive");
 	if (size % 2 == 0)
 		throw Exception("La taille du filtre doit être impaire");
-	ImageNG imageOut(imageIn.getId(), imageIn.getNom() + "-dilate" + to_string(size), imageIn.getDimension());
+	ImageNG imageOut(imageIn.getId(), imageIn.getNom().append("-dilate").append(to_string(size)), imageIn.getDimension());
 	int width = imageIn.getDimension().getLargeur(), height = imageIn.getDimension().getHauteur();
 	int offset = (size - 1) / 2;
 	for (int i = 0; i < height; i++)
@@ -154,7 +154,7 @@ ImageNG Traitements::Negatif(const ImageNG& imageIn)
 #ifdef DEBUGVERBOSE
 	cout << "\033[35;43mDEBUGVERBOSE : Negatif de Traitements\033[0m" << endl;
 #endif
-	ImageNG imageOut(imageIn.getId(), imageIn.getNom() + "-negatif", imageIn.getDimension());
+	ImageNG imageOut(imageIn.getId(), imageIn.getNom().append("-negatif"), imageIn.getDimension());
 	int width = imageIn.getDimension().getLargeur(), height = imageIn.getDimension().getHauteur();
 	for (int i = 0; i < height; i++)
 		for (int j = 0; j < width; j++)
