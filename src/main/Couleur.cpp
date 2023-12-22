@@ -108,7 +108,7 @@ ostream &operator<<(ostream &outputStream, const Couleur &couleur)
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[33;46mDEBUGVERBOSE : Opérateur d'écriture de Couleur\033[0m" << endl;
 #endif
-	outputStream << hex << (int)couleur.getAlpha() << dec << " " << hex << (int)couleur.getRouge() << dec << " " << hex << (int)couleur.getVert() << dec << " " << hex << (int)couleur.getBleu() << dec;
+	outputStream << hex << static_cast<int>(couleur.getAlpha()) << dec << " " << hex << static_cast<int>(couleur.getRouge()) << dec << " " << hex << static_cast<int>(couleur.getVert()) << dec << " " << hex << static_cast<int>(couleur.getBleu()) << dec;
 	return outputStream;
 }
 
