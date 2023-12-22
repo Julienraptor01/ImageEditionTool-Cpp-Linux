@@ -9,7 +9,7 @@ template <class T> struct node
 
 template <class T> class ArrayList
 {
-private:
+protected:
 	node<T> *head = nullptr;
 
 	void clearList();
@@ -17,7 +17,7 @@ private:
 
 public:
 	ArrayList();
-	~ArrayList();
+	virtual ~ArrayList();
 	ArrayList(const ArrayList &arrayList);
 
 	ArrayList &operator=(const ArrayList &arrayList);

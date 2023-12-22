@@ -166,7 +166,7 @@ ostream &operator<<(ostream &outputStream, const ImageB &image)
 #ifdef DEBUGVERBOSE
 	cout << "\033[33;46mDEBUGVERBOSE : Opérateur d'écriture de ImageB\033[0m" << endl;
 #endif
-	outputStream << "ImageB : " << image.getNom() << " " << image.getDimension();
+	outputStream << image.getId() << " " << image.getNom() << " " << image.getDimension();
 	return outputStream;
 }
 
