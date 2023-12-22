@@ -44,10 +44,6 @@ template <class T> void SortedArrayList<T>::insereElement(const T &data)
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[31;44mDEBUGVERYVERBOSE : insereElement de SortedArrayList\033[0m" << endl;
 #endif
-	/*
-	node<T> *newNode = new node<T>;
-	newNode->data = data;
-	*/
 	node<T> *newNode = new node<T>{data};
 	if (this->head == nullptr)
 	{
