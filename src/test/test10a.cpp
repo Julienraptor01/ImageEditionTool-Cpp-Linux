@@ -30,8 +30,8 @@ int main(int argc,char* argv[])
 	p->setNom("lena");
 	ps.ajouteImage(p);
 
-	cout << "Ajout image B lena seuillée à 128..." << endl;
-	ps.ajouteImage(new ImageB(Traitements::Seuillage(*p,128)));
+	cout << "Ajout image B lena seuillée à 127..." << endl;
+	ps.ajouteImage(new ImageB(Traitements::Seuillage(*p,127)));
 
 	cout << "Ajout image NG dessin à moi..." << endl;
 	p = new ImageNG();
