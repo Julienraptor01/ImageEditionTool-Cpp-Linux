@@ -90,12 +90,12 @@ void Essai1() // Attention : utilisez les flux bytes (read et write) !!!!
 	cout << endl;
 
 	cout << "----- Sauvegarde de la dimension dans le fichier D.dat -----" << endl;
-	ofstream fichier1("./out/D.cbif",ios::out);
+	ofstream fichier1("./out/D.cbdf",ios::out);
 	d1.Save(fichier1);
 	fichier1.close();
 
 	cout << "----- Chargement de l'objet dimension situe dans le fichier D.dat -----" << endl;
-	ifstream fichier2("./out/D.cbif",ios::in);
+	ifstream fichier2("./out/D.cbdf",ios::in);
 	Dimension d2;
 	d2.Load(fichier2);
 	fichier2.close();
@@ -165,12 +165,12 @@ void Essai4() // Attention : utilisez les flux bytes (read et write) !!!!
 	cout << endl;
 
 	cout << "----- Sauvegarde de la couleur dans le fichier C.dat -----" << endl;
-	ofstream fichier1("./out/C.cbif",ios::out);
+	ofstream fichier1("./out/C.cbcf",ios::out);
 	c1.Save(fichier1);
 	fichier1.close();
 
 	cout << "----- Chargement de la couleur situee dans le fichier C.dat -----" << endl;
-	ifstream fichier2("./out/C.cbif",ios::in);
+	ifstream fichier2("./out/C.cbcf",ios::in);
 	Couleur c2;
 	c2.Load(fichier2);
 	fichier2.close();
