@@ -52,11 +52,11 @@ int main(int argc,char* argv[])
 	cout << endl << "//***** Ajout de 2 images par copie **********************************" << endl;
 	cout << "Copie image id=3..." << endl;
 	Image* pImage = ps.getImageParId(3);
-	ImageB *pB = (ImageB*)pImage; // downcasting dangereux !!!
+	ImageB *pB = dynamic_cast<ImageB*>(pImage);
 	ps.ajouteImage(new ImageB(*pB));
 	cout << "Copie image indice=1..." << endl;
 	pImage = ps.getImageParIndice(1);
-	ImageNG *pNG = (ImageNG*)pImage;// downcasting dangereux !!!
+	ImageNG *pNG = dynamic_cast<ImageNG*>(pImage);
 	ps.ajouteImage(new ImageNG(*pNG));
 
 	cout << endl << "//***** Images de la biblothèque *************************************" << endl;

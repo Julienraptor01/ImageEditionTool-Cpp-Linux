@@ -6,7 +6,6 @@
 
 #include "Exception.h"
 #include "ColorException.h"
-#include "ArrayList.h"
 #include "SortedArrayList.h"
 
 using std::cout;
