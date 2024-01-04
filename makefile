@@ -47,9 +47,12 @@ TEST_BIN=$(BIN)$(TEST)
 LIB_BIN=$(BIN)$(LIB)
 MYQT_LIB_BIN=$(LIB_BIN)$(MYQT)
 # lists
-HEADERS=$(MAIN_SRC)/Image.h $(MAIN_SRC)/ImageNG.h $(MAIN_SRC)/ImageRGB.h $(MAIN_SRC)/ImageB.h $(MAIN_SRC)/Dimension.h $(MAIN_SRC)/Couleur.h $(MAIN_SRC)/Traitements.h $(MAIN_SRC)/ArrayList.h $(MAIN_SRC)/SortedArrayList.h $(MAIN_SRC)/Iterateur.h $(MAIN_SRC)/Exception.h $(MAIN_SRC)/XYException.h $(MAIN_SRC)/ColorException.h $(MYQT_LIB_SRC)/MyQT.h
-OBJECTS=$(MAIN_OBJ)/Image.o $(MAIN_OBJ)/ImageNG.o $(MAIN_OBJ)/ImageRGB.o $(MAIN_OBJ)/ImageB.o $(MAIN_OBJ)/Dimension.o $(MAIN_OBJ)/Couleur.o $(MAIN_OBJ)/Traitements.o $(MAIN_OBJ)/Exception.o $(MAIN_OBJ)/XYException.o $(MAIN_OBJ)/ColorException.o $(MYQT_LIB_OBJ)/MyQT.o
-TESTS=$(TEST_BIN)/test01 $(TEST_BIN)/test02 $(TEST_BIN)/test03 $(TEST_BIN)/test04 $(TEST_BIN)/test05 $(TEST_BIN)/test06 $(TEST_BIN)/test07 $(TEST_BIN)/test08 $(TEST_BIN)/test09
+# use a generic rule to list all the main headers and the MyQT header
+HEADERS=$(wildcard $(MAIN_SRC)/*.h) $(wildcard $(MYQT_LIB_SRC)/*.h)
+# use a generic rule to list all the main objects and the MyQT object
+OBJECTS=$(patsubst $(MAIN_SRC)/%.cpp,$(MAIN_OBJ)/%.o,$(wildcard $(MAIN_SRC)/*.cpp)) $(MYQT_LIB_OBJ)/MyQT.o
+# use a generic rule to list all the tests
+TESTS=$(patsubst $(TEST_SRC)/%.cpp,$(TEST_BIN)/%,$(wildcard $(TEST_SRC)/*.cpp))
 ### commands
 # compile arguments
 SRC_DEBUG_LINKER=-Xlinker --verbose
@@ -69,6 +72,8 @@ DELETE=rm -rf
 # silent log using printf
 LOG=@printf
 
+.PHONY:	all setup clean full-clean
+.SECONDARY:	$(OBJECTS) $(patsubst $(TEST_BIN)/%,$(TEST_OBJ)/%.o,$(TESTS))
 
 all:	full-clean $(TESTS)
 	$(LOG) '\n\033[44mmake all finished\033[49m\n\n'
