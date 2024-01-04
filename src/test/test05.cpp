@@ -121,9 +121,9 @@ void Essai1()
 		cout << "Bleu = " << couleur.getBleu() << endl;
 		*/
 		//same but with display as int
-		cout << "Rouge = " << (int)couleur.getRouge() << endl;
-		cout << "Vert = " << (int)couleur.getVert() << endl;
-		cout << "Bleu = " << (int)couleur.getBleu() << endl;
+		cout << "Rouge = " << static_cast<int>(couleur.getRouge()) << endl;
+		cout << "Vert = " << static_cast<int>(couleur.getVert()) << endl;
+		cout << "Bleu = " << static_cast<int>(couleur.getBleu()) << endl;
 	}
 
 	cout << endl << "(1.3) ***** Tests de base des objets statiques + operateur << ******************************" << endl;
