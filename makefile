@@ -10,7 +10,6 @@ ifeq "$(ID_LIKE)" "debian"
 OS=debian
 else ifeq "$(ID_LIKE)" "fedora"
 OS=fedora
-else
 endif
 endif
 ifeq "$(OS)" "debian"
