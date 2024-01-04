@@ -75,7 +75,7 @@ LOG=@printf
 .PHONY:	all setup clean full-clean
 .SECONDARY:	$(OBJECTS) $(patsubst $(TEST_BIN)/%,$(TEST_OBJ)/%.o,$(TESTS))
 
-all:	full-clean $(TESTS)
+all:	setup $(TESTS)
 	$(LOG) '\n\033[44mmake all finished\033[49m\n\n'
 
 #specific rule for the creation of the main object files of all the Image classes
