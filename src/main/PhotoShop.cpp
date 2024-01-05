@@ -7,6 +7,10 @@
 using std::cout;
 using std::endl;
 
+PhotoShop *PhotoShop::instance = new PhotoShop();
+
+int PhotoShop::currentId = 1;
+
 PhotoShop::PhotoShop()
 {
 #ifdef DEBUG
@@ -26,6 +30,14 @@ PhotoShop::~PhotoShop()
 #ifdef DEBUG
 	cout << "\033[34;41mDEBUG : Fin Destructeur de PhotoShop\033[0m" << endl;
 #endif
+}
+
+PhotoShop &PhotoShop::getInstance()
+{
+#ifdef DEBUGVERBOSE
+	cout << "\033[32;44mDEBUGVERBOSE : getInstance de PhotoShop\033[0m" << endl;
+#endif
+	return *instance;
 }
 
 void PhotoShop::reset()
@@ -111,5 +123,3 @@ void PhotoShop::supprimeImageParId(int id)
 			return;
 		}
 }
-
-int PhotoShop::currentId = 1;

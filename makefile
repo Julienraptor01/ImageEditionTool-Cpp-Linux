@@ -51,9 +51,7 @@ HEADERS=$(wildcard $(MAIN_SRC)/*.h) $(wildcard $(MYQT_LIB_SRC)/*.h)
 # use a generic rule to list all the main objects and the MyQT object
 OBJECTS=$(patsubst $(MAIN_SRC)/%.cpp,$(MAIN_OBJ)/%.o,$(wildcard $(MAIN_SRC)/*.cpp)) $(MYQT_LIB_OBJ)/MyQT.o
 # use a generic rule to list all the tests
-#TESTS=$(patsubst $(TEST_SRC)/%.cpp,$(TEST_BIN)/%,$(wildcard $(TEST_SRC)/*.cpp))
-# same but filter out the test10b.cpp
-TESTS=$(patsubst $(TEST_SRC)/%.cpp,$(TEST_BIN)/%,$(filter-out $(TEST_SRC)/test10b.cpp,$(wildcard $(TEST_SRC)/*.cpp)))
+TESTS=$(patsubst $(TEST_SRC)/%.cpp,$(TEST_BIN)/%,$(filter-out $(TEST_SRC)/test10a.cpp,$(wildcard $(TEST_SRC)/*.cpp)))
 ### commands
 # compile arguments
 SRC_DEBUG_LINKER=-Xlinker --verbose

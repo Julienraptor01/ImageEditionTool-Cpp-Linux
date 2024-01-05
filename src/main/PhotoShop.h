@@ -7,12 +7,19 @@
 class PhotoShop
 {
 private:
+	static PhotoShop *instance;
 	ArrayList<Image *> images;
 	static int currentId;
 
-public:
 	PhotoShop();
+	PhotoShop(const PhotoShop &photoShop) = delete;
+
+	PhotoShop &operator=(const PhotoShop &photoShop) = delete;
+
+public:
 	~PhotoShop();
+
+	static PhotoShop &getInstance();
 
 	void reset();
 	void ajouteImage(Image *image);
