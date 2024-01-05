@@ -7,21 +7,21 @@
 class PhotoShop
 {
 private:
-		ArrayList<Image*> images;
-		static int currentId;
+	ArrayList<Image *> images;
+	static int currentId;
 
-	public:
-		PhotoShop();
-		~PhotoShop();
+public:
+	PhotoShop();
+	~PhotoShop();
 
-		void reset();
-		void ajouteImage(Image *image);
+	void reset();
+	void ajouteImage(Image *image);
 
-		void afficheImages() const;
-		void dessineImages() const;
+	void afficheImages() const;
+	void dessineImages() const;
 
-		Image *getImageParIndice(int index) const;
-		Image *getImageParId(int id) const;
+	Image *getImageParIndice(int index) const;
+	Image *getImageParId(int id) const;
 
 	void supprimeImageParIndice(int index);
 	void supprimeImageParId(int id);

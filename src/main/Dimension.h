@@ -5,8 +5,8 @@
 #include <fstream>
 
 using std::ifstream;
-using std::ofstream;
 using std::istream;
+using std::ofstream;
 using std::ostream;
 
 class Dimension

@@ -22,7 +22,7 @@ PhotoShop::~PhotoShop()
 #ifdef DEBUG
 	cout << "\033[32;41mDEBUG : Destructeur de PhotoShop\033[0m" << endl;
 #endif
-reset();
+	reset();
 #ifdef DEBUG
 	cout << "\033[34;41mDEBUG : Fin Destructeur de PhotoShop\033[0m" << endl;
 #endif

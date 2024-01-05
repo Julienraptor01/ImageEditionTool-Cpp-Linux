@@ -482,7 +482,7 @@ void ImageNG::setPixel(int x, int y, int grayLevel)
 		throw ColorException("setPixel invalide", grayLevel);
 	try
 	{
-	setPixel(x, y, static_cast<unsigned char>(grayLevel));
+		setPixel(x, y, static_cast<unsigned char>(grayLevel));
 	}
 	RETHROW(XYException);
 }

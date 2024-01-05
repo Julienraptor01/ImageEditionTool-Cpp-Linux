@@ -10,11 +10,11 @@
 
 using std::cout;
 using std::endl;
-using std::min;
 using std::max;
+using std::min;
 using std::to_string;
 
-ImageB Traitements::Seuillage(const ImageNG& imageIn, int threshold)
+ImageB Traitements::Seuillage(const ImageNG &imageIn, int threshold)
 {
 #ifdef DEBUGVERBOSE
 	cout << "\033[35;43mDEBUGVERBOSE : Seuillage de Traitements\033[0m" << endl;
@@ -32,7 +32,7 @@ ImageB Traitements::Seuillage(const ImageNG& imageIn, int threshold)
 	return imageOut;
 }
 
-ImageNG Traitements::FiltreMoyenneur(const ImageNG& imageIn, int size)
+ImageNG Traitements::FiltreMoyenneur(const ImageNG &imageIn, int size)
 {
 #ifdef DEBUGVERBOSE
 	cout << "\033[35;43mDEBUGVERBOSE : FiltreMoyenneur de Traitements\033[0m" << endl;
@@ -63,7 +63,7 @@ ImageNG Traitements::FiltreMoyenneur(const ImageNG& imageIn, int size)
 	return imageOut;
 }
 
-ImageNG Traitements::FiltreMedian(const ImageNG& imageIn, int size)
+ImageNG Traitements::FiltreMedian(const ImageNG &imageIn, int size)
 {
 #ifdef DEBUGVERBOSE
 	cout << "\033[35;43mDEBUGVERBOSE : FiltreMedian de Traitements\033[0m" << endl;
@@ -94,7 +94,7 @@ ImageNG Traitements::FiltreMedian(const ImageNG& imageIn, int size)
 	return imageOut;
 }
 
-ImageNG Traitements::Erosion(const ImageNG& imageIn, int size)
+ImageNG Traitements::Erosion(const ImageNG &imageIn, int size)
 {
 #ifdef DEBUGVERBOSE
 	cout << "\033[35;43mDEBUGVERBOSE : Erosion de Traitements\033[0m" << endl;
@@ -121,7 +121,7 @@ ImageNG Traitements::Erosion(const ImageNG& imageIn, int size)
 	return imageOut;
 }
 
-ImageNG Traitements::Dilatation(const ImageNG& imageIn, int size)
+ImageNG Traitements::Dilatation(const ImageNG &imageIn, int size)
 {
 #ifdef DEBUGVERBOSE
 	cout << "\033[35;43mDEBUGVERBOSE : Dilatation de Traitements\033[0m" << endl;
@@ -148,7 +148,7 @@ ImageNG Traitements::Dilatation(const ImageNG& imageIn, int size)
 	return imageOut;
 }
 
-ImageNG Traitements::Negatif(const ImageNG& imageIn)
+ImageNG Traitements::Negatif(const ImageNG &imageIn)
 {
 #ifdef DEBUGVERBOSE
 	cout << "\033[35;43mDEBUGVERBOSE : Negatif de Traitements\033[0m" << endl;
