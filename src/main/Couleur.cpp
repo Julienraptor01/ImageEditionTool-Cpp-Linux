@@ -15,7 +15,7 @@ Couleur::Couleur()
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[34;42mDEBUGVERYVERBOSE : Constructeur par défaut de Couleur\033[0m" << endl;
 #endif
-	setARGB(0xFF000000); // fully opaque black
+	setARGB(0xFF000000);
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[31;42mDEBUGVERYVERBOSE : Fin Constructeur par défaut de Couleur\033[0m" << endl;
 #endif
@@ -61,7 +61,7 @@ Couleur::Couleur(unsigned char red, unsigned char green, unsigned char blue)
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[34;42mDEBUGVERYVERBOSE : Constructeur d'initialisation partiel de Couleur (unsigned char red, unsigned char green, unsigned char blue)\033[0m" << endl;
 #endif
-	setAlpha(0xFF); // fully opaque
+	setAlpha(0xFF);
 	setRouge(red);
 	setVert(green);
 	setBleu(blue);
@@ -75,7 +75,7 @@ Couleur::Couleur(int red, int green, int blue)
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[34;42mDEBUGVERYVERBOSE : Constructeur d'initialisation partiel de Couleur (int red, int green, int blue)\033[0m" << endl;
 #endif
-	setAlpha(0xFF); // fully opaque
+	setAlpha(0xFF);
 	setRouge(red);
 	setVert(green);
 	setBleu(blue);
