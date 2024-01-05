@@ -148,8 +148,8 @@ void Dimension::Save(ofstream &fichier) const
 	cout << "\033[35;43mDEBUGVERBOSE : Save de Dimension\033[0m" << endl;
 #endif
 	int largeur = getLargeur(), hauteur = getHauteur();
-	fichier.write((char *)&largeur, sizeof(int));
-	fichier.write((char *)&hauteur, sizeof(int));
+	fichier.write(reinterpret_cast<char *>(&largeur), sizeof(int));
+	fichier.write(reinterpret_cast<char *>(&hauteur), sizeof(int));
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[36;43mDEBUGVERBOSE : Fin Save de Dimension\033[0m" << endl;
 #endif
@@ -161,8 +161,8 @@ void Dimension::Load(ifstream &fichier)
 	cout << "\033[35;43mDEBUGVERBOSE : Load de Dimension\033[0m" << endl;
 #endif
 	int largeur, hauteur;
-	fichier.read((char *)&largeur, sizeof(int));
-	fichier.read((char *)&hauteur, sizeof(int));
+	fichier.read(reinterpret_cast<char *>(&largeur), sizeof(int));
+	fichier.read(reinterpret_cast<char *>(&hauteur), sizeof(int));
 	setLargeur(largeur);
 	setHauteur(hauteur);
 #ifdef DEBUGVERYVERBOSE

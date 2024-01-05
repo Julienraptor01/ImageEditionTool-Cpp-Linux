@@ -20,47 +20,47 @@ void Essai5();
 void Essai6();
 void Essai7();
 
-int main(int argc,char* argv[])
+int main(int argc, char *argv[])
 {
-	// Initialisation de QT
-	QApplication app(argc,argv);
+	QApplication app(argc, argv);
 	close(2);
 
 	int choix;
 	bool fini = false;
 
-	while(!fini)
+	while (!fini)
 	{
 		if (argc == 2)
 		{
 			choix = atoi(argv[1]);
 			fini = true;
 		}
-		else choix = Menu();
-		switch(choix)
+		else
+			choix = Menu();
+		switch (choix)
 		{
-		case 1 :
+		case 1:
 			Essai1();
 			break;
-		case 2 :
+		case 2:
 			Essai2();
 			break;
-		case 3 :
+		case 3:
 			Essai3();
 			break;
-		case 4 :
+		case 4:
 			Essai4();
 			break;
-		case 5 :
+		case 5:
 			Essai5();
 			break;
-		case 6 :
+		case 6:
 			Essai6();
 			break;
-		case 7 :
+		case 7:
 			Essai7();
 			break;
-		default :
+		default:
 			fini = true;
 			break;
 		}
@@ -90,19 +90,19 @@ int Menu()
 
 	int ch;
 	cout << " Choix : ";
-	cin >> ch; // Faites pas le biess !
+	cin >> ch;
 	cin.ignore();
 	return ch;
 }
 
-//*******************************************************************************************************
-//*** Tests de la classe Couleur ************************************************************************
-//*******************************************************************************************************
+/**
+ * @brief Test de la classe Couleur
+ */
 void Essai1()
 {
 	cout << endl << "(1.1) ***** Test constructeur des constructuers + Affiche **********************************" << endl;
 	{
-		Couleur c1,c2(128,255,10),c3(c2);
+		Couleur c1, c2(128, 255, 10), c3(c2);
 		c1.Affiche();
 		c2.Affiche();
 		c3.Affiche();
@@ -115,12 +115,6 @@ void Essai1()
 		couleur.setVert(60);
 		couleur.setBleu(210);
 		couleur.Affiche();
-		/*
-		cout << "Rouge = " << couleur.getRouge() << endl;
-		cout << "Vert = " << couleur.getVert() << endl;
-		cout << "Bleu = " << couleur.getBleu() << endl;
-		*/
-		//same but with display as int
 		cout << "Rouge = " << static_cast<int>(couleur.getRouge()) << endl;
 		cout << "Vert = " << static_cast<int>(couleur.getVert()) << endl;
 		cout << "Bleu = " << static_cast<int>(couleur.getBleu()) << endl;
@@ -132,24 +126,26 @@ void Essai1()
 	cout << "Blanc = " << Couleur::BLANC << endl;
 }
 
-//*************************************************************************************************
-//*** Tests de setBackground, setPixel, Dessine et constructeur de copie de ImageRGB **************
-//*************************************************************************************************
+/**
+ * @brief Tests de setBackground, setPixel, Dessine et constructeur de copie de ImageRGB
+ */
 void Essai2()
 {
 	cout << endl << "(2) Tests de setBackground, setPixel, Dessine et constructeur de copie de ImageRGB ********" << endl;
 
-	ImageRGB image1(1,"testCouleur",Dimension(300,300));
-	image1.setBackground(Couleur(0,0,128));
-	for (int x=0 ; x<300 ; x=x+4) image1.setPixel(x,x,Couleur::VERT);
+	ImageRGB image1(1, "testCouleur", Dimension(300, 300));
+	image1.setBackground(Couleur(0, 0, 128));
+	for (int x = 0; x < 300; x = x + 4)
+		image1.setPixel(x, x, Couleur::VERT);
 	cout << "Voici image1..." << endl;
 	image1.Affiche();
 	image1.Dessine();
 
 	{
-		ImageRGB image2 (image1);
+		ImageRGB image2(image1);
 		cout << "On modifie la copie image2 de image1..." << endl;
-		for (int x=0 ; x<300 ; x=x+4) image2.setPixel(x,299-x,Couleur::ROUGE);
+		for (int x = 0; x < 300; x = x + 4)
+			image2.setPixel(x, 299 - x, Couleur::ROUGE);
 		image2.setNom("testModif");
 		cout << "Voici image2..." << endl;
 		image2.Affiche();
@@ -162,9 +158,9 @@ void Essai2()
 	image1.Dessine();
 }
 
-//*************************************************************************************************
-//*** Test de importFromFile, getPixel et exportToFile de ImageRGB ********************************
-//*************************************************************************************************
+/**
+ * @brief Tests de importFromFile, getPixel et exportToFile de ImageRGB
+ */
 void Essai3()
 {
 	cout << endl << "(3) Tests de importFromFile, getPixel et exportToFile de ImageRGB ************************" << endl;
@@ -177,34 +173,36 @@ void Essai3()
 	image.Affiche();
 	cout << "Largeur = " << image.getDimension().getLargeur() << endl;
 	cout << "Hauteur = " << image.getDimension().getHauteur() << endl;
-	cout << "Valeur du pixel (125,56) = " << image.getPixel(125,56) << endl;
+	cout << "Valeur du pixel (125,56) = " << image.getPixel(125, 56) << endl;
 	image.Dessine();
 
 	cout << "Exportation de l'image modifiee vers le fichier joconde2.png......" << endl;
-	for (int x=0 ; x<255 ; x++) image.setPixel(x,(x*x/255),Couleur::ROUGE); // Dessin d'une parabole rouge :)
+	for (int x = 0; x < 255; x++)
+		image.setPixel(x, (x * x / 255), Couleur::ROUGE);
 	image.Dessine();
-	image.exportToFile("./out/joconde2.png","PNG");
+	image.exportToFile("./out/joconde2.png", "PNG");
 }
 
-
-//*************************************************************************************************
-//*** Tests de setBackground, setPixel, Dessine et constructeur de copie de ImageB ****************
-//*************************************************************************************************
+/**
+ * @brief Tests de setBackground, setPixel, Dessine et constructeur de copie de ImageB
+ */
 void Essai4()
 {
 	cout << endl << "(4) Tests de setBackground, setPixel, Dessine et constructeur de copie de ImageB **********" << endl;
 
-	ImageB image1(1,"testBinaire",Dimension(300,300));
+	ImageB image1(1, "testBinaire", Dimension(300, 300));
 	image1.setBackground(false);
-	for (int x=0 ; x<300 ; x=x+4) image1.setPixel(x,x,true);
+	for (int x = 0; x < 300; x = x + 4)
+		image1.setPixel(x, x, true);
 	cout << "Voici image1..." << endl;
 	image1.Affiche();
 	image1.Dessine();
 
 	{
-		ImageB image2 (image1);
+		ImageB image2(image1);
 		cout << "On modifie la copie image2 de image1..." << endl;
-		for (int x=0 ; x<300 ; x=x+4) image2.setPixel(x,299-x,true);
+		for (int x = 0; x < 300; x = x + 4)
+			image2.setPixel(x, 299 - x, true);
 		image2.setNom("testModif");
 		cout << "Voici image2..." << endl;
 		image2.Affiche();
@@ -217,9 +215,9 @@ void Essai4()
 	image1.Dessine();
 }
 
-//*************************************************************************************************
-//*** Test de getPixel et exportToFile de ImageB **************************************************
-//*************************************************************************************************
+/**
+ * @brief Tests de getPixel et exportToFile de ImageB
+ */
 void Essai5()
 {
 	cout << endl << "(5) Tests de getPixel et exportToFile de ImageB ********************************" << endl;
@@ -227,55 +225,56 @@ void Essai5()
 	ImageB image;
 	cout << "Creation d'une image binaire --> dessin d'une disque......" << endl;
 	image.setNom("Mon Beau Dessin");
-	image.setDimension(Dimension(300,300));
+	image.setDimension(Dimension(300, 300));
 	image.setId(1);
-	for (int x=0 ; x<300 ; x++)
-		for (int y=0 ; y<300 ; y++)
-			if ((x-100)*(x-100)+(y-100)*(y-100) < 2500) image.setPixel(x,y,true);
+	for (int x = 0; x < 300; x++)
+		for (int y = 0; y < 300; y++)
+			if ((x - 100) * (x - 100) + (y - 100) * (y - 100) < 2500)
+				image.setPixel(x, y, true);
 	cout << "Largeur = " << image.getDimension().getLargeur() << endl;
 	cout << "Hauteur = " << image.getDimension().getHauteur() << endl;
-	cout << "Valeur du pixel (125,56) = " << image.getPixel(125,56) << endl;
+	cout << "Valeur du pixel (125,56) = " << image.getPixel(125, 56) << endl;
 	image.Affiche();
 	image.Dessine();
 
 	ImageB::couleurTrue = Couleur::ROUGE;
-	ImageB::couleurFalse = Couleur(0,255,255);
+	ImageB::couleurFalse = Couleur(0, 255, 255);
 	cout << "Exportation de l'image binaire vers le fichier disque.png......" << endl;
 	image.Dessine();
-	image.exportToFile("./out/disque.png","PNG");
+	image.exportToFile("./out/disque.png", "PNG");
 }
 
-//***********************************************************************************************
-//*** Tests de la virtualite ********************************************************************
-//***********************************************************************************************
+/**
+ * @brief Tests de la virtualite
+ */
 void Essai6()
 {
-	srand((unsigned)time(NULL));
+	srand(static_cast<unsigned>(time(NULL)));
 
 	cout << "(6.1) Allocation dynamique d'images ****************************************************" << endl;
-	Image* image[10];
+	Image *image[10];
 
-	for (int i=0 ; i<10 ; i++) // Tracez vos constructeurs !!!
+	for (int i = 0; i < 10; i++)
 	{
 		cout << "image[" << i << "] : ";
-		int n = rand()%3;
-		switch(n)
+		int n = rand() % 3;
+		switch (n)
 		{
-		case 0 :
+		case 0:
 			image[i] = new ImageB();
-			((ImageB*)(image[i]))->setBackground(true);
+			(static_cast<ImageB *>(image[i]))->setBackground(true);
 			cout << "ImageB" << endl;
 			break;
 
-		case 1 :
+		case 1:
 			image[i] = new ImageNG();
-			((ImageNG*)(image[i]))->setBackground(127);
+			(static_cast<ImageNG *>(image[i]))->setBackground(127);
 			cout << "ImageNG" << endl;
 			break;
 
-		case 2 :
+		case 2:
 			image[i] = new ImageRGB();
-			((ImageRGB*)(image[i]))->setBackground(Couleur::BLEU);
+			(static_cast<ImageRGB *>(image[i]))->setBackground(Couleur::BLEU);
 			cout << "ImageRGB" << endl;
 			break;
 		}
@@ -283,7 +282,7 @@ void Essai6()
 	cout << endl;
 
 	cout << "(6.2) Test de la methode VIRTUELLE Dessine() ******************************************" << endl;
-	for (int i=0 ; i<10 ; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		cout << "image[" << i << "] : " << endl;
 		image[i]->Dessine();
@@ -291,37 +290,36 @@ void Essai6()
 	cout << endl;
 
 	cout << "(6.3) Liberation memoire **************************************************************" << endl;
-	for (int i=0 ; i<10 ; i++) delete image[i];
-	// Tout se passe-t-il comme vous voulez ?
-	// Pour etre plus precis, quid des destructeurs et de la virtualite ?
+	for (int i = 0; i < 10; i++)
+		delete image[i];
 }
 
-//***********************************************************************************************
-//*** Tests du downcasting et dynamic-cast ******************************************************
-//***********************************************************************************************
+/**
+ * @brief Tests du downcasting et dynamic-cast
+ */
 void Essai7()
 {
-	srand((unsigned)time(NULL));
+	srand(static_cast<unsigned>(time(NULL)));
 
 	cout << "(7.1) Allocation dynamique d'images ***************************************************" << endl;
-	Image* image[10];
-	for (int i=0 ; i<10 ; i++) // Tracez vos constructeurs !!!
+	Image *image[10];
+	for (int i = 0; i < 10; i++)
 	{
 		cout << "image[" << i << "] : ";
-		int n = rand()%3;
-		switch(n)
+		int n = rand() % 3;
+		switch (n)
 		{
-		case 0 :
+		case 0:
 			image[i] = new ImageB();
 			cout << "ImageB" << endl;
 			break;
 
-		case 1 :
+		case 1:
 			image[i] = new ImageNG();
 			cout << "ImageNG" << endl;
 			break;
 
-		case 2 :
+		case 2:
 			image[i] = new ImageRGB();
 			cout << "ImageRGB" << endl;
 			break;
@@ -330,22 +328,22 @@ void Essai7()
 	cout << endl;
 
 	cout << "(7.2) Test du downcasting et dynamic-cast **********************************************" << endl;
-	for (int i=0 ; i<10 ; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		cout << "image[" << i << "] ";
-		ImageB* pB = dynamic_cast<ImageB*>(image[i]);
+		ImageB *pB = dynamic_cast<ImageB *>(image[i]);
 		if (pB != NULL)
 		{
 			cout << "est une ImageB";
 			pB->setBackground(true);
 		}
-		ImageNG* pNG = dynamic_cast<ImageNG*>(image[i]);
+		ImageNG *pNG = dynamic_cast<ImageNG *>(image[i]);
 		if (pNG != NULL)
 		{
 			cout << "est une ImageNG";
 			pNG->setBackground(127);
 		}
-		ImageRGB* pRGB = dynamic_cast<ImageRGB*>(image[i]);
+		ImageRGB *pRGB = dynamic_cast<ImageRGB *>(image[i]);
 		if (pRGB != NULL)
 		{
 			cout << "est une ImageRGB";
@@ -357,5 +355,6 @@ void Essai7()
 	cout << endl;
 
 	cout << "(7.3) Liberation memoire ****************************************************************" << endl;
-	for (int i=0 ; i<10 ; i++) delete image[i];
+	for (int i = 0; i < 10; i++)
+		delete image[i];
 }

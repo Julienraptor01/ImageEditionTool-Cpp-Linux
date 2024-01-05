@@ -192,10 +192,7 @@ ImageNG ImageNG::operator+(unsigned char grayLevel) const
 			{
 				image.setPixel(i, j, image.getPixel(i, j) + grayLevel);
 			}
-			catch (ColorException &colorException)
-			{
-				throw colorException;
-			}
+			RETHROW(ColorException);
 	return image;
 }
 
@@ -208,10 +205,7 @@ ImageNG operator+(unsigned char grayLevel, const ImageNG &image)
 	{
 		return image + grayLevel;
 	}
-	catch (ColorException &colorException)
-	{
-		throw colorException;
-	}
+	RETHROW(ColorException);
 }
 
 ImageNG ImageNG::operator+(const ImageNG &image) const
@@ -227,10 +221,7 @@ ImageNG ImageNG::operator+(const ImageNG &image) const
 			{
 				imageToReturn.setPixel(i, j, imageToReturn.getPixel(i, j) + image.getPixel(i, j));
 			}
-			catch (ColorException &colorException)
-			{
-				throw colorException;
-			}
+			RETHROW(ColorException);
 	return imageToReturn;
 }
 
@@ -247,10 +238,7 @@ ImageNG ImageNG::operator-(unsigned char grayLevel) const
 			{
 				image.setPixel(i, j, image.getPixel(i, j) - grayLevel);
 			}
-			catch (ColorException &colorException)
-			{
-				throw colorException;
-			}
+			RETHROW(ColorException);
 	return image;
 }
 
@@ -267,10 +255,7 @@ ImageNG operator-(unsigned char grayLevel, const ImageNG &image)
 			{
 				imageToReturn.setPixel(i, j, grayLevel - imageToReturn.getPixel(i, j));
 			}
-			catch (ColorException &colorException)
-			{
-				throw colorException;
-			}
+			RETHROW(ColorException);
 	return imageToReturn;
 }
 
@@ -287,10 +272,7 @@ ImageNG ImageNG::operator-(const ImageNG &image) const
 			{
 				imageToReturn.setPixel(i, j, imageToReturn.getPixel(i, j) - image.getPixel(i, j));
 			}
-			catch (ColorException &colorException)
-			{
-				throw colorException;
-			}
+			RETHROW(ColorException);
 	return imageToReturn;
 }
 
@@ -306,10 +288,7 @@ ImageNG &ImageNG::operator++()
 			{
 				setPixel(i, j, getPixel(i, j) + 20);
 			}
-			catch (ColorException &colorException)
-			{
-				throw colorException;
-			}
+			RETHROW(ColorException);
 	return *this;
 }
 
@@ -326,10 +305,7 @@ ImageNG ImageNG::operator++(int)
 			{
 				setPixel(i, j, getPixel(i, j) + 20);
 			}
-			catch (ColorException &colorException)
-			{
-				throw colorException;
-			}
+			RETHROW(ColorException);
 	return image;
 }
 
@@ -345,10 +321,7 @@ ImageNG &ImageNG::operator--()
 			{
 				setPixel(i, j, getPixel(i, j) - 20);
 			}
-			catch (ColorException &colorException)
-			{
-				throw colorException;
-			}
+			RETHROW(ColorException);
 	return *this;
 }
 
@@ -365,10 +338,7 @@ ImageNG ImageNG::operator--(int)
 			{
 				setPixel(i, j, getPixel(i, j) - 20);
 			}
-			catch (ColorException &colorException)
-			{
-				throw colorException;
-			}
+			RETHROW(ColorException);
 	return image;
 }
 
@@ -485,7 +455,7 @@ void ImageNG::setBackground(int grayLevel)
 #endif
 	if (grayLevel < 0 || grayLevel > UCHAR_MAX)
 		throw ColorException("setBackground invalide", grayLevel);
-	setBackground((unsigned char)grayLevel);
+	setBackground(static_cast<unsigned char>(grayLevel));
 }
 
 void ImageNG::setPixel(int x, int y, unsigned char grayLevel)
@@ -512,12 +482,9 @@ void ImageNG::setPixel(int x, int y, int grayLevel)
 		throw ColorException("setPixel invalide", grayLevel);
 	try
 	{
-	setPixel(x, y, (unsigned char)grayLevel);
+	setPixel(x, y, static_cast<unsigned char>(grayLevel));
 	}
-	catch (XYException &xyException)
-	{
-		throw xyException;
-	}
+	RETHROW(XYException);
 }
 
 int ImageNG::getPixel(int x, int y) const
@@ -626,7 +593,7 @@ void ImageNG::Save(ofstream &fichier) const
 	for (int i = 0; i < largeur; i++)
 		for (int j = 0; j < hauteur; j++)
 			vector[i * hauteur + j] = getPixel(i, j);
-	fichier.write((char *)vector, largeur * hauteur * sizeof(unsigned char));
+	fichier.write(reinterpret_cast<char *>(vector), largeur * hauteur * sizeof(unsigned char));
 	delete[] vector;
 #ifdef DEBUGVERBOSE
 	cout << "\033[36;43mDEBUGVERBOSE : Fin Save de ImageNG\033[0m" << endl;
@@ -644,7 +611,7 @@ void ImageNG::Load(ifstream &fichier)
 	setDimension(dimension);
 	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
 	unsigned char *vector = new unsigned char[largeur * hauteur];
-	fichier.read((char *)vector, largeur * hauteur * sizeof(unsigned char));
+	fichier.read(reinterpret_cast<char *>(vector), largeur * hauteur * sizeof(unsigned char));
 	for (int i = 0; i < largeur; i++)
 		for (int j = 0; j < hauteur; j++)
 			setPixel(i, j, vector[i * hauteur + j]);

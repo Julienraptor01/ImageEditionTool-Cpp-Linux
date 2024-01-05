@@ -18,42 +18,42 @@ void Essai3();
 void Essai4();
 void Essai5();
 
-int main(int argc,char* argv[])
+int main(int argc, char *argv[])
 {
-	// Initialisation de QT
-	QApplication app(argc,argv);
+	QApplication app(argc, argv);
 	close(2);
 
 	int choix;
 	bool fini = false;
 
-	while(!fini)
+	while (!fini)
 	{
 		if (argc == 2)
 		{
 			choix = atoi(argv[1]);
 			fini = true;
 		}
-		else choix = Menu();
-		switch(choix)
+		else
+			choix = Menu();
+		switch (choix)
 		{
-		case 1 :
+		case 1:
 			Essai1();
 			break;
-		case 2 :
+		case 2:
 			Essai2();
 			break;
-		case 3 :
+		case 3:
 			Essai3();
 			break;
-		case 4 :
+		case 4:
 			Essai4();
 			break;
-		case 5 :
+		case 5:
 			Essai5();
 			break;
-		default :
-			fini = true ;
+		default:
+			fini = true;
 			break;
 		}
 	}
@@ -75,27 +75,26 @@ int Menu()
 
 	int ch;
 	cout << "Choix : ";
-	cin >> ch; // Faites pas le biess !
+	cin >> ch;
 	cin.ignore();
 	return ch;
 }
 
-//*********************************************************************************************
-void Essai1() // Attention : utilisez les flux bytes (read et write) !!!!
+void Essai1()
 {
 	cout << "----- 1. Test des methodes Save et Load de la classe Dimension ------" << endl;
 
-	Dimension d1(640,480);
+	Dimension d1(640, 480);
 	cout << "d1 = " << d1 << endl;
 	cout << endl;
 
 	cout << "----- Sauvegarde de la dimension dans le fichier D.dat -----" << endl;
-	ofstream fichier1("./out/D.cbdf",ios::out);
+	ofstream fichier1("./out/D.cbdf", ios::out);
 	d1.Save(fichier1);
 	fichier1.close();
 
 	cout << "----- Chargement de l'objet dimension situe dans le fichier D.dat -----" << endl;
-	ifstream fichier2("./out/D.cbdf",ios::in);
+	ifstream fichier2("./out/D.cbdf", ios::in);
 	Dimension d2;
 	d2.Load(fichier2);
 	fichier2.close();
@@ -103,8 +102,7 @@ void Essai1() // Attention : utilisez les flux bytes (read et write) !!!!
 	cout << endl;
 }
 
-//*********************************************************************************************
-void Essai2() // Attention : utilisez les flux bytes (read et write) !!!!
+void Essai2()
 {
 	cout << "----- 2. Test des methodes Save et Load de la classe ImageNG ------" << endl;
 
@@ -114,12 +112,12 @@ void Essai2() // Attention : utilisez les flux bytes (read et write) !!!!
 	cout << endl;
 
 	cout << "----- Sauvegarde de l'image dans le fichier NG.dat -----" << endl;
-	ofstream fichier1("./out/NG.cbif",ios::out);
+	ofstream fichier1("./out/NG.cbif", ios::out);
 	i1.Save(fichier1);
 	fichier1.close();
 
 	cout << "----- Chargement de l'image situee dans le fichier NG.dat -----" << endl;
-	ifstream fichier2("./out/NG.cbif",ios::in);
+	ifstream fichier2("./out/NG.cbif", ios::in);
 	ImageNG i2;
 	i2.Load(fichier2);
 	fichier2.close();
@@ -128,25 +126,25 @@ void Essai2() // Attention : utilisez les flux bytes (read et write) !!!!
 	cout << endl;
 }
 
-//*********************************************************************************************
-void Essai3() // Attention : utilisez les flux bytes (read et write) !!!!
+void Essai3()
 {
 	cout << "----- 3. Test des methodes Save et Load de la classe ImageB ------" << endl;
 
-	ImageB i1(1,"testBinaire",Dimension(255,255));
+	ImageB i1(1, "testBinaire", Dimension(255, 255));
 	i1.setBackground(false);
-	for (int x=0 ; x<255 ; x=x+1) i1.setPixel(x,x,true);
+	for (int x = 0; x < 255; x = x + 1)
+		i1.setPixel(x, x, true);
 	cout << "i1 = " << i1 << endl;
 	i1.Dessine();
 	cout << endl;
 
 	cout << "----- Sauvegarde de l'image dans le fichier B.dat -----" << endl;
-	ofstream fichier1("./out/B.cbif",ios::out);
+	ofstream fichier1("./out/B.cbif", ios::out);
 	i1.Save(fichier1);
 	fichier1.close();
 
 	cout << "----- Chargement de l'image situee dans le fichier B.dat -----" << endl;
-	ifstream fichier2("./out/B.cbif",ios::in);
+	ifstream fichier2("./out/B.cbif", ios::in);
 	ImageB i2;
 	i2.Load(fichier2);
 	fichier2.close();
@@ -155,22 +153,21 @@ void Essai3() // Attention : utilisez les flux bytes (read et write) !!!!
 	cout << endl;
 }
 
-//*********************************************************************************************
-void Essai4() // Attention : utilisez les flux bytes (read et write) !!!!
+void Essai4()
 {
 	cout << "----- 4. Test des methodes Save et Load de la classe Couleur ------" << endl;
 
-	Couleur c1(112,141,35);
+	Couleur c1(112, 141, 35);
 	cout << "c1 = " << c1 << endl;
 	cout << endl;
 
 	cout << "----- Sauvegarde de la couleur dans le fichier C.dat -----" << endl;
-	ofstream fichier1("./out/C.cbcf",ios::out);
+	ofstream fichier1("./out/C.cbcf", ios::out);
 	c1.Save(fichier1);
 	fichier1.close();
 
 	cout << "----- Chargement de la couleur situee dans le fichier C.dat -----" << endl;
-	ifstream fichier2("./out/C.cbcf",ios::in);
+	ifstream fichier2("./out/C.cbcf", ios::in);
 	Couleur c2;
 	c2.Load(fichier2);
 	fichier2.close();
@@ -178,8 +175,7 @@ void Essai4() // Attention : utilisez les flux bytes (read et write) !!!!
 	cout << endl;
 }
 
-//*********************************************************************************************
-void Essai5() // Attention : utilisez les flux bytes (read et write) !!!!
+void Essai5()
 {
 	cout << "----- 5. Test des methodes Save et Load de la classe ImageRGB ------" << endl;
 
@@ -189,13 +185,13 @@ void Essai5() // Attention : utilisez les flux bytes (read et write) !!!!
 	cout << endl;
 
 	cout << "----- Sauvegarde de l'image dans le fichier RGB.dat -----" << endl;
-	ofstream fichier1("./out/RGB.cbif",ios::out);
+	ofstream fichier1("./out/RGB.cbif", ios::out);
 	i1.Save(fichier1);
 	fichier1.close();
 
 	cout << "----- Chargement de l'image situee dans le fichier RGB.dat -----" << endl;
-	ifstream fichier2("./out/RGB.cbif",ios::in);
-	ImageRGB* i2 = new ImageRGB();
+	ifstream fichier2("./out/RGB.cbif", ios::in);
+	ImageRGB *i2 = new ImageRGB();
 	i2->Load(fichier2);
 	fichier2.close();
 	cout << "i2 = " << *i2 << endl;

@@ -18,48 +18,48 @@ void Essai5();
 void Essai6();
 void Essai7();
 
-int main(int argc,char* argv[])
+int main(int argc, char *argv[])
 {
-	// Initialisation de QT
-	QApplication app(argc,argv);
+	QApplication app(argc, argv);
 	close(2);
 
 	int choix;
 	bool fini = false;
 
-	while(!fini)
+	while (!fini)
 	{
 		if (argc == 2)
 		{
 			choix = atoi(argv[1]);
 			fini = true;
 		}
-		else choix = Menu();
-		switch(choix)
+		else
+			choix = Menu();
+		switch (choix)
 		{
-		case 1 :
+		case 1:
 			Essai1();
 			break;
-		case 2 :
+		case 2:
 			Essai2();
 			break;
-		case 3 :
+		case 3:
 			Essai3();
 			break;
-		case 4 :
+		case 4:
 			Essai4();
 			break;
-		case 5 :
+		case 5:
 			Essai5();
 			break;
-		case 6 :
+		case 6:
 			Essai6();
 			break;
-		case 7 :
+		case 7:
 			Essai7();
 			break;
-		default :
-			fini = true ;
+		default:
+			fini = true;
 			break;
 		}
 	}
@@ -84,12 +84,11 @@ int Menu()
 
 	int ch;
 	cout << "Choix : ";
-	cin >> ch; // Faites pas le biess !
+	cin >> ch;
 	cin.ignore();
 	return ch;
 }
 
-//*******************************************************************************************************
 void Essai1()
 {
 	cout << "***** 1. Test du Seuillage d'une ImageNG *****************************************************" << endl;
@@ -105,13 +104,12 @@ void Essai1()
 	cin.ignore();
 
 	ImageB imageSeuillee;
-	imageSeuillee = Traitements::Seuillage(image,seuil);
+	imageSeuillee = Traitements::Seuillage(image, seuil);
 
 	cout << "Voici l'image seuillee : " << imageSeuillee << endl;
 	imageSeuillee.Dessine();
 }
 
-//*******************************************************************************************************
 void Essai2()
 {
 	cout << "***** 2. Test du filtre moyenneur sur une ImageNG ********************************************" << endl;
@@ -122,7 +120,7 @@ void Essai2()
 	image.Dessine();
 
 	ImageNG imageFiltree;
-	imageFiltree = Traitements::FiltreMoyenneur(image,3);
+	imageFiltree = Traitements::FiltreMoyenneur(image, 3);
 
 	cout << "Voici l'image filtree : " << imageFiltree << endl;
 	imageFiltree.Dessine();
@@ -133,13 +131,12 @@ void Essai2()
 	image2.Dessine();
 
 	ImageNG imageFiltree2;
-	imageFiltree2 = Traitements::FiltreMoyenneur(image2,11);
+	imageFiltree2 = Traitements::FiltreMoyenneur(image2, 11);
 
 	cout << "Voici l'image filtree : " << imageFiltree2 << endl;
 	imageFiltree2.Dessine();
 }
 
-//*******************************************************************************************************
 void Essai3()
 {
 	cout << "***** 3. Test du filtre median sur une ImageNG ********************************************" << endl;
@@ -155,13 +152,12 @@ void Essai3()
 	cin.ignore();
 
 	ImageNG imageFiltree;
-	imageFiltree = Traitements::FiltreMedian(image,taille);
+	imageFiltree = Traitements::FiltreMedian(image, taille);
 
 	cout << "Voici l'image filtree : " << imageFiltree << endl;
 	imageFiltree.Dessine();
 }
 
-//*******************************************************************************************************
 void Essai4()
 {
 	cout << "***** 4. Test de l'erosion sur une ImageNG ********************************************" << endl;
@@ -177,13 +173,12 @@ void Essai4()
 	cin.ignore();
 
 	ImageNG imageFiltree;
-	imageFiltree = Traitements::Erosion(image,taille);
+	imageFiltree = Traitements::Erosion(image, taille);
 
 	cout << "Voici l'image erodee : " << imageFiltree << endl;
 	imageFiltree.Dessine();
 }
 
-//*******************************************************************************************************
 void Essai5()
 {
 	cout << "***** 5. Test de la dilatation sur une ImageNG ********************************************" << endl;
@@ -199,13 +194,12 @@ void Essai5()
 	cin.ignore();
 
 	ImageNG imageFiltree;
-	imageFiltree = Traitements::Dilatation(image,taille);
+	imageFiltree = Traitements::Dilatation(image, taille);
 
 	cout << "Voici l'image dilatee : " << imageFiltree << endl;
 	imageFiltree.Dessine();
 }
 
-//*******************************************************************************************************
 void Essai6()
 {
 	cout << "***** 6. Essai de detection de contours sur une ImageNG ************************************" << endl;
@@ -216,14 +210,13 @@ void Essai6()
 	image.Dessine();
 
 	ImageNG imageResultat;
-	imageResultat = Traitements::Dilatation(image,3) - Traitements::Erosion(image,3);
+	imageResultat = Traitements::Dilatation(image, 3) - Traitements::Erosion(image, 3);
 	imageResultat.setNom("joconde-contours");
 
 	cout << "Voici l'image contours : " << imageResultat << endl;
 	imageResultat.Dessine();
 }
 
-//*******************************************************************************************************
 void Essai7()
 {
 	cout << "***** 7. Test du negatif sur une ImageNG ************************************" << endl;

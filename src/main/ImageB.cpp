@@ -264,7 +264,7 @@ void ImageB::Save(ofstream &fichier) const
 	for (int i = 0; i < hauteur; i++)
 		for (int j = 0; j < largeur; j++)
 			vector[i * largeur + j] = getPixel(j, i);
-	fichier.write((char *)vector, largeur * hauteur * sizeof(bool));
+	fichier.write(reinterpret_cast<char *>(vector), largeur * hauteur * sizeof(bool));
 	delete[] vector;
 #ifdef DEBUGVERBOSE
 	cout << "\033[36;43mDEBUGVERBOSE : Fin Save de ImageB\033[0m" << endl;
@@ -282,7 +282,7 @@ void ImageB::Load(ifstream &fichier)
 	setDimension(dimension);
 	int largeur = dimension.getLargeur(), hauteur = dimension.getHauteur();
 	bool *vector = new bool[largeur * hauteur];
-	fichier.read((char *)vector, largeur * hauteur * sizeof(bool));
+	fichier.read(reinterpret_cast<char *>(vector), largeur * hauteur * sizeof(bool));
 	for (int i = 0; i < hauteur; i++)
 		for (int j = 0; j < largeur; j++)
 			setPixel(j, i, vector[i * largeur + j]);

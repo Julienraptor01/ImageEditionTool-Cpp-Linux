@@ -21,60 +21,60 @@ void Essai9();
 void Essai10();
 void Essai11();
 
-int main(int argc,char* argv[])
+int main(int argc, char *argv[])
 {
-	// Initialisation de QT
-	QApplication app(argc,argv);
+	QApplication app(argc, argv);
 	close(2);
 
 	int choix;
 	bool fini = false;
 
-	while(!fini)
+	while (!fini)
 	{
 		if (argc == 2)
 		{
 			choix = atoi(argv[1]);
 			fini = true;
 		}
-		else choix = Menu();
-		switch(choix)
+		else
+			choix = Menu();
+		switch (choix)
 		{
-		case 1 :
+		case 1:
 			Essai1();
 			break;
-		case 2 :
+		case 2:
 			Essai2();
 			break;
-		case 3 :
+		case 3:
 			Essai3();
 			break;
-		case 4 :
+		case 4:
 			Essai4();
 			break;
-		case 5 :
+		case 5:
 			Essai5();
 			break;
-		case 6 :
+		case 6:
 			Essai6();
 			break;
-		case 7 :
+		case 7:
 			Essai7();
 			break;
-		case 8 :
+		case 8:
 			Essai8();
 			break;
-		case 9 :
+		case 9:
 			Essai9();
 			break;
-		case 10 :
+		case 10:
 			Essai10();
 			break;
-		case 11 :
+		case 11:
 			Essai11();
 			break;
-		default :
-			fini = true ;
+		default:
+			fini = true;
 			break;
 		}
 	}
@@ -82,7 +82,6 @@ int main(int argc,char* argv[])
 	return 0;
 }
 
-//******************************************************************************************************
 int Menu()
 {
 	cout << endl;
@@ -104,14 +103,14 @@ int Menu()
 
 	int ch;
 	cout << "Choix : ";
-	cin >> ch; // Faites pas le biess !
+	cin >> ch;
 	cin.ignore();
 	return ch;
 }
 
-//*******************************************************************************************************
-//*** Tests de l'operateur = de la classe Couleur *******************************************************
-//*******************************************************************************************************
+/**
+ * @brief Tests de l'operateur = de la classe Couleur
+ */
 void Essai1()
 {
 	cout << "********************************************************************" << endl;
@@ -127,9 +126,9 @@ void Essai1()
 	im.Dessine();
 }
 
-//*******************************************************************************************************
-//*** Tests de l'operateur = de la classe ImageNG *******************************************************
-//*******************************************************************************************************
+/**
+ * @brief Tests de l'operateur = de la classe ImageNG
+ */
 void Essai2()
 {
 	cout << "********************************************************************" << endl;
@@ -138,7 +137,7 @@ void Essai2()
 	{
 		ImageNG i;
 		{
-			ImageNG i1("./src/assets/images/bulles.bmp"); // Ajout d'un nouveau constructeur !!! --> a faire
+			ImageNG i1("./src/assets/images/bulles.bmp");
 			cout << "Voici i1 : ";
 			i1.Affiche();
 			i1.Dessine();
@@ -152,8 +151,8 @@ void Essai2()
 		i.Dessine();
 
 		cout << endl << ">>>>> i2 = i3 = ImageNG(1,\"essai\",Dimension(400,200));" << endl;
-		ImageNG i2,i3;
-		i2 = i3 = ImageNG(1,"essai",Dimension(400,200));
+		ImageNG i2, i3;
+		i2 = i3 = ImageNG(1, "essai", Dimension(400, 200));
 		cout << "Voici i2 : ";
 		i2.Affiche();
 		i2.Dessine();
@@ -163,9 +162,9 @@ void Essai2()
 	}
 }
 
-//*******************************************************************************************************
-//*** Tests des operateurs << et >> de la classe Dimension **********************************************
-//*******************************************************************************************************
+/**
+ * @brief Tests des operateurs << et >> de la classe Dimension
+ */
 void Essai3()
 {
 	cout << "**************************************************************************" << endl;
@@ -178,9 +177,9 @@ void Essai3()
 	cout << d1 << endl << endl;
 }
 
-//*******************************************************************************************************
-//*** Tests de l'operateur << de la classe ImageNG ******************************************************
-//*******************************************************************************************************
+/**
+ * @brief Tests de l'operateur << de la classe ImageNG
+ */
 void Essai4()
 {
 	cout << "**************************************************************************" << endl;
@@ -191,9 +190,9 @@ void Essai4()
 	i1.Dessine();
 }
 
-//*******************************************************************************************************
-//*** Tests des operateurs (+ int) de la classe ImageNG *************************************************
-//*******************************************************************************************************
+/**
+ * @brief Tests des operateurs (+ int) de la classe ImageNG
+ */
 void Essai5()
 {
 	cout << "****************************************************************************************" << endl;
@@ -225,9 +224,9 @@ void Essai5()
 	i3.Dessine();
 }
 
-//*******************************************************************************************************
-//*** Tests des operateurs (- int) de la classe ImageNG *************************************************
-//*******************************************************************************************************
+/**
+ * @brief Tests des operateurs (- int) de la classe ImageNG
+ */
 void Essai6()
 {
 	cout << "****************************************************************************************" << endl;
@@ -247,62 +246,62 @@ void Essai6()
 	i1.Dessine();
 }
 
-//*******************************************************************************************************
-//*** Tests des operateurs ++ de la classe ImageNG ******************************************************
-//*******************************************************************************************************
+/**
+ * @brief Tests des operateurs ++ de la classe ImageNG
+ */
 void Essai7()
 {
 	cout << "****************************************************************************************" << endl;
 	cout << "(7) ********* Test des operateurs ++ de la classe ImageNG ******************************" << endl;
 	cout << "****************************************************************************************" << endl;
 
-	ImageNG i(1,"essai++",Dimension(400,200));
+	ImageNG i(1, "essai++", Dimension(400, 200));
 	cout << endl << "***** Test de l'operateur de pre-incrementation **********************" << endl;
 	cout << "i : " << i << endl;
-	cout << "++i : " << ++i << endl; // Si tout va bien, i est incremente avant d'etre affichee !
+	cout << "++i : " << ++i << endl;
 	cout << "i : " << i << endl << endl;
 
 	cout << "***** Test de l'operateur de post-incrementation *********************" << endl;
 	cout << "i : " << i << endl;
-	cout << "i++ : " << i++ << endl; // Si tout va bien, i est incremente apres avoir ete affichee !
+	cout << "i++ : " << i++ << endl;
 	cout << "i : " << i << endl << endl;
 
 	cout << "***** Test visuel ++ *************************************************" << endl;
 	i = ImageNG("./src/assets/images/boat.bmp");
-	for (int x=0 ; x<8 ; x++,i++)
+	for (int x = 0; x < 8; x++, i++)
 		i.Dessine();
 }
 
-//*******************************************************************************************************
-//*** Tests des operateurs -- de la classe ImageNG ******************************************************
-//*******************************************************************************************************
+/**
+ * @brief Tests des operateurs -- de la classe ImageNG
+ */
 void Essai8()
 {
 	cout << "****************************************************************************************" << endl;
 	cout << "(8) ********* Test des operateurs -- de la classe ImageNG ******************************" << endl;
 	cout << "****************************************************************************************" << endl;
 
-	ImageNG i(1,"essai--",Dimension(400,200));
+	ImageNG i(1, "essai--", Dimension(400, 200));
 	i.setBackground(210);
 	cout << endl << "***** Test de l'operateur de pre-decrementation **********************" << endl;
 	cout << "i : " << i << endl;
-	cout << "--i : " << --i << endl; // Si tout va bien, i est decremente avant d'etre affichee !
+	cout << "--i : " << --i << endl;
 	cout << "i : " << i << endl << endl;
 
 	cout << "***** Test de l'operateur de post-decrementation *********************" << endl;
 	cout << "i : " << i << endl;
-	cout << "i-- : " << i-- << endl; // Si tout va bien, i est decremente apres avoir ete affichee !
+	cout << "i-- : " << i-- << endl;
 	cout << "i : " << i << endl << endl;
 
 	cout << "***** Test visuel ++ *************************************************" << endl;
 	i = ImageNG("./src/assets/images/boat.bmp");
-	for (int x=0 ; x<8 ; x++,i--)
+	for (int x = 0; x < 8; x++, i--)
 		i.Dessine();
 }
 
-//*******************************************************************************************************
-//*** Test des operateurs == et != de la classe Dimension ***********************************************
-//*******************************************************************************************************
+/**
+ * @brief Tests des operateurs == et != de la classe Dimension
+ */
 void Essai9()
 {
 	cout << "****************************************************************************************" << endl;
@@ -314,21 +313,23 @@ void Essai9()
 	cin >> d1;
 	cout << "Encodez une dimension d2 :" << endl;
 	cin >> d2;
-	if (d1 == d2) cout << "--> d1 est egale a d2";
-	if (d1 != d2) cout << "--> d1 n'est pas egale a d2";
+	if (d1 == d2)
+		cout << "--> d1 est egale a d2";
+	if (d1 != d2)
+		cout << "--> d1 n'est pas egale a d2";
 	cout << endl << endl;
 }
 
-//*******************************************************************************************************
-//*** Tests de l'operateur (- ImageNG) de la classe ImageNG *********************************************
-//*******************************************************************************************************
+/**
+ * @brief Tests de l'operateur (- ImageNG) de la classe ImageNG
+ */
 void Essai10()
 {
 	cout << "****************************************************************************************" << endl;
 	cout << "(10) ********* Tests de l'operateur (- ImageNG) de la classe ImageNG *******************" << endl;
 	cout << "****************************************************************************************" << endl;
 
-	ImageNG i1("./src/assets/images/imageBinaire1.bmp"),i2("./src/assets/images/imageBinaire2.bmp"),i3;
+	ImageNG i1("./src/assets/images/imageBinaire1.bmp"), i2("./src/assets/images/imageBinaire2.bmp"), i3;
 	cout << "Avant :" << endl;
 	cout << "i1 = " << i1 << endl;
 	i1.Dessine();
@@ -344,9 +345,9 @@ void Essai10()
 	i2.Dessine();
 }
 
-//*******************************************************************************************************
-//*** Tests des operateurs < > et == de la classe ImageNG ***********************************************
-//*******************************************************************************************************
+/**
+ * @brief Tests des operateurs < > et == de la classe ImageNG
+ */
 void Essai11()
 {
 	cout << "****************************************************************************************" << endl;
@@ -360,9 +361,13 @@ void Essai11()
 	i2.Dessine();
 
 	cout << "Comparaison :" << endl;
-	if (i1 == i2) cout << "--> i1 == i2";
-	else if (i1 < i2) cout << "--> i1 < i2";
-	else if (i1 > i2) cout << "--> i1 > i2";
-	else cout << "aucun des 3...";
+	if (i1 == i2)
+		cout << "--> i1 == i2";
+	else if (i1 < i2)
+		cout << "--> i1 < i2";
+	else if (i1 > i2)
+		cout << "--> i1 > i2";
+	else
+		cout << "aucun des 3...";
 	cout << endl << endl;
 }

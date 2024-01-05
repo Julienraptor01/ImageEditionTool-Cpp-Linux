@@ -57,7 +57,7 @@ void PhotoShop::afficheImages() const
 	cout << "\033[31;44mDEBUGVERBOSE : afficheImages de PhotoShop\033[0m" << endl;
 #endif
 	for (Iterateur<Image *> iterateur(images); !iterateur.end(); iterateur++)
-		((Image *)iterateur)->Affiche();
+		(static_cast<Image *>(iterateur))->Affiche();
 }
 
 void PhotoShop::dessineImages() const
@@ -66,7 +66,7 @@ void PhotoShop::dessineImages() const
 	cout << "\033[31;44mDEBUGVERBOSE : dessineImages de PhotoShop\033[0m" << endl;
 #endif
 	for (Iterateur<Image *> iterateur(images); !iterateur.end(); iterateur++)
-		((Image *)iterateur)->Dessine();
+		(static_cast<Image *>(iterateur))->Dessine();
 }
 
 Image *PhotoShop::getImageParIndice(int index) const
@@ -83,8 +83,8 @@ Image *PhotoShop::getImageParId(int id) const
 	cout << "\033[31;44mDEBUGVERBOSE : getImageParId de PhotoShop\033[0m" << endl;
 #endif
 	for (Iterateur<Image *> iterateur(images); !iterateur.end(); iterateur++)
-		if (((Image *)iterateur)->getId() == id)
-			return (Image *)iterateur;
+		if ((static_cast<Image *>(iterateur))->getId() == id)
+			return static_cast<Image *>(iterateur);
 	return nullptr;
 }
 
@@ -104,7 +104,7 @@ void PhotoShop::supprimeImageParId(int id)
 #endif
 	Iterateur<Image *> iterateur(images);
 	for (int index = 0; !iterateur.end(); iterateur++, index++)
-		if (((Image *)iterateur)->getId() == id)
+		if ((static_cast<Image *>(iterateur))->getId() == id)
 		{
 			Image *imageToDelete = images.retireElement(index);
 			delete imageToDelete;

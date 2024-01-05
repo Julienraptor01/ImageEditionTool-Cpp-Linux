@@ -15,41 +15,42 @@ void Essai4();
 void Essai5();
 void Essai6();
 
-int main(int argc,char* argv[])
+int main(int argc, char *argv[])
 {
 	int choix;
 	bool fini = false;
 
-	while(!fini)
+	while (!fini)
 	{
 		if (argc == 2)
 		{
 			choix = atoi(argv[1]);
 			fini = true;
 		}
-		else choix = Menu();
-		switch(choix)
+		else
+			choix = Menu();
+		switch (choix)
 		{
-		case 1 :
+		case 1:
 			Essai1();
 			break;
-		case 2 :
+		case 2:
 			Essai2();
 			break;
-		case 3 :
+		case 3:
 			Essai3();
 			break;
-		case 4 :
+		case 4:
 			Essai4();
 			break;
-		case 5 :
+		case 5:
 			Essai5();
 			break;
-		case 6 :
+		case 6:
 			Essai6();
 			break;
-		default :
-			fini = true ;
+		default:
+			fini = true;
 			break;
 		}
 	}
@@ -74,7 +75,7 @@ int Menu()
 
 	int ch;
 	cout << "Choix : ";
-	cin >> ch; // Faites pas le biess !
+	cin >> ch;
 	cin.ignore();
 	return ch;
 }
@@ -85,7 +86,7 @@ void Essai1()
 	cout << "----- 1.1 Creation et gestion d'une Liste ---------------------------------------------------" << endl;
 
 	ArrayList<int> liste;
-	liste.Affiche(); // --> ()
+	liste.Affiche();
 	cout << endl;
 
 	cout << "Liste Vide ? " << liste.estVide() << endl;
@@ -97,7 +98,7 @@ void Essai1()
 	liste.insereElement(0);
 	liste.insereElement(17);
 	cout << "Liste Vide ? " << liste.estVide() << endl;
-	liste.Affiche(); // --> (3 -2 5 -1 0 17)
+	liste.Affiche();
 	cout << "La liste contient " << liste.getNombreElements() << " elements." << endl;
 
 	cout << "----- 1.2 On recupere une elements de la Liste dans le supprimer ----------------------------" << endl;
@@ -125,7 +126,7 @@ void Essai2()
 	cout << "----- 2. Test du constructeur de copie ArrayList avec des entiers ---------------------------" << endl;
 	cout << "----- 2.1 Creation et gestion d'une Liste ---------------------------------------------------" << endl;
 	ArrayList<int> liste;
-	liste.Affiche(); // --> ()
+	liste.Affiche();
 	cout << endl;
 
 	cout << "On insere 3,-2,5,-1,0 et 17..." << endl;
@@ -135,7 +136,7 @@ void Essai2()
 	liste.insereElement(-1);
 	liste.insereElement(0);
 	liste.insereElement(17);
-	liste.Affiche(); // --> (3 -2 5 -1 0 17)
+	liste.Affiche();
 
 	cout << "----- 2.2 Test du constructeur de copie -----------------------------------------------------" << endl;
 	{
@@ -157,7 +158,7 @@ void Essai3()
 	cout << "----- 3. Test de l'operateur = de ArrayList avec des entiers ---------------------------------" << endl;
 	cout << "----- 3.1 Creation et gestion d'une Liste --------------------------------------------------" << endl;
 	ArrayList<int> liste;
-	liste.Affiche(); // --> ()
+	liste.Affiche();
 	cout << endl;
 
 	cout << "On insere 3,-2,5,-1,0 et 17..." << endl;
@@ -167,7 +168,7 @@ void Essai3()
 	liste.insereElement(-1);
 	liste.insereElement(0);
 	liste.insereElement(17);
-	liste.Affiche(); // --> (3 -2 5 -1 0 17)
+	liste.Affiche();
 
 	cout << "----- 3.2 Test de l'operateur = -------------------------------------------------------------" << endl;
 	{
@@ -194,11 +195,11 @@ void Essai4()
 	cout << endl;
 
 	cout << "On insere Couleur(128,23,89)..." << endl;
-	liste.insereElement(Couleur(128,23,89));
+	liste.insereElement(Couleur(128, 23, 89));
 	liste.Affiche();
 
 	cout << "On insere Couleur(100,100,100)..." << endl;
-	Couleur c(100,100,100);
+	Couleur c(100, 100, 100);
 	liste.insereElement(c);
 	liste.Affiche();
 
@@ -225,16 +226,16 @@ void Essai5()
 
 	cout << "On affiche grace a un iterateur..." << endl;
 	Iterateur<int> it(liste);
-	for (it.reset() ; !it.end() ; it++)
-		cout << " " << (int)it << endl;
+	for (it.reset(); !it.end(); it++)
+		cout << " " << static_cast<int>(it) << endl;
 	cout << endl;
 
 	cout << "On modifie l'element d'indice 1 et on re-affiche grace a l'iterateur..." << endl;
 	it.reset();
 	it++;
 	&it = 100;
-	for (it.reset() ; !it.end() ; it++)
-		cout << " " << (int)it << endl;
+	for (it.reset(); !it.end(); it++)
+		cout << " " << static_cast<int>(it) << endl;
 	cout << endl;
 
 	cout << "On supprime l'element d'indice 3 et on re-affiche grace a l'iterateur..." << endl;
@@ -242,7 +243,7 @@ void Essai5()
 	it.reset();
 	while (!it.end())
 	{
-		cout << " " << (int)it << endl;
+		cout << " " << static_cast<int>(it) << endl;
 		it++;
 	}
 }
@@ -256,14 +257,14 @@ void Essai6()
 	cout << "On insere quelques couleurs..." << endl;
 	liste.insereElement(Couleur::BLEU);
 	liste.insereElement(Couleur::BLANC);
-	liste.insereElement(Couleur(128,0,36));
-	liste.insereElement(Couleur(0,128,255));
+	liste.insereElement(Couleur(128, 0, 36));
+	liste.insereElement(Couleur(0, 128, 255));
 
 	cout << "On affiche grace a un iterateur..." << endl;
 	Iterateur<Couleur> it(liste);
-	for (it.reset() ; !it.end() ; it++)
+	for (it.reset(); !it.end(); it++)
 	{
-		Couleur c = (Couleur) it;
+		Couleur c = static_cast<Couleur>(it);
 		cout << " " << c << endl;
 	}
 	cout << endl;
@@ -273,7 +274,7 @@ void Essai6()
 	it.reset();
 	while (!it.end())
 	{
-		cout << " " << (Couleur)it << endl;
+		cout << " " << static_cast<Couleur>(it) << endl;
 		it++;
 	}
 }

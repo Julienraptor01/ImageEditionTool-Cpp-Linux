@@ -14,6 +14,23 @@ using namespace std;
 #include "XYException.h"
 #include "ColorException.h"
 
+#define CATCH_AFFICHE \
+catch (Exception &e) \
+{ \
+	if (dynamic_cast<ColorException *>(&e)) \
+	{ \
+		static_cast<ColorException *>(&e)->Affiche(); \
+	} \
+	else if (dynamic_cast<XYException *>(&e)) \
+	{ \
+		static_cast<XYException *>(&e)->Affiche(); \
+	} \
+	else \
+	{ \
+		e.Affiche(); \
+	} \
+}
+
 int Menu();
 void Essai1();
 void Essai2();
@@ -22,45 +39,45 @@ void Essai4();
 void Essai5();
 void Essai6();
 
-int main(int argc,char* argv[])
+int main(int argc, char *argv[])
 {
-	// Initialisation de QT
-	QApplication app(argc,argv);
+	QApplication app(argc, argv);
 	close(2);
 
 	int choix;
 	bool fini = false;
 
-	while(!fini)
+	while (!fini)
 	{
 		if (argc == 2)
 		{
 			choix = atoi(argv[1]);
 			fini = true;
 		}
-		else choix = Menu();
-		switch(choix)
+		else
+			choix = Menu();
+		switch (choix)
 		{
-		case 1 :
+		case 1:
 			Essai1();
 			break;
-		case 2 :
+		case 2:
 			Essai2();
 			break;
-		case 3 :
+		case 3:
 			Essai3();
 			break;
-		case 4 :
+		case 4:
 			Essai4();
 			break;
-		case 5 :
+		case 5:
 			Essai5();
 			break;
-		case 6 :
+		case 6:
 			Essai6();
 			break;
-		default :
-			fini = true ;
+		default:
+			fini = true;
 			break;
 		}
 	}
@@ -84,21 +101,14 @@ int Menu()
 
 	int ch;
 	cout << "Choix : ";
-	cin >> ch; // Faites pas le biess !
+	cin >> ch;
 	cin.ignore();
 	return ch;
 }
 
-//**********************************************************************************************
-// ATTENTION !!!!
-// Les methodes de vos classes NE doivent PAS contenir de TRY{...} CATCH{...} mais uniquement des THROW !!! Donc, votre classe lance une exception (une erreur) mais ce n'est pas elle qui la traite. C'est l'application qui utilise votre classe qui doit traiter les exceptions. C'est donc uniquement dans le main (ou les fonctions appelees) que l'on trouve des try...catch
-//**********************************************************************************************
 void Essai1()
 {
 	cout << "***** (1) Tests de ColorException dans la classe Couleur *********************" << endl;
-	// A COMPLETER : Traitez l'exception susceptible d'etre lancee par le bloc de code suivant (try...catch)
-	// --> remplacer les ... par ce qu'il faut
-
 	try
 	{
 		Couleur c;
@@ -119,7 +129,7 @@ void Essai1()
 		c.setBleu(val);
 		cout << "Couleur modifiee = " << c << endl << endl;
 
-		int r,v,b;
+		int r, v, b;
 		cout << "Creation d'une couleur..." << endl;
 		cout << "Composante Rouge : ";
 		cin >> r;
@@ -130,24 +140,16 @@ void Essai1()
 		cout << "Composante Bleue : ";
 		cin >> b;
 		cin.ignore();
-		Couleur c1(r,v,b);
+		Couleur c1(r, v, b);
 		cout << "Couleur creee = " << c1 << endl << endl;
 	}
-	catch (ColorException &e)
-	{
-		e.Affiche();
-	}
-
+	CATCH_AFFICHE;
 	cout << endl;
 }
 
-//**********************************************************************************************
 void Essai2()
 {
 	cout << "***** (2) Tests de XYException dans la classe Dimension *********************" << endl;
-	// A COMPLETER : Traitez l'exception susceptible d'etre lancee par le bloc de code suivant (try...catch)
-	// --> remplacer les ... par ce qu'il faut
-
 	try
 	{
 		Dimension d;
@@ -164,7 +166,7 @@ void Essai2()
 		d.setHauteur(val);
 		cout << "Dimension modifiee = " << d << endl << endl;
 
-		int l,h;
+		int l, h;
 		cout << "Creation d'une dimension..." << endl;
 		cout << "Largeur : ";
 		cin >> l;
@@ -172,28 +174,20 @@ void Essai2()
 		cout << "Hauteur : ";
 		cin >> h;
 		cin.ignore();
-		Dimension d1(l,h);
+		Dimension d1(l, h);
 		cout << "Dimension creee = " << d1 << endl << endl;
 
 		cout << "Modification d'une dimension par saisie clavier..." << endl;
 		cin >> d1;
 		cout << "Dimension saisie : " << d1 << endl;
 	}
-	catch (XYException &e)
-	{
-		e.Affiche();
-	}
-
+	CATCH_AFFICHE;
 	cout << endl;
 }
 
-//**********************************************************************************************
 void Essai3()
 {
 	cout << "***** (3) Tests de setBackground et set/getPixel dans la classe ImageNG ******************" << endl;
-	// A COMPLETER : Traitez l'exception susceptible d'etre lancee par le bloc de code suivant (try...catch)
-	// --> remplacer les ... par ce qu'il faut
-
 	try
 	{
 		ImageNG im;
@@ -207,7 +201,7 @@ void Essai3()
 		cout << "Image modifiee :" << endl << im << endl;
 		im.Dessine();
 
-		int x,y;
+		int x, y;
 		cout << "Dessin d'un pixel..." << endl;
 		cout << "x : ";
 		cin >> x;
@@ -218,7 +212,7 @@ void Essai3()
 		cout << "Niveau de gris : ";
 		cin >> val;
 		cin.ignore();
-		im.setPixel(x,y,val);
+		im.setPixel(x, y, val);
 		cout << "Image modifiee :" << endl << im << endl;
 		im.Dessine();
 
@@ -229,30 +223,18 @@ void Essai3()
 		cout << "y : ";
 		cin >> y;
 		cin.ignore();
-		cout << "Valeur en (" << x << "," << y << ") = " << im.getPixel(x,y) << endl << endl;
+		cout << "Valeur en (" << x << "," << y << ") = " << im.getPixel(x, y) << endl << endl;
 	}
-	catch (XYException &e)
-	{
-		e.Affiche();
-	}
-	catch (ColorException &e)
-	{
-		e.Affiche();
-	}
-
+	CATCH_AFFICHE;
 	cout << endl;
 }
 
-//**********************************************************************************************
 void Essai4()
 {
 	cout << "***** (4) Tests des operateurs - < > == de la classe ImageNG ******************" << endl;
-	// A COMPLETER : Traitez l'exception susceptible d'etre lancee par le bloc de code suivant (try...catch)
-	// --> remplacer les ... par ce qu'il faut
-
 	try
 	{
-		ImageNG im1,im2;
+		ImageNG im1, im2;
 		cout << "Choisissez deux images parmi " << endl;
 		cout << "a) joconde.bmp" << endl;
 		cout << "b) lena.bmp" << endl;
@@ -261,30 +243,30 @@ void Essai4()
 		cout << "Image 1 : ";
 		cin >> ch;
 		cin.ignore();
-		switch(ch)
+		switch (ch)
 		{
-		case 'a' :
+		case 'a':
 			im1.importFromFile("./src/assets/images/joconde.bmp");
 			break;
-		case 'b' :
+		case 'b':
 			im1.importFromFile("./src/assets/images/lena.bmp");
 			break;
-		default :
+		default:
 			im1.importFromFile("./src/assets/images/bulles.bmp");
 			break;
 		}
 		cout << "Image 2 : ";
 		cin >> ch;
 		cin.ignore();
-		switch(ch)
+		switch (ch)
 		{
-		case 'a' :
+		case 'a':
 			im2.importFromFile("./src/assets/images/joconde.bmp");
 			break;
-		case 'b' :
+		case 'b':
 			im2.importFromFile("./src/assets/images/lena.bmp");
 			break;
-		default :
+		default:
 			im2.importFromFile("./src/assets/images/bulles.bmp");
 			break;
 		}
@@ -300,10 +282,14 @@ void Essai4()
 		if (ch == 'c')
 		{
 			cout << "Comparaison des deux images..." << endl;
-			if (im1 < im2) cout << "image1 < image2" << endl;
-			else if (im1 > im2) cout << "image1 > image2" << endl;
-			else if (im1 ==im2) cout << "image1 ==image2" << endl;
-			else cout << "Aucune des 3 possibilités" << endl;
+			if (im1 < im2)
+				cout << "image1 < image2" << endl;
+			else if (im1 > im2)
+				cout << "image1 > image2" << endl;
+			else if (im1 == im2)
+				cout << "image1 ==image2" << endl;
+			else
+				cout << "Aucune des 3 possibilités" << endl;
 		}
 		else
 		{
@@ -313,35 +299,23 @@ void Essai4()
 			im.Dessine();
 		}
 	}
-	catch (XYException &e)
-	{
-		e.Affiche();
-	}
-	catch (ColorException &e)
-	{
-		e.Affiche();
-	}
-
+	CATCH_AFFICHE;
 	cout << endl;
 }
 
-//**********************************************************************************************
 void Essai5()
 {
 	cout << "***** (5) Tests de set/getPixel dans la classe ImageRGB *************************" << endl;
-	// A COMPLETER : Traitez l'exception susceptible d'etre lancee par le bloc de code suivant (try...catch)
-	// --> remplacer les ... par ce qu'il faut
-
 	try
 	{
 		ImageRGB im;
 		cout << "ImageRGB creee par defaut :" << endl;
 		cout << "On modifie la couleur du fond..." << endl;
-		im.setBackground(Couleur(0,255,255));
+		im.setBackground(Couleur(0, 255, 255));
 		cout << "Image modifiee :" << endl << im << endl;
 		im.Dessine();
 
-		int x,y;
+		int x, y;
 		cout << "Dessin d'un pixel..." << endl;
 		cout << "x : ";
 		cin >> x;
@@ -349,7 +323,7 @@ void Essai5()
 		cout << "y : ";
 		cin >> y;
 		cin.ignore();
-		im.setPixel(x,y,Couleur(255,0,0));
+		im.setPixel(x, y, Couleur(255, 0, 0));
 		cout << "Image modifiee :" << endl << im << endl;
 		im.Dessine();
 
@@ -360,30 +334,22 @@ void Essai5()
 		cout << "y : ";
 		cin >> y;
 		cin.ignore();
-		cout << "Valeur en (" << x << "," << y << ") = " << im.getPixel(x,y) << endl << endl;
+		cout << "Valeur en (" << x << "," << y << ") = " << im.getPixel(x, y) << endl << endl;
 	}
-	catch (XYException &e)
-	{
-		e.Affiche();
-	}
-
+	CATCH_AFFICHE;
 	cout << endl;
 }
 
-//**********************************************************************************************
 void Essai6()
 {
-	cout << "***** (6) Tests de set/getPixel dans la classe ImageB ***************************" << endl;
-	// A COMPLETER : Traitez l'exception susceptible d'etre lancee par le bloc de code suivant (try...catch)
-	// --> remplacer les ... par ce qu'il faut
-
+	cout << "***** (6) Tests de set/getPixel dans la classe ImageB ***************************" << endl; 
 	try
 	{
 		ImageB im;
 		cout << "ImageB creee par defaut :" << endl << im << endl;
 		im.Dessine();
 
-		int x,y;
+		int x, y;
 		cout << "Dessin d'un pixel..." << endl;
 		cout << "x : ";
 		cin >> x;
@@ -391,7 +357,7 @@ void Essai6()
 		cout << "y : ";
 		cin >> y;
 		cin.ignore();
-		im.setPixel(x,y,true);
+		im.setPixel(x, y, true);
 		cout << "Image modifiee :" << endl << im << endl;
 		im.Dessine();
 
@@ -402,12 +368,8 @@ void Essai6()
 		cout << "y : ";
 		cin >> y;
 		cin.ignore();
-		cout << "Valeur en (" << x << "," << y << ") = " << im.getPixel(x,y) << endl << endl;
+		cout << "Valeur en (" << x << "," << y << ") = " << im.getPixel(x, y) << endl << endl;
 	}
-	catch (XYException &e)
-	{
-		e.Affiche();
-	}
-
+	CATCH_AFFICHE;
 	cout << endl;
 }

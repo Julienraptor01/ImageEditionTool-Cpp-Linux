@@ -160,7 +160,7 @@ void Couleur::setRouge(int red)
 #endif
 	if (red < 0 || red > UCHAR_MAX)
 		throw ColorException("setRouge invalide", red);
-	color.unpacked.red = (unsigned char)red;
+	color.unpacked.red = static_cast<unsigned char>(red);
 }
 
 unsigned char Couleur::getRouge() const
@@ -186,7 +186,7 @@ void Couleur::setVert(int green)
 #endif
 	if (green < 0 || green > UCHAR_MAX)
 		throw ColorException("setVert invalide", green);
-	color.unpacked.green = (unsigned char)green;
+	color.unpacked.green = static_cast<unsigned char>(green);
 }
 
 unsigned char Couleur::getVert() const
@@ -212,7 +212,7 @@ void Couleur::setBleu(int blue)
 #endif
 	if (blue < 0 || blue > UCHAR_MAX)
 		throw ColorException("setBleu invalide", blue);
-	color.unpacked.blue = (unsigned char)blue;
+	color.unpacked.blue = static_cast<unsigned char>(blue);
 }
 
 unsigned char Couleur::getBleu() const
@@ -240,7 +240,7 @@ void Couleur::Save(ofstream &fichier) const
 	cout << "\033[35;43mDEBUGVERYVERBOSE : Save de Couleur\033[0m" << endl;
 #endif
 	unsigned int packedARGB = getARGB();
-	fichier.write((char *)&packedARGB, sizeof(unsigned int));
+	fichier.write(reinterpret_cast<char *>(&packedARGB), sizeof(unsigned int));
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[36;43mDEBUGVERYVERBOSE : Fin Save de Couleur\033[0m" << endl;
 #endif
@@ -252,7 +252,7 @@ void Couleur::Load(ifstream &fichier)
 	cout << "\033[35;43mDEBUGVERYVERBOSE : Load de Couleur\033[0m" << endl;
 #endif
 	unsigned int packedARGB;
-	fichier.read((char *)&packedARGB, sizeof(unsigned int));
+	fichier.read(reinterpret_cast<char *>(&packedARGB), sizeof(unsigned int));
 	setARGB(packedARGB);
 #ifdef DEBUGVERYVERBOSE
 	cout << "\033[36;43mDEBUGVERYVERBOSE : Fin Load de Couleur\033[0m" << endl;
