@@ -1,6 +1,6 @@
 #!/bin/bash
-mkdir -p ./out ./logs
-rm -rf ./out/* ./logs/*
+mkdir -p ./out/test03 ./out/test05 ./out/test08 ./logs
+rm -rf ./out/test03/* ./out/test05/* ./out/test08/* ./logs/*
 test_number=$1
 if [ -z "$test_number" ]
 then

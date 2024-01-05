@@ -120,7 +120,7 @@ void Essai2()
 	for (int x = 0; x < 255; x++)
 		image.setPixel(x, (x * x / 255), 255);
 	image.Dessine();
-	image.exportToFile("./out/joconde2.png", "PNG");
+	image.exportToFile("./out/test03/joconde2.png", "PNG");
 }
 
 /**

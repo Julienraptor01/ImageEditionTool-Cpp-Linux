@@ -180,7 +180,7 @@ void Essai3()
 	for (int x = 0; x < 255; x++)
 		image.setPixel(x, (x * x / 255), Couleur::ROUGE);
 	image.Dessine();
-	image.exportToFile("./out/joconde2.png", "PNG");
+	image.exportToFile("./out/test05/joconde2.png", "PNG");
 }
 
 /**
@@ -241,7 +241,7 @@ void Essai5()
 	ImageB::couleurFalse = Couleur(0, 255, 255);
 	cout << "Exportation de l'image binaire vers le fichier disque.png......" << endl;
 	image.Dessine();
-	image.exportToFile("./out/disque.png", "PNG");
+	image.exportToFile("./out/test05/disque.png", "PNG");
 }
 
 /**

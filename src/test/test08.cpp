@@ -89,12 +89,12 @@ void Essai1()
 	cout << endl;
 
 	cout << "----- Sauvegarde de la dimension dans le fichier D.dat -----" << endl;
-	ofstream fichier1("./out/D.cbdf", ios::out);
+	ofstream fichier1("./out/test08/D.cbdf", ios::out);
 	d1.Save(fichier1);
 	fichier1.close();
 
 	cout << "----- Chargement de l'objet dimension situe dans le fichier D.dat -----" << endl;
-	ifstream fichier2("./out/D.cbdf", ios::in);
+	ifstream fichier2("./out/test08/D.cbdf", ios::in);
 	Dimension d2;
 	d2.Load(fichier2);
 	fichier2.close();
@@ -112,12 +112,12 @@ void Essai2()
 	cout << endl;
 
 	cout << "----- Sauvegarde de l'image dans le fichier NG.dat -----" << endl;
-	ofstream fichier1("./out/NG.cbif", ios::out);
+	ofstream fichier1("./out/test08/NG.cbif", ios::out);
 	i1.Save(fichier1);
 	fichier1.close();
 
 	cout << "----- Chargement de l'image situee dans le fichier NG.dat -----" << endl;
-	ifstream fichier2("./out/NG.cbif", ios::in);
+	ifstream fichier2("./out/test08/NG.cbif", ios::in);
 	ImageNG i2;
 	i2.Load(fichier2);
 	fichier2.close();
@@ -139,12 +139,12 @@ void Essai3()
 	cout << endl;
 
 	cout << "----- Sauvegarde de l'image dans le fichier B.dat -----" << endl;
-	ofstream fichier1("./out/B.cbif", ios::out);
+	ofstream fichier1("./out/test08/B.cbif", ios::out);
 	i1.Save(fichier1);
 	fichier1.close();
 
 	cout << "----- Chargement de l'image situee dans le fichier B.dat -----" << endl;
-	ifstream fichier2("./out/B.cbif", ios::in);
+	ifstream fichier2("./out/test08/B.cbif", ios::in);
 	ImageB i2;
 	i2.Load(fichier2);
 	fichier2.close();
@@ -162,12 +162,12 @@ void Essai4()
 	cout << endl;
 
 	cout << "----- Sauvegarde de la couleur dans le fichier C.dat -----" << endl;
-	ofstream fichier1("./out/C.cbcf", ios::out);
+	ofstream fichier1("./out/test08/C.cbcf", ios::out);
 	c1.Save(fichier1);
 	fichier1.close();
 
 	cout << "----- Chargement de la couleur situee dans le fichier C.dat -----" << endl;
-	ifstream fichier2("./out/C.cbcf", ios::in);
+	ifstream fichier2("./out/test08/C.cbcf", ios::in);
 	Couleur c2;
 	c2.Load(fichier2);
 	fichier2.close();
@@ -185,12 +185,12 @@ void Essai5()
 	cout << endl;
 
 	cout << "----- Sauvegarde de l'image dans le fichier RGB.dat -----" << endl;
-	ofstream fichier1("./out/RGB.cbif", ios::out);
+	ofstream fichier1("./out/test08/RGB.cbif", ios::out);
 	i1.Save(fichier1);
 	fichier1.close();
 
 	cout << "----- Chargement de l'image situee dans le fichier RGB.dat -----" << endl;
-	ifstream fichier2("./out/RGB.cbif", ios::in);
+	ifstream fichier2("./out/test08/RGB.cbif", ios::in);
 	ImageRGB *i2 = new ImageRGB();
 	i2->Load(fichier2);
 	fichier2.close();
