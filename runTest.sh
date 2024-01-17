@@ -2,22 +2,17 @@
 mkdir -p ./out/test03 ./out/test05 ./out/test08 ./logs
 rm -rf ./out/test03/* ./out/test05/* ./out/test08/* ./logs/*
 test_number=$1
-if [ -z "$test_number" ]
-then
+if [ -z "$test_number" ]; then
 	echo "No test number provided"
 	exit -1
-elif ! [[ $test_number =~ ^-?[0-9]+$ ]] && ! [[ $test_number =~ ^-?[0-9]+[a-z]$ ]]
-then
+elif ! [[ $test_number =~ ^-?[0-9]+$ ]] && ! [[ $test_number =~ ^-?[0-9]+[a-z]$ ]]; then
 	echo "Invalid test number"
 	exit -2
-elif [[ $test_number =~ ^-?[0-9]+[a-z]$ ]] || [ $test_number -gt 9 ]
-then
+elif [[ $test_number =~ ^-?[0-9]+[a-z]$ ]] || [ $test_number -gt 9 ]; then
 	./build/bin/test/test$test_number
-elif [ $test_number -gt 0 ]
-then
+elif [ $test_number -gt 0 ]; then
 	./build/bin/test/test0$test_number
-elif [ $test_number -eq 0 ]
-then
+elif [ $test_number -eq 0 ]; then
 	./build/bin/test/test01 > ./logs/test01.log
 	./build/bin/test/test02 1 > ./logs/test02-1.log
 	./build/bin/test/test02 2 > ./logs/test02-2.log
@@ -68,8 +63,7 @@ then
 	./build/bin/test/test09 7 > ./logs/test09-7.log
 	#./build/bin/test/test10a > ./logs/test10a.log
 	./build/bin/test/test10b > ./logs/test10b.log
-elif [ $test_number -eq -1 ]
-then
+elif [ $test_number -eq -1 ]; then
 	./build/bin/test/test01 > ./logs/test01.log
 	./build/bin/test/test02 1 > ./logs/test02-1.log
 	./build/bin/test/test02 2 > ./logs/test02-2.log
