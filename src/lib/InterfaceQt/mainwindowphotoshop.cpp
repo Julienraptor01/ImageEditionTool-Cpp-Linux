@@ -556,7 +556,31 @@ void MainWindowPhotoShop::on_actionCouleur_FALSE_pour_imageB_triggered()
 
 void MainWindowPhotoShop::on_actionImporterCSV_triggered()
 {
-	// Etape 13 (TO DO)
+	string nomFichier = dialogueDemandeFichierOuvrir("Choisissez un fichier CSV");
+	int nbImagesImportees = -1;
+	try
+	{
+		nbImagesImportees = PhotoShop::getInstance().importeImages(nomFichier);
+		videTableImages();
+		ArrayList<Image *> images = PhotoShop::getInstance().getImages();
+		Iterateur<Image *> it(images);
+		Image *image = nullptr;
+		for (it.reset(); !it.end(); it++)
+		{
+			image = it;
+			if (dynamic_cast<ImageNG *>(image) != nullptr)
+				ajouteTupleTableImages(image->getId(), "NG", to_string(image->getDimension().getLargeur()).append("x").append(to_string(image->getDimension().getHauteur())), image->getNom());
+			else if (dynamic_cast<ImageRGB *>(image) != nullptr)
+				ajouteTupleTableImages(image->getId(), "RGB", to_string(image->getDimension().getLargeur()).append("x").append(to_string(image->getDimension().getHauteur())), image->getNom());
+			else if (dynamic_cast<ImageB *>(image) != nullptr)
+				ajouteTupleTableImages(image->getId(), "B", to_string(image->getDimension().getLargeur()).append("x").append(to_string(image->getDimension().getHauteur())), image->getNom());
+		}
+	}
+	CATCH_AFFICHE
+	if (nbImagesImportees != -1)
+		dialogueMessage("Importation", to_string(nbImagesImportees).append(" images ont été importées").c_str());
+	else
+		dialogueErreur("Erreur", "Aucune image n'a été importée");
 }
 
 void MainWindowPhotoShop::on_actionReset_triggered()
@@ -714,9 +738,9 @@ void MainWindowPhotoShop::on_pushButtonSupprimerResultat_clicked()
 	setResultatBoolean(-1);
 	if (PhotoShop::getInstance().resultat != nullptr)
 	{
-	delete PhotoShop::getInstance().resultat;
-	PhotoShop::getInstance().resultat = nullptr;
-	setImageNG("resultat");
+		delete PhotoShop::getInstance().resultat;
+		PhotoShop::getInstance().resultat = nullptr;
+		setImageNG("resultat");
 	}
 }
 

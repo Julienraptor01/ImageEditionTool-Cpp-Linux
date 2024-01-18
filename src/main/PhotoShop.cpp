@@ -3,6 +3,8 @@
 #include <iostream>
 
 #include "Iterateur.h"
+#include "ImageNG.h"
+#include "ImageRGB.h"
 
 using std::cout;
 using std::endl;
@@ -135,3 +137,41 @@ void PhotoShop::supprimeImageParId(int id)
 Image *PhotoShop::operande1 = nullptr;
 Image *PhotoShop::operande2 = nullptr;
 Image *PhotoShop::resultat = nullptr;
+
+int PhotoShop::importeImages(const string &nomFichier)
+{
+#ifdef DEBUGVERBOSE
+	cout << "\033[31;44mDEBUGVERBOSE : importeImages de PhotoShop\033[0m" << endl;
+#endif
+	ifstream fichier(nomFichier);
+	if (fichier)
+	{
+		int nbImagesImportees = 0;
+		string ligne;
+		while (getline(fichier, ligne))
+		{
+			string typeImage = ligne.substr(0, ligne.find(';'));
+			string nomImage = ligne.substr(ligne.find(';') + 1, ligne.rfind(';') - ligne.find(';') - 1);
+			string nom = ligne.substr(ligne.rfind(';') + 1);
+			if (typeImage == "NG")
+			{
+				ImageNG *imageNG = new ImageNG();
+				imageNG->setNom(nom);
+				imageNG->importFromFile(nomImage);
+				ajouteImage(imageNG);
+				nbImagesImportees++;
+			}
+			else if (typeImage == "RGB")
+			{
+				ImageRGB *imageRGB = new ImageRGB();
+				imageRGB->setNom(nom);
+				imageRGB->importFromFile(nomImage);
+				ajouteImage(imageRGB);
+				nbImagesImportees++;
+			}
+		}
+		return nbImagesImportees;
+	}
+	else
+		throw Exception("Impossible d'ouvrir le fichier " + nomFichier);
+}
