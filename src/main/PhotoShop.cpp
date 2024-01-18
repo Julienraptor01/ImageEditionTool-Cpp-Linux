@@ -100,6 +100,14 @@ Image *PhotoShop::getImageParId(int id) const
 	return nullptr;
 }
 
+ArrayList<Image *> PhotoShop::getImages() const
+{
+#ifdef DEBUGVERBOSE
+	cout << "\033[31;44mDEBUGVERBOSE : getImages de PhotoShop\033[0m" << endl;
+#endif
+	return images;
+}
+
 void PhotoShop::supprimeImageParIndice(int index)
 {
 #ifdef DEBUGVERBOSE

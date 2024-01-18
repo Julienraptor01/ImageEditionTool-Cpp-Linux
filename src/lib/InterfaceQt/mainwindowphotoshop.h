@@ -1,15 +1,14 @@
 #ifndef MAINWINDOWPHOTOSHOP_H
 #define MAINWINDOWPHOTOSHOP_H
+
 #include <QMainWindow>
 #include <string>
 
-using namespace std;
-
-/*
 #include "ImageNG.h"
 #include "ImageRGB.h"
 #include "ImageB.h"
-*/
+
+using std::string;
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -31,11 +30,9 @@ public:
 	void setNomImage(string nom);
 	string getNomImage() const;
 	void setParametresImageNG(int max=-1,int min=-1,int luminance=-1,float contraste=0.0f);
-	/*
 	void setImageNG(string destination,const ImageNG* imageng=NULL);
 	void setImageRGB(string destination,const ImageRGB* imagergb=NULL);
 	void setImageB(string destination,const ImageB* imageb=NULL);
-	*/
 	void setResultatBoolean(int valeur=-1);
 
 	// Table des images
@@ -87,4 +84,5 @@ private slots:
 private:
 	Ui::MainWindowPhotoShop *ui;
 };
-#endif // MAINWINDOWPHOTOSHOP_H
+
+#endif

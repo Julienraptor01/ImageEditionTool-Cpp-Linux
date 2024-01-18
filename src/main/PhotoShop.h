@@ -30,6 +30,8 @@ public:
 	Image *getImageParIndice(int index) const;
 	Image *getImageParId(int id) const;
 
+	ArrayList<Image *> getImages() const;
+
 	void supprimeImageParIndice(int index);
 	void supprimeImageParId(int id);
 };
