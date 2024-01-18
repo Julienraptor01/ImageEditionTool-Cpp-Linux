@@ -131,3 +131,7 @@ void PhotoShop::supprimeImageParId(int id)
 			return;
 		}
 }
+
+Image *PhotoShop::operande1 = nullptr;
+Image *PhotoShop::operande2 = nullptr;
+Image *PhotoShop::resultat = nullptr;

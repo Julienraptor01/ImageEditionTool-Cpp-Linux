@@ -14,8 +14,27 @@
 #include "Iterateur.h"
 #include "Traitements.h"
 #include "XYException.h"
+#include "ColorException.h"
+#include "Couleur.h"
 
 using std::to_string;
+
+#define CATCH_AFFICHE                                     \
+	catch (Exception & e)                                 \
+	{                                                     \
+		if (dynamic_cast<ColorException *>(&e))           \
+		{                                                 \
+			static_cast<ColorException *>(&e)->Affiche(); \
+		}                                                 \
+		else if (dynamic_cast<XYException *>(&e))         \
+		{                                                 \
+			static_cast<XYException *>(&e)->Affiche();    \
+		}                                                 \
+		else                                              \
+		{                                                 \
+			e.Affiche();                                  \
+		}                                                 \
+	}
 
 MainWindowPhotoShop::MainWindowPhotoShop(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindowPhotoShop)
 {
@@ -34,7 +53,10 @@ MainWindowPhotoShop::MainWindowPhotoShop(QWidget *parent) : QMainWindow(parent),
 	ui->tableWidgetImages->setColumnCount(4);
 	ui->tableWidgetImages->setRowCount(0);
 	QStringList labelsTableOptions;
-	labelsTableOptions << "Id" << "Type" << "Dimension" << "Nom";
+	labelsTableOptions << "Id"
+					   << "Type"
+					   << "Dimension"
+					   << "Nom";
 	ui->tableWidgetImages->setHorizontalHeaderLabels(labelsTableOptions);
 	ui->tableWidgetImages->setSelectionMode(QAbstractItemView::SingleSelection);
 	ui->tableWidgetImages->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -520,12 +542,16 @@ void MainWindowPhotoShop::on_actionImage_par_id_triggered()
 
 void MainWindowPhotoShop::on_actionCouleur_TRUE_pour_ImageB_triggered()
 {
-	// Etape 12 (TO DO)
+	int red, green, blue;
+	dialogueDemandeCouleur("Choisissez une couleur", &red, &green, &blue);
+	ImageB::couleurTrue = Couleur(red, green, blue);
 }
 
 void MainWindowPhotoShop::on_actionCouleur_FALSE_pour_imageB_triggered()
 {
-	// Etape 12 (TO DO)
+	int red, green, blue;
+	dialogueDemandeCouleur("Choisissez une couleur", &red, &green, &blue);
+	ImageB::couleurFalse = Couleur(red, green, blue);
 }
 
 void MainWindowPhotoShop::on_actionImporterCSV_triggered()
@@ -589,35 +615,214 @@ void MainWindowPhotoShop::on_pushButtonModifierNom_clicked()
 
 void MainWindowPhotoShop::on_pushButtonOperande1_clicked()
 {
-	// Etape 12 (TO DO)
+	int indice = getIndiceImageSelectionnee();
+	if (indice == -1)
+	{
+		dialogueErreur("Erreur", "Aucune image sélectionnée");
+		return;
+	}
+	PhotoShop::getInstance().operande1 = PhotoShop::getInstance().getImageParIndice(indice);
+	ImageNG *imageNG = dynamic_cast<ImageNG *>(PhotoShop::getInstance().operande1);
+	if (imageNG != nullptr)
+	{
+		setImageNG("operande1", imageNG);
+		return;
+	}
+	ImageRGB *imageRGB = dynamic_cast<ImageRGB *>(PhotoShop::getInstance().operande1);
+	if (imageRGB != nullptr)
+	{
+		setImageRGB("operande1", imageRGB);
+		return;
+	}
+	ImageB *imageB = dynamic_cast<ImageB *>(PhotoShop::getInstance().operande1);
+	if (imageB != nullptr)
+	{
+		setImageB("operande1", imageB);
+		return;
+	}
 }
 
 void MainWindowPhotoShop::on_pushButtonSupprimeOperande1_clicked()
 {
-	// Etape 12 (TO DO)
+	PhotoShop::getInstance().operande1 = nullptr;
+	setImageNG("operande1");
 }
 
 void MainWindowPhotoShop::on_pushButtonOperande2_clicked()
 {
-	// Etape 12 (TO DO)
+	int indice = getIndiceImageSelectionnee();
+	if (indice == -1)
+	{
+		dialogueErreur("Erreur", "Aucune image sélectionnée");
+		return;
+	}
+	PhotoShop::getInstance().operande2 = PhotoShop::getInstance().getImageParIndice(indice);
+	ImageNG *imageNG = dynamic_cast<ImageNG *>(PhotoShop::getInstance().operande2);
+	if (imageNG != nullptr)
+	{
+		setImageNG("operande2", imageNG);
+		return;
+	}
+	ImageRGB *imageRGB = dynamic_cast<ImageRGB *>(PhotoShop::getInstance().operande2);
+	if (imageRGB != nullptr)
+	{
+		setImageRGB("operande2", imageRGB);
+		return;
+	}
+	ImageB *imageB = dynamic_cast<ImageB *>(PhotoShop::getInstance().operande2);
+	if (imageB != nullptr)
+	{
+		setImageB("operande2", imageB);
+		return;
+	}
 }
 
 void MainWindowPhotoShop::on_pushButtonSupprimerOperande2_clicked()
 {
-	// Etape 12 (TO DO)
+	PhotoShop::getInstance().operande2 = nullptr;
+	setImageNG("operande2");
 }
 
 void MainWindowPhotoShop::on_pushButtonResultat_clicked()
 {
-	// Etape 12 (TO DO)
+	if (PhotoShop::getInstance().resultat == nullptr)
+	{
+		dialogueErreur("Erreur", "Aucun résulta à ajouter");
+		return;
+	}
+	PhotoShop::getInstance().ajouteImage(PhotoShop::getInstance().resultat);
+	videTableImages();
+	ArrayList<Image *> images = PhotoShop::getInstance().getImages();
+	Iterateur<Image *> it(images);
+	Image *image = nullptr;
+	for (it.reset(); !it.end(); it++)
+	{
+		image = it;
+		if (dynamic_cast<ImageNG *>(image) != nullptr)
+			ajouteTupleTableImages(image->getId(), "NG", to_string(image->getDimension().getLargeur()).append("x").append(to_string(image->getDimension().getHauteur())), image->getNom());
+		else if (dynamic_cast<ImageRGB *>(image) != nullptr)
+			ajouteTupleTableImages(image->getId(), "RGB", to_string(image->getDimension().getLargeur()).append("x").append(to_string(image->getDimension().getHauteur())), image->getNom());
+		else if (dynamic_cast<ImageB *>(image) != nullptr)
+			ajouteTupleTableImages(image->getId(), "B", to_string(image->getDimension().getLargeur()).append("x").append(to_string(image->getDimension().getHauteur())), image->getNom());
+	}
+	PhotoShop::getInstance().resultat = nullptr;
+	setImageNG("resultat");
 }
 
 void MainWindowPhotoShop::on_pushButtonSupprimerResultat_clicked()
 {
-	// Etape 12 (TO DO)
+	setResultatBoolean(-1);
+	if (PhotoShop::getInstance().resultat != nullptr)
+	{
+	delete PhotoShop::getInstance().resultat;
+	PhotoShop::getInstance().resultat = nullptr;
+	setImageNG("resultat");
+	}
 }
 
 void MainWindowPhotoShop::on_pushButtonTraitement_clicked()
 {
-	// Etape 12 (TO DO)
+	on_pushButtonSupprimerResultat_clicked();
+	string traitement = getTraitementSelectionne();
+	if (PhotoShop::getInstance().operande1 == nullptr)
+	{
+		dialogueErreur("Erreur", "Aucune image sélectionnée pour l'opérande 1");
+		return;
+	}
+	bool secondOperandNeeded = false;
+	if (traitement == "Différence" || traitement == "Comparaison (==)" || traitement == "Comparaison (<)" || traitement == "Comparaison (>)")
+	{
+		secondOperandNeeded = true;
+	}
+	if (secondOperandNeeded && PhotoShop::getInstance().operande2 == nullptr)
+	{
+		dialogueErreur("Erreur", "Aucune image sélectionnée pour l'opérande 2");
+		return;
+	}
+	ImageNG *imageNG1 = dynamic_cast<ImageNG *>(PhotoShop::getInstance().operande1);
+	if (imageNG1 == nullptr)
+	{
+		dialogueErreur("Erreur", "L'image sélectionnée pour l'opérande 1 n'est pas de type ImageNG");
+		return;
+	}
+	if (secondOperandNeeded)
+	{
+		ImageNG *imageNG2 = dynamic_cast<ImageNG *>(PhotoShop::getInstance().operande2);
+		if (imageNG2 == nullptr)
+		{
+			dialogueErreur("Erreur", "L'image sélectionnée pour l'opérande 2 n'est pas de type ImageNG");
+			return;
+		}
+	}
+	try
+	{
+		if (traitement == "Eclaircir (+ val)")
+		{
+			PhotoShop::getInstance().resultat = new ImageNG(*imageNG1 + dialogueDemandeInt("Valeur", "Entrez la valeur à ajouter"));
+			setImageNG("resultat", dynamic_cast<ImageNG *>(PhotoShop::getInstance().resultat));
+		}
+		else if (traitement == "Eclaircir (++)")
+		{
+			PhotoShop::getInstance().resultat = new ImageNG(*imageNG1++);
+			setImageNG("resultat", dynamic_cast<ImageNG *>(PhotoShop::getInstance().resultat));
+		}
+		else if (traitement == "Assombrir (- val)")
+		{
+			PhotoShop::getInstance().resultat = new ImageNG(*imageNG1 - dialogueDemandeInt("Valeur", "Entrez la valeur à soustraire"));
+			setImageNG("resultat", dynamic_cast<ImageNG *>(PhotoShop::getInstance().resultat));
+		}
+		else if (traitement == "Assombrir (--)")
+		{
+			PhotoShop::getInstance().resultat = new ImageNG(*imageNG1--);
+			setImageNG("resultat", dynamic_cast<ImageNG *>(PhotoShop::getInstance().resultat));
+		}
+		else if (traitement == "Différence")
+		{
+			PhotoShop::getInstance().resultat = new ImageNG(*imageNG1 - *dynamic_cast<ImageNG *>(PhotoShop::getInstance().operande2));
+			setImageNG("resultat", dynamic_cast<ImageNG *>(PhotoShop::getInstance().resultat));
+		}
+		else if (traitement == "Comparaison (==)")
+		{
+			setResultatBoolean(*imageNG1 == *dynamic_cast<ImageNG *>(PhotoShop::getInstance().operande2));
+		}
+		else if (traitement == "Comparaison (<)")
+		{
+			setResultatBoolean(*imageNG1 < *dynamic_cast<ImageNG *>(PhotoShop::getInstance().operande2));
+		}
+		else if (traitement == "Comparaison (>)")
+		{
+			setResultatBoolean(*imageNG1 > *dynamic_cast<ImageNG *>(PhotoShop::getInstance().operande2));
+		}
+		else if (traitement == "Seuillage")
+		{
+			PhotoShop::getInstance().resultat = new ImageB(Traitements::Seuillage(*imageNG1, dialogueDemandeInt("Seuil", "Entrez le seuil")));
+			setImageB("resultat", dynamic_cast<ImageB *>(PhotoShop::getInstance().resultat));
+		}
+		else if (traitement == "Filtre moyenneur")
+		{
+			PhotoShop::getInstance().resultat = new ImageNG(Traitements::FiltreMoyenneur(*imageNG1, dialogueDemandeInt("Taille du filtre", "Entrez la taille du filtre")));
+			setImageNG("resultat", dynamic_cast<ImageNG *>(PhotoShop::getInstance().resultat));
+		}
+		else if (traitement == "Filtre médian")
+		{
+			PhotoShop::getInstance().resultat = new ImageNG(Traitements::FiltreMedian(*imageNG1, dialogueDemandeInt("Taille du filtre", "Entrez la taille du filtre")));
+			setImageNG("resultat", dynamic_cast<ImageNG *>(PhotoShop::getInstance().resultat));
+		}
+		else if (traitement == "Erosion")
+		{
+			PhotoShop::getInstance().resultat = new ImageNG(Traitements::Erosion(*dynamic_cast<ImageNG *>(PhotoShop::getInstance().operande1), dialogueDemandeInt("Taille du filtre", "Entrez la taille du filtre")));
+			setImageNG("resultat", dynamic_cast<ImageNG *>(PhotoShop::getInstance().resultat));
+		}
+		else if (traitement == "Dilatation")
+		{
+			PhotoShop::getInstance().resultat = new ImageNG(Traitements::Dilatation(*dynamic_cast<ImageNG *>(PhotoShop::getInstance().operande1), dialogueDemandeInt("Taille du filtre", "Entrez la taille du filtre")));
+			setImageNG("resultat", dynamic_cast<ImageNG *>(PhotoShop::getInstance().resultat));
+		}
+		else if (traitement == "Négatif")
+		{
+			PhotoShop::getInstance().resultat = new ImageNG(Traitements::Negatif(*imageNG1));
+			setImageNG("resultat", dynamic_cast<ImageNG *>(PhotoShop::getInstance().resultat));
+		}
+	}
+	CATCH_AFFICHE;
 }

@@ -34,6 +34,10 @@ public:
 
 	void supprimeImageParIndice(int index);
 	void supprimeImageParId(int id);
+
+	static Image *operande1;
+	static Image *operande2;
+	static Image *resultat;
 };
 
 #endif
